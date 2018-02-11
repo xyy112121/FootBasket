@@ -13,9 +13,10 @@
 @end
 
 @implementation AppDelegate
-
+@synthesize userinfo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.userinfo = [UserInfo new];
     // Override point for customization after application launch.
     return YES;
 }

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfo.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong,nonatomic)UserInfo *userinfo;
 @property (strong, nonatomic) UIWindow *window;
 
 
