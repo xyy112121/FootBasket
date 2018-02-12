@@ -131,6 +131,12 @@
     }
      UITableViewCell *celltemp = [tableview cellForRowAtIndexPath:indexPath];
     celltemp.contentView.backgroundColor = [UIColor whiteColor];
+    
+    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
+    if(_delegate1&&[_delegate1 respondsToSelector:@selector(DGClickCategorySmall:)])
+    {
+        [_delegate1 DGClickCategorySmall:dictemp];
+    }
 }
 
 #pragma mark - 接口

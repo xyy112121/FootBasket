@@ -86,6 +86,43 @@
     [self.view addSubview:leftcategorymenu];
 }
 
+-(UIView *)getcellView:(NSDictionary *)dic Frame:(CGRect)frame
+{
+    UIView *viewcell = [[UIView alloc] initWithFrame:frame];
+    viewcell.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
+    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"headPicture"]];
+    [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
+    imageview.contentMode = UIViewContentModeScaleAspectFill;
+    imageview.clipsToBounds = YES;
+    [viewcell addSubview:imageview];
+    
+    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10, XYViewTop(imageview), XYViewWidth(viewcell)-110, 20)];
+    labelname.text = [dic objectForKey:@"name"];
+    labelname.font = FONTB(17.0f);
+    [viewcell addSubview:labelname];
+    
+    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, 100, 20)];
+    labelsummary.text = [dic objectForKey:@"summary"];
+    labelsummary.font = FONTN(14.0f);
+    labelsummary.textColor = COLORNOW(172, 172, 172);
+    [viewcell addSubview:labelsummary];
+    
+    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelsummary)+5, 100, 20)];
+    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"salePrice"],[dic objectForKey:@"displayUnit"]];
+    labelprice.font = FONTN(14.0f);
+    labelprice.textColor = COLORNOW(248, 88, 37);
+    [viewcell addSubview:labelprice];
+    
+    UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonshoppingcar.frame = CGRectMake(XYViewWidth(viewcell)-50,XYViewHeight(viewcell)-50, 40, 40);
+    [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
+    [viewcell addSubview:buttonshoppingcar];
+    
+    return viewcell;
+}
+
 
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
@@ -101,6 +138,7 @@
     [hpnav removeFromSuperview];
     hpnav = nil;
     hpnav = [[HpNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    hpnav.tag = EnHpNavigationBgTag;
     [hpnav initViewCategory];
     [self.navigationController.navigationBar addSubview:hpnav];
 }
@@ -236,7 +274,9 @@
     
     cell.backgroundColor = [UIColor clearColor];
     
-
+    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
+    UIView *viewcell = [self getcellView:dictemp Frame:CGRectMake(0, 0, XYViewWidth(tableView), 100)];
+    [cell.contentView addSubview:viewcell];
     
     
     return cell;
@@ -244,7 +284,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
+    GoodsDetailViewController *goodsdetail = [[GoodsDetailViewController alloc] init];
+    goodsdetail.FCGoodsId = [dictemp objectForKey:@"id"];
+    goodsdetail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:goodsdetail animated:YES];
 }
 
 

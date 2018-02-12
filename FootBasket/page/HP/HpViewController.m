@@ -259,14 +259,14 @@
     if([arraydata count]>indexPath.row*2)
     {
         NSDictionary *dictemp1 = [arraydata objectAtIndex:indexPath.row*2];
-        UIView *discount1 = [self SpecialDiscountGoods:CGRectMake(10, 10, widthnow, widthnow+55) Dic:dictemp1 TagNow:indexPath.row*2];
+        UIView *discount1 = [self SpecialDiscountGoods:CGRectMake(10, 10, widthnow, widthnow+55) Dic:dictemp1 TagNow:(int)indexPath.row*2];
         [cell.contentView addSubview:discount1];
     }
     
     if([arraydata count]>indexPath.row*2+1)
     {
         NSDictionary *dictemp2 = [arraydata objectAtIndex:indexPath.row*2+1];
-        UIView *discount2 = [self SpecialDiscountGoods:CGRectMake(SCREEN_WIDTH/2+5, 10, widthnow, widthnow+55) Dic:dictemp2 TagNow:indexPath.row*2+1];
+        UIView *discount2 = [self SpecialDiscountGoods:CGRectMake(SCREEN_WIDTH/2+5, 10, widthnow, widthnow+55) Dic:dictemp2 TagNow:(int)indexPath.row*2+1];
         [cell.contentView addSubview:discount2];
     }
     

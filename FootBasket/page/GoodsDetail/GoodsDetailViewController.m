@@ -80,6 +80,33 @@
     
 }
 
+
+-(UIView *)getsectiononecellview:(NSDictionary *)dic Frame:(CGRect)frame
+{
+    UIView *view = [[UIView alloc] initWithFrame:frame];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10,10, SCREEN_WIDTH-20, 20)];
+    labelname.text = [dic objectForKey:@"name"];
+    labelname.font = FONTB(17.0f);
+    labelname.textColor = COLORNOW(52, 52, 52);
+    [view addSubview:labelname];
+    
+    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname),XYViewBottom(labelname)+5, SCREEN_WIDTH-20, 20)];
+    labelsummary.text = [dic objectForKey:@"summary"];
+    labelsummary.font = FONTN(14.0f);
+    labelsummary.textColor = COLORNOW(152, 152, 152);
+    [view addSubview:labelsummary];
+    
+    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelsummary)+5, 100, 20)];
+    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"salePrice"],[dic objectForKey:@"displayUnit"]];
+    labelprice.font = FONTN(14.0f);
+    labelprice.textColor = COLORNOW(248, 88, 37);
+    [view addSubview:labelprice];
+    
+    return view;
+}
+
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -138,31 +165,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    if([arrayattributes count]>0)
+        return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 0)
+        return 90;
     return 46;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 0)
-        return 5;
+        return 1;
     else
-        return 4;
+        return [arrayattributes count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.01;
+    if(section == 1)
+        return 10;
+    else
+        return 0.01;
     
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
+    if(section == 1)
+    {
+        UIImageView *imageline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        imageline.backgroundColor = COLORNOW(235, 235, 235);
+        return imageline;
+    }
     return nil;
 }
 
@@ -184,8 +223,45 @@
     }
     
     cell.backgroundColor = [UIColor clearColor];
+
     
-    cell.textLabel.text = @"123";
+    if(indexPath.section == 0)
+    {
+        UIView *view = [self getsectiononecellview:dicproduct Frame:CGRectMake(0, 0, SCREEN_WIDTH, 90)];
+        [cell.contentView addSubview:view];
+    }
+    else if(indexPath.section == 1)
+    {
+        if(indexPath.row == 0)
+        {
+            UILabel *labeltitle = [[UILabel alloc] initWithFrame:CGRectMake(10,10,100,20)];
+            labeltitle.text = @"规格";
+            labeltitle.font = FONTB(17.0f);
+            labeltitle.textColor = COLORNOW(52, 52, 52);
+            [cell.contentView addSubview:labeltitle];
+        }
+        else
+        {
+            NSDictionary *dictemp = [arrayattributes objectAtIndex:indexPath.row-1];
+            
+            UILabel *labeltitle = [[UILabel alloc] initWithFrame:CGRectMake(10,10,130,20)];
+            labeltitle.text = [dictemp objectForKey:@"productAttribute_name"];
+            labeltitle.font = FONTB(15.0f);
+            labeltitle.textColor = COLORNOW(52, 52, 52);
+            [cell.contentView addSubview:labeltitle];
+            
+            UILabel *labelvale = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-100,10,90,20)];
+            labelvale.text = [dictemp objectForKey:@"basicValue"];
+            labelvale.font = FONTB(15.0f);
+            labelvale.textAlignment = NSTextAlignmentRight;
+            labelvale.textColor = COLORNOW(152, 152, 152);
+            [cell.contentView addSubview:labelvale];
+            
+        }
+        
+        
+    }
+    
     
     
     return cell;
