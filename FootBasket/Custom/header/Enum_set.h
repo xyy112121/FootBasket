@@ -18,42 +18,15 @@ typedef enum
 
 typedef enum
 {
-    EnMiddleMenuLeft,   //左边菜单
-    EnMiddleMenuRight    //右边菜单
-}EnMiddleMenuDirect;
+    EnShoppingCarNotSelect,   //未选中
+    EnShoppingCarSelected   //已选中
+}EnShoppingCarSelectDelete;
 
 typedef enum
 {
-    EnHpageView,   //首页菜单
-    EnAssembly,    //部件菜单
-    EnBookManual,  //手册
-    EnSetting      //设置
-}EnHpageItem;
-
-typedef enum
-{
-    EnHpMiddleMenuNone,//无图纸
-    EnHpUserDrawings,//用户图纸
-    EnHpMaintainSys,//维护系统
-    EnHpExamSys,//考试系统
-    EnHpServicePlan,//维修计划
-    EnHpServiceManual,//维修手册
-    EnHpOverhaulManual //检修手册
-}EnHpMiddleMenuItem;
-
-typedef enum
-{
-    EnHpBottomMenuNone,//无模型
-    EnHpBottomMenuVehicle,//整车
-    EnHpBottomMenuBogie,//转向架
-    EnHpBottomMenuVehicleBody,//车体
-    EnHpBottomMenuBraking,//制动
-    EnHpBottomMenuInDecoration,//内装
-    EnHpBottomMenuDoor, //车门
-    EnHpBottomMenuLink,//车端连接
-    EnHpBottomMenuWarmSys,//暖通系统
-    EnHpBottomMenuEleEquipment  //电器设备
-}EnHpBottomMenuItem;
+    EnNotSelect,   //未选中
+    EnSelected   //已选中
+}EnSelect;
 
 #define EnCategoryTopBtTag     5000 //分类buttontag
 #define EnHpDiscountImageViewTag   5100//首页特优惠imagetag
@@ -61,6 +34,16 @@ typedef enum
 #define EnHpRecommendImageViewTag   5500//首页推荐image tag
 #define EnHpRecommendShopCarBtTag   5600//首页推荐购物车按钮
 #define EnHpNavigationBgTag   5700//首页导航栏背景
+#define EnShopCarDeleteBtTag 5800 //购物车删除按钮
+
+#define EnShopCarReduceBtTag  5900 //购物车减少数量
+#define EnShopCarAddBtTag  6000 //购物车增加数量
+#define EnShopCarLabelNumTag  6100 //购物车显示数量
+
+#define EnDoneOrderPayWayImageTag  6200 //确认订单付款方式按钮
+
+#define EnMyAddrListDefaultBtTag 6300 //设置默认按钮
+
 #endif /* Enum_set_h */
 
 

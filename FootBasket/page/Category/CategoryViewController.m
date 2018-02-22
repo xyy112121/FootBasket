@@ -20,9 +20,9 @@
     {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.backgroundColor = COLORNOW(250, 250, 250);
     self.tabBarController.tabBar.tintColor =  COLORNOW(32, 188, 167);
-    self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.barTintColor = COLORNOW(250, 250, 250);
     [self initview];
     // Do any additional setup after loading the view.
 }

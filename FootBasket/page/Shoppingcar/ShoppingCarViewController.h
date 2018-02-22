@@ -12,7 +12,11 @@
 {
     AppDelegate *app;
     UITableView *tableview;
-    NSArray *arraydata;
+    NSMutableArray *arraydata;
+    EnShoppingCarSelectDelete selectdelete;
+    EnSelect selectall;
+    NSMutableArray *arraydelete;
+    UIButton *buttonselectall;//全选中按钮
 }
 
 @end

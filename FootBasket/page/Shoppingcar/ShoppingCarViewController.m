@@ -20,10 +20,21 @@
     {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.backgroundColor = COLORNOW(250, 250, 250);
     self.tabBarController.tabBar.tintColor =  COLORNOW(32, 188, 167);
-    self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.barTintColor = COLORNOW(250, 250, 250);
     [self initview];
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(2, StatusBarHeight, 60, 40)];
+    UIButton *button = [[UIButton alloc] initWithFrame:contentView.bounds];
+    [button setTitle:@"删除"forState:UIControlStateNormal];
+    button.titleLabel.font = FONTN(15.0f);
+    [button setTitleColor:COLORNOW(52, 52, 52) forState:UIControlStateNormal];
+    [button addTarget:self action: @selector(clickdelete:) forControlEvents: UIControlEventTouchUpInside];
+    [contentView addSubview:button];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:contentView];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -31,63 +42,283 @@
 {
     self.view.backgroundColor = COLORNOW(245, 245, 245);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    arraydelete = [[NSMutableArray alloc] init];
+    selectdelete = EnShoppingCarNotSelect;
+    selectall = EnNotSelect;
+    self.title = @"购物车";
     
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-49) style:UITableViewStylePlain];
+    
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-49-40) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.backgroundColor = [UIColor clearColor];
-    tableview.delegate = self;
-    tableview.dataSource = self;
+
     [self.view addSubview:tableview];
     
     [self setExtraCellLineHidden:tableview];
     
-    [self getshoppingcarinterface];
     
+    
+    UIView *viewbottom = [self viewbottomSettlement:CGRectMake(0, SCREEN_HEIGHT-IPhone_SafeBottomMargin-49-StatusBarAndNavigationHeight-50, SCREEN_WIDTH, 50)];
+    [self.view addSubview:viewbottom];
+}
+
+//结算条
+-(UIView *)viewbottomSettlement:(CGRect)frame
+{
+    UIView *viewbottom = [[UIView alloc] initWithFrame:frame];
+    viewbottom.backgroundColor = [UIColor whiteColor];
+    
+    
+    buttonselectall = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonselectall.frame = CGRectMake(0, 5, 40, 40);
+    [buttonselectall setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
+    [buttonselectall addTarget:self action:@selector(clickselectalldelete:) forControlEvents:UIControlEventTouchUpInside];
+    buttonselectall.hidden = YES;
+    [viewbottom addSubview:buttonselectall];
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(SCREEN_WIDTH-100, 0, 100, 50);
+    [button setTitle:@"去结算" forState:UIControlStateNormal];
+    button.titleLabel.font = FONTN(15.0f);
+    button.backgroundColor = COLORNOW(32, 188, 167);
+    [button addTarget:self action:@selector(clickSettlement:) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [viewbottom addSubview:button];
+    
+    UILabel *labelall = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(button)-120, 15, 35, 20)];
+    labelall.textColor = COLORNOW(52, 52, 52);
+    labelall.font = FONTN(15.0f);
+    labelall.text = @"合计";
+    [viewbottom addSubview:labelall];
+    
+    UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
+    labelmoney.textColor = COLORNOW(248, 88, 37);
+    labelmoney.font = FONTN(15.0f);
+    labelmoney.text = @"￥125.09";
+    [viewbottom addSubview:labelmoney];
+    
+    
+    
+    return viewbottom;
 }
 
 
-
 //cell
--(UIView *)ViewCell:(CGRect)frame Dic:(NSDictionary *)dic
+-(UIView *)ViewCell:(CGRect)frame Dic:(NSDictionary *)dic IndexPath:(NSIndexPath *)indexpath
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height)];
     view.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XYViewWidth(view), XYViewWidth(view))];
-    imageview.image = LOADIMAGE(@"图层20", @"png");
+    float noworginx = 10;
+    
+    if(selectdelete == EnShoppingCarSelected)
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, 40, XYViewHeight(view));
+        [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(clickselectdelete:) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = indexpath.row+EnShopCarDeleteBtTag;
+        for(int i=0;i<[arraydelete count];i++)
+        {
+            NSString *strid = [arraydelete objectAtIndex:i];
+            if([[dic objectForKey:@"id"] isEqualToString:strid])
+            {
+                [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
+            }
+        }
+        [view addSubview:button];
+        noworginx = 40;
+    }
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(noworginx, 10, 80, 80)];
+    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"headPicture"]];
+    [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
     imageview.contentMode = UIViewContentModeScaleAspectFill;
     imageview.clipsToBounds = YES;
-    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"productBasic_headPicture"]];
-    [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
     [view addSubview:imageview];
     
-    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10,XYViewBottom(imageview)+5, XYViewWidth(view)-10, 20)];
-    labelname.text = [dic objectForKey:@"productBasic_name"];
+    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10,XYViewTop(imageview), XYViewWidth(view)-100, 20)];
+    labelname.text = [dic objectForKey:@"name"];
     labelname.font = FONTN(16.0f);
+    labelname.textColor = COLORNOW(52, 52, 52);
     [view addSubview:labelname];
     
     UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(view)-50, 20)];
-    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"productBasic_salePrice"],[dic objectForKey:@"productBasic_displayUnit"]];
+    labelprice.text = [NSString stringWithFormat:@"￥%@元",[dic objectForKey:@"salePrice"]];
     labelprice.font = FONTN(15.0f);
-    labelprice.textColor = COLORNOW(248, 88, 37);
+    labelprice.textColor = COLORNOW(122, 122, 122);
     [view addSubview:labelprice];
     
-    UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonshoppingcar.frame = CGRectMake(XYViewWidth(view)-40,XYViewHeight(view)-35, 40, 40);
-    [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
-    buttonshoppingcar.backgroundColor = [UIColor clearColor];
-    [view addSubview:buttonshoppingcar];
+    //增加
+    UIButton *buttonadd = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonadd.frame = CGRectMake(SCREEN_WIDTH-50, (XYViewHeight(view)-40)/2, 40, 40);
+    [buttonadd setImage:LOADIMAGE(@"addicon", @"png") forState:UIControlStateNormal];
+    [buttonadd addTarget:self action:@selector(clickaddproduct:) forControlEvents:UIControlEventTouchUpInside];
+    buttonadd.tag = indexpath.row+EnShopCarAddBtTag;
+    [view addSubview:buttonadd];
+    
+    UILabel *labelnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(buttonadd)-25, XYViewTop(buttonadd), 25, 40)];
+    labelnum.text = @"1";
+    labelnum.textAlignment = NSTextAlignmentCenter;
+    labelnum.font = FONTN(15.0f);
+    labelnum.textColor = COLORNOW(52, 52, 52);
+    labelnum.tag = indexpath.row+EnShopCarLabelNumTag;
+    [view addSubview:labelnum];
+    
+    //减少
+    UIButton *buttonreduce = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonreduce.frame = CGRectMake(XYViewL(labelnum)-40, XYViewTop(buttonadd), 40, 40);
+    [buttonreduce setImage:LOADIMAGE(@"reduceicon", @"png") forState:UIControlStateNormal];
+    [buttonreduce addTarget:self action:@selector(clickreduceproduct:) forControlEvents:UIControlEventTouchUpInside];
+    buttonreduce.tag = indexpath.row+EnShopCarReduceBtTag;
+    [view addSubview:buttonreduce];
+    
+
+    
+    
+
     
     return view;
-    
 }
 
-#pragma mark - ActionDelegate
+#pragma mark - IBACtion
+-(void)clickdelete:(id)sender
+{
+    if(selectdelete == EnShoppingCarNotSelect)
+    {
+        [arraydelete removeAllObjects];
+        selectdelete = EnShoppingCarSelected;
+        buttonselectall.hidden = NO;
+        [tableview reloadData];
+    }
+    else
+    {
+        [arraydelete removeAllObjects];
+        selectdelete = EnShoppingCarNotSelect;
+        buttonselectall.hidden = YES;
+        [tableview reloadData];
+    }
+}
 
+-(void)clickselectdelete:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag] - EnShopCarDeleteBtTag;
+    NSDictionary *dictemp = [arraydata objectAtIndex:tagnow];
+    int flag = 0;
+    for(int i=0;i<[arraydelete count];i++)
+    {
+        NSString *strid = [arraydelete objectAtIndex:i];
+        if([[dictemp objectForKey:@"id"] isEqualToString:strid])
+        {
+            [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
+            [arraydelete removeObject:strid];
+            flag = 1;
+            break;
+        }
+    }
+    if(flag == 0)
+    {
+        [arraydelete addObject:[dictemp objectForKey:@"id"]];
+        [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
+    }
+}
+
+-(void)clickaddproduct:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag] - EnShopCarAddBtTag;
+    
+    UILabel *labelnum = [tableview viewWithTag:EnShopCarLabelNumTag+tagnow];
+    int numnow = [labelnum.text intValue];
+    if(numnow+1>99)
+    {
+        [MBProgressHUD showError:@"单一商品最大数量订购99件" toView:app.window];
+    }
+    else
+    {
+        labelnum.text = [NSString stringWithFormat:@"%d",numnow+1];
+        NSMutableDictionary *dictemp = [arraydata objectAtIndex:tagnow];
+        if(dictemp)
+        {
+            [dictemp setObject:labelnum.text forKey:@"productnum"];
+        }
+        else
+        {
+            [dictemp setObject:labelnum.text forKey:@"productnum"];
+        }
+    }
+}
+
+-(void)clickreduceproduct:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag] - EnShopCarReduceBtTag;
+    UILabel *labelnum = [tableview viewWithTag:EnShopCarLabelNumTag+tagnow];
+    
+    int numnow = [labelnum.text intValue];
+    if(numnow-1<1)
+    {
+        [MBProgressHUD showError:@"单一商品最小数量订购1件" toView:app.window];
+    }
+    else
+    {
+        labelnum.text = [NSString stringWithFormat:@"%d",numnow-1];
+        NSMutableDictionary *dictemp = [arraydata objectAtIndex:tagnow];
+        if(dictemp)
+        {
+            [dictemp setObject:labelnum.text forKey:@"productnum"];
+        }
+        else
+        {
+            [dictemp setObject:labelnum.text forKey:@"productnum"];
+        }
+    }
+}
+
+-(void)clickselectalldelete:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if(selectall == EnNotSelect)
+    {
+        selectall = EnSelected;
+        [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
+         [arraydelete removeAllObjects];
+        for(int i=0;i<[arraydata count];i++)
+        {
+            NSDictionary *dictemp = [arraydata objectAtIndex:i];
+            [arraydelete addObject:[dictemp objectForKey:@"id"]];
+            
+            UIButton *buttondelete = [tableview viewWithTag:EnShopCarDeleteBtTag+i];
+            [buttondelete setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
+        }
+    }
+    else
+    {
+        selectall = EnNotSelect;
+        [arraydelete removeAllObjects];
+        [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
+        for(int i=0;i<[arraydata count];i++)
+        {
+            UIButton *buttondelete = [tableview viewWithTag:EnShopCarDeleteBtTag+i];
+            [buttondelete setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
+        }
+    }
+}
+
+-(void)clickSettlement:(id)sender
+{
+    DoneOrderViewController *doneorder = [[DoneOrderViewController alloc] init];
+    doneorder.hidesBottomBarWhenPushed = YES;
+    doneorder.arraydata = arraydata;
+    [self.navigationController pushViewController:doneorder animated:YES];
+}
 
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self getshoppingcarinterface];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -140,18 +371,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;//[arraydata count];
+    return [arraydata count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.01;
+    return 10;
     
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    UIImageView *imageviewline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    imageviewline.backgroundColor = COLORNOW(245, 245, 245);
+    
+    return imageviewline;
 }
 
 
@@ -172,8 +406,11 @@
     }
     
     cell.backgroundColor = [UIColor clearColor];
+    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
+    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 100) Dic:dictemp IndexPath:indexPath];
+    [cell.contentView addSubview:view];
     
-    cell.textLabel.text = @"123";
+    
     return cell;
 }
 
@@ -187,7 +424,10 @@
 {
     ShoppingCarService *shoppingcar = [ShoppingCarService new];
     [shoppingcar sendShoppingCarRequest:app.userinfo.userid App:app ReqUrl:RQMyShoppingCar successBlock:^(NSDictionary *dicData) {
-        
+        arraydata = [NSMutableArray arrayWithArray:[dicData objectForKey:@"rows"]];
+        tableview.delegate = self;
+        tableview.dataSource = self;
+        [tableview reloadData];
     }];
 }
 

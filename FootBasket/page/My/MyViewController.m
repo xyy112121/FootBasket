@@ -20,9 +20,9 @@
     {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.backgroundColor = COLORNOW(250, 250, 250);
     self.tabBarController.tabBar.tintColor =  COLORNOW(32, 188, 167);
-    self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.barTintColor = COLORNOW(250, 250, 250);
     [self initview];
     
 //    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(2, 2, 60, 40)];
@@ -295,7 +295,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    MyAddrListViewController *myaddrlist;
+    switch (indexPath.section)
+    {
+        case 0:
+            switch (indexPath.row)
+        {
+            case 0:
+
+                break;
+            case 1:
+                myaddrlist = [[MyAddrListViewController alloc] init];
+                myaddrlist.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:myaddrlist animated:YES];
+                break;
+        }
+            break;
+        case 1:
+            
+            break;
+        case 2:
+            
+            break;
+            
+    }
 }
 
 

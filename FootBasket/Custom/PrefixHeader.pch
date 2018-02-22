@@ -67,6 +67,9 @@
 #import "FocusNewsView.h"
 #import "GoodsDetailService.h"
 #import "GoodsDetailViewController.h"
+#import "DoneOrderViewController.h"
+#import "PayButtonView.h"
+#import "MyAddrListViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**
