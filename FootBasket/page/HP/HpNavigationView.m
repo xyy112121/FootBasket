@@ -39,13 +39,12 @@
     imageicon.image = LOADIMAGE(@"searchicon", @"png");
     [self addSubview:imageicon];
     
-    UITextField *textfieldcode = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageicon)+5, XYViewTop(imagebg)+1, XYViewWidth(imagebg)-40, XYViewHeight(imagebg)-2)];
-    textfieldcode.font = FONTN(15.0f);
-    textfieldcode.delegate = self;
-    textfieldcode.placeholder = @"搜索";
-    textfieldcode.backgroundColor = [UIColor clearColor];
-    
-    [self addSubview:textfieldcode];
+    textfieldinput = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageicon)+5, XYViewTop(imagebg)+1, XYViewWidth(imagebg)-40, XYViewHeight(imagebg)-2)];
+    textfieldinput.font = FONTN(15.0f);
+    textfieldinput.delegate = self;
+    textfieldinput.placeholder = @"搜索";
+    textfieldinput.backgroundColor = [UIColor clearColor];
+    [self addSubview:textfieldinput];
     
     UIButton *buttonright = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonright.frame = CGRectMake(SCREEN_WIDTH-50, 2, 40, 40);
@@ -71,12 +70,26 @@
     imageicon.image = LOADIMAGE(@"searchicon", @"png");
     [self addSubview:imageicon];
     
-    UITextField *textfieldcode = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageicon)+5, XYViewTop(imagebg)+1, XYViewWidth(imagebg)-40, XYViewHeight(imagebg)-2)];
-    textfieldcode.font = FONTN(15.0f);
-    textfieldcode.delegate = self;
-    textfieldcode.placeholder = @"输入产品名称";
-    textfieldcode.backgroundColor = [UIColor clearColor];
-    [self addSubview:textfieldcode];
+    textfieldinput = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageicon)+5, XYViewTop(imagebg)+1, XYViewWidth(imagebg)-40, XYViewHeight(imagebg)-2)];
+    textfieldinput.font = FONTN(15.0f);
+    textfieldinput.delegate = self;
+    textfieldinput.placeholder = @"输入产品名称";
+    textfieldinput.backgroundColor = [UIColor clearColor];
+    [self addSubview:textfieldinput];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if(textField == textfieldinput)
+    {
+        if(_delegate1 && [_delegate1 respondsToSelector:@selector(DGCickSearchTextfield:)])
+        {
+            [_delegate1 DGCickSearchTextfield:textField.text];
+        }
+        return NO;
+    }
+    return YES;
+    
 }
 
 @end

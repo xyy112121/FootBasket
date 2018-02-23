@@ -131,6 +131,12 @@
     [self gethpinterface];
 }
 
+-(void)DGCickSearchTextfield:(id)sender
+{
+    SearchViewController *searchview = [[SearchViewController alloc] init];
+    UINavigationController *nctl = [[UINavigationController alloc] initWithRootViewController:searchview];
+    [self.navigationController presentViewController:nctl animated:YES completion:nil];
+}
 
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
@@ -157,6 +163,7 @@
     [hpnav removeFromSuperview];
     hpnav = nil;
     hpnav = [[HpNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    hpnav.delegate1 = self;
     hpnav.tag = EnHpNavigationBgTag;
     [hpnav initViewHP];
     [self.navigationController.navigationBar addSubview:hpnav];

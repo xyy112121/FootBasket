@@ -11,8 +11,10 @@
 @interface HpNavigationView : UIView<UITextFieldDelegate>
 {
     AppDelegate *app;
+    UITextField *textfieldinput;
 }
 
 -(void)initViewHP;
 -(void)initViewCategory;
+@property(nonatomic,weak)id<ActionDelegate>delegate1;
 @end

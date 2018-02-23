@@ -43,6 +43,9 @@ typedef enum
 #define EnDoneOrderPayWayImageTag  6200 //确认订单付款方式按钮
 
 #define EnMyAddrListDefaultBtTag 6300 //设置默认按钮
+#define EnMyNewAddrTextfieldTag 6400 //填写地址信息
+
+#define EnSearchNavigationBgViewTag 6500 //搜索背景
 
 #endif /* Enum_set_h */
 

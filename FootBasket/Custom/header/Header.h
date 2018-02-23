@@ -15,6 +15,9 @@
 #define Tmp_path [NSHomeDirectory() stringByAppendingPathComponent:@"tmp/videos"]
 #define Cache_path [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"]
 #define Cache_Remarks [Cache_path stringByAppendingPathComponent:@"CacheRemarks.plist"]
+#define Cache_SearchHistory [Cache_path stringByAppendingPathComponent:@"SearchHistory.plist"]
+
+
 #define COLORNOW(a,b,c) [UIColor colorWithRed:a/255.0f green:b/255.0f blue:c/255.0f alpha:1]
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)

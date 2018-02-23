@@ -70,6 +70,10 @@
 #import "DoneOrderViewController.h"
 #import "PayButtonView.h"
 #import "MyAddrListViewController.h"
+#import "MyNewAddrViewController.h"
+#import "CZHAddressPickerView.h"
+#import "SearchViewController.h"
+#import "SearchResultViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

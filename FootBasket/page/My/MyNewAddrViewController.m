@@ -1,18 +1,18 @@
 //
-//  MyAddrListViewController.m
+//  MyNewAddrViewController.m
 //  FootBasket
 //
 //  Created by xyy on 2018/2/22.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "MyAddrListViewController.h"
+#import "MyNewAddrViewController.h"
 
-@interface MyAddrListViewController ()
+@interface MyNewAddrViewController ()
 
 @end
 
-@implementation MyAddrListViewController
+@implementation MyNewAddrViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,10 +41,10 @@
 {
     self.view.backgroundColor = COLORNOW(240, 240, 240);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.title = @"我的收货地址";
-    
+    self.title = @"添加新地址";
+    selectresult = EnNotSelect;
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-50) style:UITableViewStylePlain];
-    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableview.backgroundColor = [UIColor clearColor];
     tableview.delegate = self;
     tableview.dataSource = self;
@@ -54,84 +54,18 @@
     
     UIButton *buttonaddnew = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonaddnew.frame = CGRectMake(0, SCREEN_HEIGHT-50-StatusBarAndNavigationHeight, SCREEN_WIDTH, 50);
-    [buttonaddnew setImage:LOADIMAGE(@"添加icon", @"png") forState:UIControlStateNormal];
-    [buttonaddnew setTitle:@"添加新地址" forState:UIControlStateNormal];
+    [buttonaddnew setTitle:@"保存" forState:UIControlStateNormal];
     [buttonaddnew setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     buttonaddnew.titleLabel.font = FONTN(15.0f);
     [buttonaddnew setBackgroundColor:COLORNOW(32, 188, 167)];
     [buttonaddnew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [buttonaddnew addTarget:self action:@selector(clickaddnew:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonaddnew addTarget:self action:@selector(clickdone:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonaddnew];
-}
-
-//cell
--(UIView *)ViewCell:(CGRect)frame Dic:(NSDictionary *)dic IndexPath:(NSIndexPath *)indexpath
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height)];
-    view.backgroundColor = [UIColor clearColor];
     
-    UIImageView *imagebg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, frame.size.height-10)];
-    imagebg.backgroundColor = [UIColor whiteColor];
-    [view addSubview:imagebg];
-    
-
-    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10,20, 100, 20)];
-    labelname.text = @"张明明";
-    labelname.font = FONTB(16.0f);
-    labelname.textColor = COLORNOW(52, 52, 52);
-    [view addSubview:labelname];
-    
-    UILabel *labeltel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-150,XYViewTop(labelname), 140, 20)];
-    labeltel.text = @"13678909870";
-    labeltel.font = FONTN(16.0f);
-    labeltel.textAlignment = NSTextAlignmentRight;
-    labeltel.textColor = COLORNOW(52, 52, 52);
-    [view addSubview:labeltel];
-    
-    UILabel *labeladdr = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname),XYViewBottom(labelname)+5, SCREEN_WIDTH-20, 40)];
-    labeladdr.text = @"四川省简阳市 河东新区XX栋小XX号 多少户";
-    labeladdr.font = FONTN(14.0f);
-    labeladdr.backgroundColor = [UIColor clearColor];
-    labeladdr.textColor = COLORNOW(72, 72, 72);
-    labeladdr.numberOfLines = 2;
-    [view addSubview:labeladdr];
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, XYViewBottom(view)-40, 100, 40);
-    [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
-    [button setTitle:@"默认地址" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    button.titleLabel.font = FONTN(15.0f);
-    [button setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    button.tag = indexpath.row+EnMyAddrListDefaultBtTag;
-    [view addSubview:button];
-    
-    UIButton *buttonedit = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonedit.frame = CGRectMake(SCREEN_WIDTH-80, XYViewBottom(view)-40, 70, 40);
-    [buttonedit setImage:LOADIMAGE(@"编辑", @"png") forState:UIControlStateNormal];
-    [buttonedit setTitle:@"编辑" forState:UIControlStateNormal];
-    buttonedit.titleLabel.font = FONTN(15.0f);
-    [buttonedit setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [buttonedit setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [buttonedit addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    buttonedit.tag = indexpath.row+EnMyAddrListDefaultBtTag;
-    [view addSubview:buttonedit];
-    
-    UIButton *buttondelete = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttondelete.frame = CGRectMake(XYViewL(buttonedit)-70, XYViewTop(buttonedit), 70, 40);
-    [buttondelete setImage:LOADIMAGE(@"删除", @"png") forState:UIControlStateNormal];
-    [buttondelete setTitle:@"删除" forState:UIControlStateNormal];
-    buttondelete.titleLabel.font = FONTN(15.0f);
-    [buttondelete setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [buttondelete setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [buttondelete addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    buttondelete.tag = indexpath.row+EnMyAddrListDefaultBtTag;
-    [view addSubview:buttondelete];
-    
-    
-    
-    return view;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
 
 #pragma mark - viewcontroller delegate
@@ -148,31 +82,67 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
+#pragma mark - UItextfielddelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if(textField.tag == EnMyNewAddrTextfieldTag+2)
+    {
+        [self clickselectcity];
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)clicksetdefault:(id)sender
+-(void)clickdone:(id)sender
 {
-    
+    UITextField *textfield1 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+0];
+    UITextField *textfield2 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+1];
+    UITextField *textfield3 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+2];
+    UITextField *textfield4 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+3];
+    if(([textfield1.text length]==0)||([textfield2.text length]==0)||([textfield3.text length]==0)||([textfield4.text length]==0))
+    {
+        [MBProgressHUD showError:@"请填写地址信息" toView:app.window];
+    }
+    else if(![[CommonHeader new] CMisMobileNumber:textfield3.text])
+    {
+        [MBProgressHUD showError:@"请填写正确的手机号" toView:app.window];
+    }
+    else
+    {
+        [self returnback:nil];
+    }
 }
 
--(void)clicksetedit:(id)sender
+-(void)clickselectcity
 {
-    
+    UITextField *textfield = [tableview viewWithTag:EnMyNewAddrTextfieldTag+2];
+    [CZHAddressPickerView areaPickerViewWithProvince:FCprovice city:FCcity area:FCarea areaBlock:^(NSString *province, NSString *city, NSString *area) {
+        NSString *text = [NSString stringWithFormat:@"%@%@%@",province,city,area];
+        textfield.text = text;
+    }];
 }
 
--(void)clicksetdelete:(id)sender
+-(void)keyboardHide:(id)sender
 {
-    
-}
+    UITextField *textfield1 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+0];
+    UITextField *textfield2 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+1];
+    UITextField *textfield3 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+2];
+    UITextField *textfield4 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+3];
+    FCname = textfield1.text;
+    FCtel = textfield2.text;
+    FCdetailaddr = textfield4.text;
+    [textfield1 resignFirstResponder];
+    [textfield2 resignFirstResponder];
+    [textfield3 resignFirstResponder];
+    [textfield4 resignFirstResponder];
 
--(void)clickaddnew:(id)sender
-{
-    MyNewAddrViewController *addnew = [[MyNewAddrViewController alloc] init];
-    [self.navigationController pushViewController:addnew animated:YES];
 }
 
 #pragma mark - tableview delegate
@@ -208,28 +178,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 40;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;//[arraydata count];
+    if(section == 0)
+        return 4;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.01;
+    return 10;
     
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    UIImageView *imageline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    imageline.backgroundColor = COLORNOW(240, 240, 240);
+    return imageline;
 }
 
 
@@ -249,10 +223,57 @@
         [view removeFromSuperview];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
-    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
-    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 120) Dic:dictemp IndexPath:indexPath];
-    [cell.contentView addSubview:view];
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    
+    if(indexPath.section == 0)
+    {
+        UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 20)];
+        labelname.textColor = COLORNOW(52, 52, 52);
+        labelname.font = FONTN(16.0f);
+        [cell.contentView addSubview:labelname];
+        
+        UITextField *textfieldvalue = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(labelname), 10, SCREEN_WIDTH-120, 20)];
+        textfieldvalue.textColor = COLORNOW(52, 52, 52);
+        textfieldvalue.font = FONTN(15.0f);
+        textfieldvalue.delegate = self;
+        [cell.contentView addSubview:textfieldvalue];
+        textfieldvalue.tag = EnMyNewAddrTextfieldTag+indexPath.row;
+        switch (indexPath.row)
+        {
+            case 0:
+                labelname.text = @"收货人";
+                textfieldvalue.placeholder = @"添加收货人姓名";
+                textfieldvalue.text = FCname;
+                break;
+            case 1:
+                labelname.text = @"联系电话";
+                textfieldvalue.placeholder = @"填写联系电话";
+                textfieldvalue.text = FCtel;
+                break;
+            case 2:
+                labelname.text = @"所在省市";
+                textfieldvalue.placeholder = @"选择省市";
+                break;
+            case 3:
+                labelname.text = @"详细地址";
+                textfieldvalue.placeholder = @"填写详细地址";
+                textfieldvalue.text = FCdetailaddr;
+                break;
+        }
+    }
+    else if(indexPath.section == 1)
+    {
+        UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 20)];
+        labelname.textColor = COLORNOW(52, 52, 52);
+        labelname.font = FONTN(16.0f);
+        labelname.text = @"设为默认";
+        [cell.contentView addSubview:labelname];
+     
+        imageviewdefaule = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40, 10, 20, 20)];
+        imageviewdefaule.image = LOADIMAGE(@"选区", @"png");
+        [cell.contentView addSubview:imageviewdefaule];
+    }
     
     
     return cell;
@@ -260,7 +281,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if(indexPath.section == 1)
+    {
+        if(selectresult == EnNotSelect)
+        {
+            selectresult = EnSelected;
+            imageviewdefaule.image = LOADIMAGE(@"选择框选中", @"png");
+        }
+        else
+        {
+            selectresult = EnNotSelect;
+            imageviewdefaule.image = LOADIMAGE(@"选区", @"png");
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

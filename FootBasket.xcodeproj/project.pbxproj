@@ -271,6 +271,13 @@
 		740F402A20284C560050A6BF /* HpNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F402920284C560050A6BF /* HpNavigationView.m */; };
 		740F402D202856B20050A6BF /* RecommendGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F402C202856B20050A6BF /* RecommendGoodsCell.m */; };
 		7413048A202AA3B000D9AB80 /* HpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74130489202AA3B000D9AB80 /* HpService.m */; };
+		743B5238203FBD340004E673 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 743B5230203FBD330004E673 /* city.plist */; };
+		743B5239203FBD340004E673 /* CZHAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B5232203FBD330004E673 /* CZHAddressPickerView.m */; };
+		743B523A203FBD340004E673 /* description in Resources */ = {isa = PBXBuildFile; fileRef = 743B5233203FBD330004E673 /* description */; };
+		743B523B203FBD340004E673 /* UIButton+CZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B5235203FBD330004E673 /* UIButton+CZHExtension.m */; };
+		743B523C203FBD340004E673 /* UIView+CZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B5237203FBD330004E673 /* UIView+CZHExtension.m */; };
+		743B5242203FEB3A0004E673 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B5241203FEB3A0004E673 /* SearchViewController.m */; };
+		743B524520400C520004E673 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B524420400C520004E673 /* SearchResultViewController.m */; };
 		743DC44020294854004E4DB0 /* RequestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 743DC43E20294854004E4DB0 /* RequestInterface.m */; };
 		743DC44420294AF5004E4DB0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743DC44320294AF5004E4DB0 /* LoginView.m */; };
 		743DC44820294EA6004E4DB0 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 743DC44720294EA6004E4DB0 /* UserInfo.m */; };
@@ -284,6 +291,10 @@
 		743DC45F2029A70F004E4DB0 /* CategoryLeftMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 743DC45E2029A70F004E4DB0 /* CategoryLeftMenu.m */; };
 		7484DFC4202BFB9300900FB8 /* CategoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7484DFC3202BFB9300900FB8 /* CategoryService.m */; };
 		7484DFC8202BFC1A00900FB8 /* ShoppingCarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7484DFC7202BFC1A00900FB8 /* ShoppingCarService.m */; };
+		74AAAAE9203F0225006AD3EB /* 添加icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE6203F0225006AD3EB /* 添加icon@2x.png */; };
+		74AAAAEA203F0225006AD3EB /* 添加icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE7203F0225006AD3EB /* 添加icon.png */; };
+		74AAAAEB203F0225006AD3EB /* 添加icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE8203F0225006AD3EB /* 添加icon@3x.png */; };
+		74AAAAEE203F03D8006AD3EB /* MyNewAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */; };
 		74E3A00F202D4D04003A06A7 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E3A00E202D4D04003A06A7 /* GoodsDetailViewController.m */; };
 		74E3A012202D5174003A06A7 /* FocusNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E3A010202D5174003A06A7 /* FocusNewsView.m */; };
 		74E3A017202D51B0003A06A7 /* XLsn0wLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E3A015202D51B0003A06A7 /* XLsn0wLoop.m */; };
@@ -727,6 +738,19 @@
 		740F402C202856B20050A6BF /* RecommendGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendGoodsCell.m; sourceTree = "<group>"; };
 		74130488202AA3B000D9AB80 /* HpService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HpService.h; sourceTree = "<group>"; };
 		74130489202AA3B000D9AB80 /* HpService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HpService.m; sourceTree = "<group>"; };
+		743B522F203FBD330004E673 /* AddressPickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerHeader.h; sourceTree = "<group>"; };
+		743B5230203FBD330004E673 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
+		743B5231203FBD330004E673 /* CZHAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHAddressPickerView.h; sourceTree = "<group>"; };
+		743B5232203FBD330004E673 /* CZHAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHAddressPickerView.m; sourceTree = "<group>"; };
+		743B5233203FBD330004E673 /* description */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description; sourceTree = "<group>"; };
+		743B5234203FBD330004E673 /* UIButton+CZHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CZHExtension.h"; sourceTree = "<group>"; };
+		743B5235203FBD330004E673 /* UIButton+CZHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CZHExtension.m"; sourceTree = "<group>"; };
+		743B5236203FBD330004E673 /* UIView+CZHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CZHExtension.h"; sourceTree = "<group>"; };
+		743B5237203FBD330004E673 /* UIView+CZHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CZHExtension.m"; sourceTree = "<group>"; };
+		743B5240203FEB3A0004E673 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		743B5241203FEB3A0004E673 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		743B524320400C520004E673 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		743B524420400C520004E673 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		743DC43E20294854004E4DB0 /* RequestInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestInterface.m; sourceTree = "<group>"; };
 		743DC43F20294854004E4DB0 /* RequestInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestInterface.h; sourceTree = "<group>"; };
 		743DC44220294AF5004E4DB0 /* LoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -747,6 +771,11 @@
 		7484DFC3202BFB9300900FB8 /* CategoryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryService.m; sourceTree = "<group>"; };
 		7484DFC6202BFC1A00900FB8 /* ShoppingCarService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarService.h; sourceTree = "<group>"; };
 		7484DFC7202BFC1A00900FB8 /* ShoppingCarService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarService.m; sourceTree = "<group>"; };
+		74AAAAE6203F0225006AD3EB /* 添加icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加icon@2x.png"; sourceTree = "<group>"; };
+		74AAAAE7203F0225006AD3EB /* 添加icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加icon.png"; sourceTree = "<group>"; };
+		74AAAAE8203F0225006AD3EB /* 添加icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加icon@3x.png"; sourceTree = "<group>"; };
+		74AAAAEC203F03D8006AD3EB /* MyNewAddrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNewAddrViewController.h; sourceTree = "<group>"; };
+		74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewAddrViewController.m; sourceTree = "<group>"; };
 		74E3A00D202D4D04003A06A7 /* GoodsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
 		74E3A00E202D4D04003A06A7 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		74E3A010202D5174003A06A7 /* FocusNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusNewsView.m; sourceTree = "<group>"; };
@@ -818,6 +847,9 @@
 		740F3D5320280E210050A6BF /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				74AAAAE7203F0225006AD3EB /* 添加icon.png */,
+				74AAAAE6203F0225006AD3EB /* 添加icon@2x.png */,
+				74AAAAE8203F0225006AD3EB /* 添加icon@3x.png */,
 				74E3A01E202D57BE003A06A7 /* arrow_R.png */,
 				74E3A01F202D57BE003A06A7 /* arrow_R@2x.png */,
 				74E3A01D202D57BE003A06A7 /* arrow_R@3x.png */,
@@ -948,6 +980,7 @@
 		740F3E2D2028454C0050A6BF /* page */ = {
 			isa = PBXGroup;
 			children = (
+				743B523F203FCAA10004E673 /* Search */,
 				74E3A00C202D4C88003A06A7 /* GoodsDetail */,
 				743DC44120294AD0004E4DB0 /* Account */,
 				740F3E30202845780050A6BF /* Category */,
@@ -978,6 +1011,8 @@
 				740F3E362028471C0050A6BF /* MyViewController.m */,
 				74E8187F203EBCC50016B4E1 /* MyAddrListViewController.h */,
 				74E81880203EBCC50016B4E1 /* MyAddrListViewController.m */,
+				74AAAAEC203F03D8006AD3EB /* MyNewAddrViewController.h */,
+				74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -1026,6 +1061,7 @@
 		740F3E3F202847F90050A6BF /* CommLib */ = {
 			isa = PBXGroup;
 			children = (
+				743B522E203FBD330004E673 /* AddressPickerView */,
 				74E3A013202D51B0003A06A7 /* 无限循环支持gif */,
 				740F3E40202847F90050A6BF /* AFNetworking */,
 				740F3E67202847F90050A6BF /* CircleProgress */,
@@ -1580,6 +1616,40 @@
 			path = hp;
 			sourceTree = "<group>";
 		};
+		743B522E203FBD330004E673 /* AddressPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				743B522F203FBD330004E673 /* AddressPickerHeader.h */,
+				743B5230203FBD330004E673 /* city.plist */,
+				743B5231203FBD330004E673 /* CZHAddressPickerView.h */,
+				743B5232203FBD330004E673 /* CZHAddressPickerView.m */,
+				743B5233203FBD330004E673 /* description */,
+				743B5234203FBD330004E673 /* UIButton+CZHExtension.h */,
+				743B5235203FBD330004E673 /* UIButton+CZHExtension.m */,
+				743B5236203FBD330004E673 /* UIView+CZHExtension.h */,
+				743B5237203FBD330004E673 /* UIView+CZHExtension.m */,
+			);
+			path = AddressPickerView;
+			sourceTree = "<group>";
+		};
+		743B523D203FC1FA0004E673 /* mangeaddress */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mangeaddress;
+			sourceTree = "<group>";
+		};
+		743B523F203FCAA10004E673 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				743B5240203FEB3A0004E673 /* SearchViewController.h */,
+				743B5241203FEB3A0004E673 /* SearchViewController.m */,
+				743B524320400C520004E673 /* SearchResultViewController.h */,
+				743B524420400C520004E673 /* SearchResultViewController.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		743DC44120294AD0004E4DB0 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -1601,6 +1671,7 @@
 		743DC44920295574004E4DB0 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				743B523D203FC1FA0004E673 /* mangeaddress */,
 				74E3A019202D530B003A06A7 /* goodsdetail */,
 				7484DFC5202BFBBB00900FB8 /* shoppingcar */,
 				7484DFC1202BFB9300900FB8 /* category */,
@@ -1734,11 +1805,13 @@
 				740F3E1320280E210050A6BF /* 电话@3x.png in Resources */,
 				740F3E2B20280E210050A6BF /* 首页选择后@3x.png in Resources */,
 				740F3DE120280E210050A6BF /* 关于我们ICON.png in Resources */,
+				743B5238203FBD340004E673 /* city.plist in Resources */,
 				740F4010202847F90050A6BF /* Info.plist in Resources */,
 				740F3E1120280E210050A6BF /* 电话.png in Resources */,
 				740F3DD520280E210050A6BF /* 个人头像.png in Resources */,
 				740F3DC620280E210050A6BF /* reduceicon.png in Resources */,
 				740F3DDA20280E210050A6BF /* 代付款@3x.png in Resources */,
+				743B523A203FBD340004E673 /* description in Resources */,
 				740F3FBE202847F90050A6BF /* dropdown_loading1_01@2x.png in Resources */,
 				740F3DF820280E210050A6BF /* 彩色分割条@3x.png in Resources */,
 				740F3DF020280E210050A6BF /* 地址icon.png in Resources */,
@@ -1784,6 +1857,7 @@
 				740F3E0D20280E210050A6BF /* 特惠@3x.png in Resources */,
 				740F3E2020280E210050A6BF /* 选区.png in Resources */,
 				740F3DC120280E210050A6BF /* addicon@2x.png in Resources */,
+				74AAAAEA203F0225006AD3EB /* 添加icon.png in Resources */,
 				740F3DD720280E210050A6BF /* 个人头像@3x.png in Resources */,
 				740F3FFB202847F90050A6BF /* README.md in Resources */,
 				740F3DF620280E210050A6BF /* 彩色分割条.png in Resources */,
@@ -1867,6 +1941,8 @@
 				740F3DEA20280E210050A6BF /* 加入购物车icon.png in Resources */,
 				740F3E0620280E210050A6BF /* 收货地址icon@2x.png in Resources */,
 				740F3E2A20280E210050A6BF /* 首页选择后@2x.png in Resources */,
+				74AAAAEB203F0225006AD3EB /* 添加icon@3x.png in Resources */,
+				74AAAAE9203F0225006AD3EB /* 添加icon@2x.png in Resources */,
 				740F3D4520280CE40050A6BF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1925,6 +2001,7 @@
 				740F3FDB202847F90050A6BF /* MKPeopleHeadTableViewCell.m in Sources */,
 				740F401A202847F90050A6BF /* ViewController+MASAdditions.m in Sources */,
 				743DC44020294854004E4DB0 /* RequestInterface.m in Sources */,
+				743B5239203FBD340004E673 /* CZHAddressPickerView.m in Sources */,
 				740F4002202847F90050A6BF /* SDWebImageDownloader.m in Sources */,
 				740F3FAE202847F90050A6BF /* MJRefreshAutoFooter.m in Sources */,
 				740F401B202847F90050A6BF /* NullSafe.m in Sources */,
@@ -1956,6 +2033,7 @@
 				740F3FCD202847F90050A6BF /* UIScrollView+MJRefresh.m in Sources */,
 				740F3FF3202847F90050A6BF /* POPGeometry.mm in Sources */,
 				740F3FD3202847F90050A6BF /* RATreeNodeInfo.m in Sources */,
+				743B524520400C520004E673 /* SearchResultViewController.m in Sources */,
 				740F3FC6202847F90050A6BF /* MJDIYAutoFooter.m in Sources */,
 				740F400F202847F90050A6BF /* AddCustomView.m in Sources */,
 				740F3FD6202847F90050A6BF /* RATreeView+TableViewDataSource.m in Sources */,
@@ -1974,6 +2052,7 @@
 				740F3F92202847F90050A6BF /* AFURLRequestSerialization.m in Sources */,
 				740F3FED202847F90050A6BF /* POPAnimationTracer.mm in Sources */,
 				740F3E3D2028473D0050A6BF /* ShoppingCarViewController.m in Sources */,
+				743B523B203FBD340004E673 /* UIButton+CZHExtension.m in Sources */,
 				740F3FCE202847F90050A6BF /* UIView+MJExtension.m in Sources */,
 				740F3F9D202847F90050A6BF /* UIWebView+AFNetworking.m in Sources */,
 				7484DFC8202BFC1A00900FB8 /* ShoppingCarService.m in Sources */,
@@ -1986,7 +2065,9 @@
 				740F3FC8202847F90050A6BF /* MJDIYHeader.m in Sources */,
 				740F3FEE202847F90050A6BF /* POPAnimator.mm in Sources */,
 				74E8187E203EA7210016B4E1 /* PayButtonView.m in Sources */,
+				74AAAAEE203F03D8006AD3EB /* MyNewAddrViewController.m in Sources */,
 				740F3FAA202847F90050A6BF /* JQMusic2Animation.m in Sources */,
+				743B5242203FEB3A0004E673 /* SearchViewController.m in Sources */,
 				740F402D202856B20050A6BF /* RecommendGoodsCell.m in Sources */,
 				740F402A20284C560050A6BF /* HpNavigationView.m in Sources */,
 				74E3A01C202D5325003A06A7 /* GoodsDetailService.m in Sources */,
@@ -2009,6 +2090,7 @@
 				740F3FA9202847F90050A6BF /* JQMusic1Animation.m in Sources */,
 				740F3FB7202847F90050A6BF /* MJRefreshBackGifFooter.m in Sources */,
 				740F3FAD202847F90050A6BF /* MBProgressHUD.m in Sources */,
+				743B523C203FBD340004E673 /* UIView+CZHExtension.m in Sources */,
 				740F3F94202847F90050A6BF /* AFURLSessionManager.m in Sources */,
 				740F4019202847F90050A6BF /* View+MASAdditions.m in Sources */,
 				740F3FEF202847F90050A6BF /* POPBasicAnimation.mm in Sources */,
