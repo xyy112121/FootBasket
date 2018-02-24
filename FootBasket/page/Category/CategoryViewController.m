@@ -139,8 +139,17 @@
     hpnav = nil;
     hpnav = [[HpNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     hpnav.tag = EnHpNavigationBgTag;
+    hpnav.delegate1 = self;
     [hpnav initViewCategory];
     [self.navigationController.navigationBar addSubview:hpnav];
+}
+
+#pragma mark - ActionDelegate
+-(void)DGCickSearchTextfield:(id)sender
+{
+    SearchViewController *searchview = [[SearchViewController alloc] init];
+    UINavigationController *nctl = [[UINavigationController alloc] initWithRootViewController:searchview];
+    [self.navigationController presentViewController:nctl animated:YES completion:nil];
 }
 
 #pragma mark - IBAction

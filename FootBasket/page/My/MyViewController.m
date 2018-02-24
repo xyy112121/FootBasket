@@ -110,6 +110,7 @@
     imagewaitreceive.frame = CGRectMake(30, XYViewBottom(imageviewline)+5, nowwidth, 50);
     imagewaitreceive.backgroundColor = [UIColor clearColor];
     [imagewaitreceive setImage:LOADIMAGE(@"待收货", @"png") forState:UIControlStateNormal];
+    [imagewaitreceive addTarget:self action:@selector(clickwaitorderlist:) forControlEvents:UIControlEventTouchUpInside];
     [viewheader addSubview:imagewaitreceive];
     
     UILabel *labelleft = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagewaitreceive), XYViewBottom(imagewaitreceive)-5, XYViewWidth(imagewaitreceive), 20)];
@@ -125,6 +126,8 @@
     imagereceived.frame = CGRectMake(30+XYViewR(imagewaitreceive), XYViewTop(imagewaitreceive), nowwidth, 50);
     imagereceived.backgroundColor = [UIColor clearColor];
     [imagereceived setImage:LOADIMAGE(@"已收货", @"png") forState:UIControlStateNormal];
+    [imagereceived addTarget:self action:@selector(clickreceiveorderlist:) forControlEvents:UIControlEventTouchUpInside];
+    
     [viewheader addSubview:imagereceived];
     
     UILabel *labelmiddle = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagereceived), XYViewBottom(imagereceived)-5, XYViewWidth(imagereceived), 20)];
@@ -157,6 +160,22 @@
 -(void)gotosetting:(id)sender
 {
     
+}
+
+-(void)clickwaitorderlist:(id)sender
+{
+    UserOrderViewController *userorder = [[UserOrderViewController alloc] init];
+    userorder.hidesBottomBarWhenPushed = YES;
+    userorder.orderstate = @"2";
+    [self.navigationController pushViewController:userorder animated:YES];
+}
+
+-(void)clickreceiveorderlist:(id)sender
+{
+    UserOrderViewController *userorder = [[UserOrderViewController alloc] init];
+    userorder.hidesBottomBarWhenPushed = YES;
+    userorder.orderstate = @"3";
+    [self.navigationController pushViewController:userorder animated:YES];
 }
 
 #pragma mark - viewcontroller delegate

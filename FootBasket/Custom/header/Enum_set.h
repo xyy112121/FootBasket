@@ -47,6 +47,10 @@ typedef enum
 
 #define EnSearchNavigationBgViewTag 6500 //搜索背景
 
+#define EnShoppingCarDeleteViewBgTag 6600 //搜索背景
+
+#define EnMyOrderListStateBtTag 6700 //搜索背景
+
 #endif /* Enum_set_h */
 
 

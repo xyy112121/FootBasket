@@ -1,18 +1,18 @@
 //
-//  DoneOrderViewController.m
+//  OrderDetailViewController.m
 //  FootBasket
 //
-//  Created by xyy on 2018/2/22.
+//  Created by xyy on 2018/2/24.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "DoneOrderViewController.h"
+#import "OrderDetailViewController.h"
 
-@interface DoneOrderViewController ()
+@interface OrderDetailViewController ()
 
 @end
 
-@implementation DoneOrderViewController
+@implementation OrderDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@
 {
     self.view.backgroundColor = COLORNOW(240, 240, 240);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.title = @"确认订单";
+    self.title = @"订单详情";
     
     
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-50) style:UITableViewStylePlain];
@@ -52,42 +52,25 @@
     
     [self setExtraCellLineHidden:tableview];
     
-    [self gotoSettlement];
+    [self getorderdetail];
     
 }
 
-//结算条
+//确认收货
 -(UIView *)viewbottomSettlement:(CGRect)frame
 {
     UIView *viewbottom = [[UIView alloc] initWithFrame:frame];
     viewbottom.backgroundColor = [UIColor whiteColor];
-
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(SCREEN_WIDTH-100, 0, 100, 50);
-    [button setTitle:@"提交订单" forState:UIControlStateNormal];
+    [button setTitle:@"确认收货" forState:UIControlStateNormal];
     button.titleLabel.font = FONTN(15.0f);
     button.backgroundColor = COLORNOW(250, 111, 73);
     [button addTarget:self action:@selector(clickcommitorder:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [viewbottom addSubview:button];
     
-    UILabel *labelall = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(button)-120, 15, 35, 20)];
-    labelall.textColor = COLORNOW(52, 52, 52);
-    labelall.font = FONTN(15.0f);
-    labelall.text = @"合计";
-    [viewbottom addSubview:labelall];
-    
-    UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
-    labelmoney.textColor = COLORNOW(248, 88, 37);
-    labelmoney.font = FONTN(15.0f);
-    labelmoney.text = [NSString stringWithFormat:@"%@",[dicresponse objectForKey:@"realPayPrice"]];
-    [viewbottom addSubview:labelmoney];
-    
-    UILabel *labelproductnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelall)-100, 15, 95, 20)];
-    labelproductnum.textColor = COLORNOW(52, 52, 52);
-    labelproductnum.font = FONTN(15.0f);
-    labelproductnum.text = [NSString stringWithFormat:@"共计:%ld款产品",[arraydata count]];
-    [viewbottom addSubview:labelproductnum];
     return viewbottom;
 }
 
@@ -98,7 +81,6 @@
     viewaddr.backgroundColor = [UIColor whiteColor];
     
     NSDictionary *dicarrd = [dicresponse objectForKey:@"address"];
-    selectaddrid = [dicarrd objectForKey:@"id"];
     UIImageView *imageaddricon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 14, 14, 18)];
     imageaddricon.image = LOADIMAGE(@"地址icon", @"png");
     [viewaddr addSubview:imageaddricon];
@@ -106,9 +88,8 @@
     UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 8, SCREEN_WIDTH-100, 30)];
     textfield.backgroundColor = [UIColor clearColor];
     textfield.placeholder = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
-   // textfield.text = [dicarrd objectForKey:@"address"];
+    // textfield.text = [dicarrd objectForKey:@"address"];
     textfield.font = FONTN(15.0f);
-    textfield.delegate = self;
     textfield.textColor = COLORNOW(52, 52, 52);
     [viewaddr addSubview:textfield];
     
@@ -150,7 +131,7 @@
     labelprice.font = FONTN(14.0f);
     labelprice.textColor = COLORNOW(122, 122, 122);
     [view addSubview:labelprice];
-
+    
     NSString *strprice = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"sumPrice"]];
     CommonHeader *comheader = [CommonHeader new];
     CGSize size = [comheader CMGetlablesize:strprice Fwidth:150 Fheight:20 Sfont:FONTN(15.0f) Spaceing:3.0f];
@@ -192,14 +173,6 @@
     return view;
 }
 
-#pragma mark - UItextfielddelegate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    MyAddrListViewController *myaddr = [[MyAddrListViewController alloc] init];
-    [self.navigationController pushViewController:myaddr animated:YES];
-    return NO;
-}
-
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -220,26 +193,10 @@
 
 -(void)clickcommitorder:(id)sender
 {
-    if([selectaddrid length]==0)
-    {
-        [MBProgressHUD showError:@"请选择收货地址" toView:app.window];
-        return;
-    }
-    else if([payway length]==0)
-    {
-        [MBProgressHUD showError:@"请选择付款方式" toView:app.window];
-        return;
-    }
-    else if([receivetime length]==0)
-    {
-        [MBProgressHUD showError:@"请选择送达时间" toView:app.window];
-        return;
-    }
-    
     NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = [NSString stringWithFormat:@"你实际需要支付%@元\n是否确定提交订单",[dicresponse objectForKey:@"realPayPrice"]];
+    NSString *message = [NSString stringWithFormat:@"请你在确认收到货的时候点击确认收货,请问是否确认收货"];
     NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
-    NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
+    NSString *otherButtonTitle = NSLocalizedString(@"确认收货", nil);
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -249,7 +206,7 @@
     }];
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self commitselforder];
+        
     }];
     
     // Add the actions.
@@ -259,43 +216,6 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void)clickreceiveTime:(id)sender
-{
-        DateTimePickerView *pickerView = [[DateTimePickerView alloc] init];
-//        self.datePickerView = pickerView;
-        pickerView.delegate = self;
-        pickerView.pickerViewMode = DatePickerViewDateTimeMode;
-        [self.view addSubview:pickerView];
-        [pickerView showDateTimePickerView];
-}
-    
-#pragma mark - delegate
-    
-- (void)didClickFinishDateTimePickerView:(NSString *)date
-{
-    receivetime = date;
-    [receivebuttontime setTitle:date forState:UIControlStateNormal];
-}
-
-
-#pragma mark - Actiondelegate
--(void)DGClickPayWay:(id)sender TitleName:(UILabel *)titlename
-{
-    PayButtonView *payway1 = [tableview viewWithTag:EnDoneOrderPayWayImageTag];
-    PayButtonView *payway2 = [tableview viewWithTag:EnDoneOrderPayWayImageTag];
-    PayButtonView *payway3 = [tableview viewWithTag:EnDoneOrderPayWayImageTag];
-    [payway1 updateimageselect];
-    [payway2 updateimageselect];
-    [payway3 updateimageselect];
-    if([titlename.text isEqualToString:@"货到付款"])
-        payway = @"0";
-    else if([titlename.text isEqualToString:@"欠账订单"])
-        payway = @"1";
-    else if([titlename.text isEqualToString:@"取店取货"])
-        payway = @"2";
-    UIImageView *imageview = (UIImageView *)sender;
-    imageview.image = LOADIMAGE(@"选择框选中", @"png");
-}
 
 #pragma mark - tableview delegate
 //隐藏那些没有cell的线
@@ -397,12 +317,11 @@
         labeltime.text = @"送达时间";
         [viewtime addSubview:labeltime];
         
-        receivebuttontime  = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *receivebuttontime  = [UIButton buttonWithType:UIButtonTypeCustom];
         receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-155, 21, 130, 30);
         [receivebuttontime setTitle:@"请选择送达时间" forState:UIControlStateNormal];
         receivebuttontime.titleLabel.font = FONTN(15.0f);
         [receivebuttontime setTitleColor:COLORNOW(32, 188, 167) forState:UIControlStateNormal];
-        [receivebuttontime addTarget:self action:@selector(clickreceiveTime:) forControlEvents:UIControlEventTouchUpInside];
         receivebuttontime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [viewtime addSubview:receivebuttontime];
         
@@ -513,40 +432,12 @@
 }
 
 #pragma mark - 获取首页数据
-//结算
--(void)gotoSettlement
+-(void)getorderdetail
 {
-    ShoppingCarService *shoppingcar = [ShoppingCarService new];
-    
-    CommonHeader *com = [CommonHeader new];
-    NSString *jsonnum = [com CMDataToJson:_arrayproductnum];
-    DLog(@"jsonnum===%@",jsonnum);
-    [shoppingcar sendShoppingCarSettlementRequest:jsonnum Userid:app.userinfo.userid App:app ReqUrl:RQShoppingCarSettlement successBlock:^(NSDictionary *dicData) {
+    OrderService *order = [OrderService new];
+    [order sendOrderDetailRequest:_FCorderid App:app ReqUrl:RQMyOrderDetail successBlock:^(NSDictionary *dicData) {
         
-        dicresponse = dicData;
-        
-        arraydata = [dicresponse objectForKey:@"products"];
-        tableview.delegate = self;
-        tableview.dataSource = self;
-        [tableview reloadData];
-        
-        UIView *viewbottom = [self viewbottomSettlement:CGRectMake(0, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-50, SCREEN_WIDTH, 50)];
-        [self.view addSubview:viewbottom];
     }];
-}
-
-//提交订单
--(void)commitselforder
-{
-    ShoppingCarService *shoppingcar = [ShoppingCarService new];
-    
-    CommonHeader *com = [CommonHeader new];
-    NSString *jsonnum = [com CMDataToJson:_arrayproductnum];
-    DLog(@"jsonnum===%@",jsonnum);
-    [shoppingcar sendCommitOrderRequest:jsonnum Userid:app.userinfo.userid AddrId:selectaddrid PayWay:payway DeliveryTime:receivetime App:app ReqUrl:RQCommitOrder successBlock:^(NSDictionary *dicData) {
-        [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
-    }];
-    
 }
 
 - (void)didReceiveMemoryWarning {

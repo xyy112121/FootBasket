@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FootBasket/service/shoppingcar/ShoppingCarService.m"
+            timestampString = "541155924.252556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-sendCommitOrderRequest:Userid:AddrId:PayWay:DeliveryTime:App:ReqUrl:successBlock:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ShoppingCarService sendCommitOrderRequest:Userid:AddrId:PayWay:DeliveryTime:App:ReqUrl:successBlock:]"
+                  moduleName = "FootBasket"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xyy/Desktop/%E5%B7%A5%E4%BD%9C/Other/%E4%B8%96%E5%B9%B3(%E5%9C%A8%E7%BA%BF%E5%8D%96%E8%8F%9C%E7%B3%BB%E7%BB%9Fapp)/code/ios/FootBasket/FootBasket/service/shoppingcar/ShoppingCarService.m"
+                  timestampString = "541156962.069332"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "532">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__103-[ShoppingCarService sendCommitOrderRequest:Userid:AddrId:PayWay:DeliveryTime:App:ReqUrl:successBlock:]_block_invoke"
+                  moduleName = "FootBasket"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xyy/Desktop/%E5%B7%A5%E4%BD%9C/Other/%E4%B8%96%E5%B9%B3(%E5%9C%A8%E7%BA%BF%E5%8D%96%E8%8F%9C%E7%B3%BB%E7%BB%9Fapp)/code/ios/FootBasket/FootBasket/service/shoppingcar/ShoppingCarService.m"
+                  timestampString = "541156962.071184"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

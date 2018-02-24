@@ -12,7 +12,7 @@
 @protocol ActionDelegate<NSObject>
 @optional
 
--(void)DGClickPayWay:(id)sender;
+-(void)DGClickPayWay:(id)sender TitleName:(UILabel *)label;
 -(void)DGLoginSuccess:(id)sender; //登录成功
 -(void)DGClickCategorySmall:(NSDictionary *)sender;//点击小分类获取
 -(void)DGCickSearchTextfield:(id)sender;//点击搜索

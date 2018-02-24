@@ -53,7 +53,7 @@
     [self setExtraCellLineHidden:tableview];
     
     UIButton *buttonaddnew = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonaddnew.frame = CGRectMake(0, SCREEN_HEIGHT-50-StatusBarAndNavigationHeight, SCREEN_WIDTH, 50);
+    buttonaddnew.frame = CGRectMake(0, SCREEN_HEIGHT-50-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);
     [buttonaddnew setTitle:@"保存" forState:UIControlStateNormal];
     [buttonaddnew setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     buttonaddnew.titleLabel.font = FONTN(15.0f);
@@ -106,17 +106,23 @@
     UITextField *textfield2 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+1];
     UITextField *textfield3 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+2];
     UITextField *textfield4 = [tableview viewWithTag:EnMyNewAddrTextfieldTag+3];
+    FCname = textfield1.text;
+    FCtel = textfield2.text;
     if(([textfield1.text length]==0)||([textfield2.text length]==0)||([textfield3.text length]==0)||([textfield4.text length]==0))
     {
         [MBProgressHUD showError:@"请填写地址信息" toView:app.window];
     }
-    else if(![[CommonHeader new] CMisMobileNumber:textfield3.text])
+    else if(![[CommonHeader new] CMisMobileNumber:textfield2.text])
     {
         [MBProgressHUD showError:@"请填写正确的手机号" toView:app.window];
     }
     else
     {
-        [self returnback:nil];
+        MangeAddressService *addrservice = [MangeAddressService new];
+        [addrservice sendAddNewAddressRequest:FCprovice City:FCcity Area:FCarea Address:FCdetailaddr Tel:FCtel IsDefault:selectresult==EnSelected?@"1":@"0" UserName:FCname UserId:app.userinfo.userid App:app ReqUrl:RQAddNewAddress successBlock:^(NSDictionary *dicData) {
+            
+            [self returnback:nil];
+        }];
     }
 }
 
@@ -124,6 +130,9 @@
 {
     UITextField *textfield = [tableview viewWithTag:EnMyNewAddrTextfieldTag+2];
     [CZHAddressPickerView areaPickerViewWithProvince:FCprovice city:FCcity area:FCarea areaBlock:^(NSString *province, NSString *city, NSString *area) {
+        FCprovice = province;
+        FCcity = city;
+        FCarea = area;
         NSString *text = [NSString stringWithFormat:@"%@%@%@",province,city,area];
         textfield.text = text;
     }];

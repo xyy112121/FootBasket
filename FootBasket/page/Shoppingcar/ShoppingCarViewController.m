@@ -43,6 +43,7 @@
     self.view.backgroundColor = COLORNOW(245, 245, 245);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     arraydelete = [[NSMutableArray alloc] init];
+    arrayproductnum = [[NSMutableArray alloc] init];
     selectdelete = EnShoppingCarNotSelect;
     selectall = EnNotSelect;
     self.title = @"购物车";
@@ -122,7 +123,7 @@
         for(int i=0;i<[arraydelete count];i++)
         {
             NSString *strid = [arraydelete objectAtIndex:i];
-            if([[dic objectForKey:@"id"] isEqualToString:strid])
+            if([[dic objectForKey:@"shoppingCartId"] isEqualToString:strid])
             {
                 [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
             }
@@ -160,6 +161,14 @@
     
     UILabel *labelnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(buttonadd)-25, XYViewTop(buttonadd), 25, 40)];
     labelnum.text = @"1";
+    for(int i=0;i<[arrayproductnum count];i++)
+    {
+        NSDictionary *dictemp = [arrayproductnum objectAtIndex:i];
+        if([[dictemp objectForKey:@"shoppingCartId"] isEqualToString:[dic objectForKey:@"shoppingCartId"]])
+        {
+            labelnum.text = [dictemp objectForKey:@"count"];
+        }
+    }
     labelnum.textAlignment = NSTextAlignmentCenter;
     labelnum.font = FONTN(15.0f);
     labelnum.textColor = COLORNOW(52, 52, 52);
@@ -174,12 +183,24 @@
     buttonreduce.tag = indexpath.row+EnShopCarReduceBtTag;
     [view addSubview:buttonreduce];
     
-
-    
-    
-
-    
     return view;
+}
+
+-(UIView *)adddeleteview:(CGRect)frame
+{
+    UIView *viewdelete = [[UIView alloc] initWithFrame:frame];
+    viewdelete.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(XYViewWidth(viewdelete)-100, 0, 100, 50);
+    [button setTitle:@"删除" forState:UIControlStateNormal];
+    button.titleLabel.font = FONTN(15.0f);
+    button.backgroundColor = COLORNOW(226, 24, 28);
+    [button addTarget:self action:@selector(deleteshopcarproduct:) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [viewdelete addSubview:button];
+    
+    return viewdelete;
 }
 
 #pragma mark - IBACtion
@@ -191,9 +212,13 @@
         selectdelete = EnShoppingCarSelected;
         buttonselectall.hidden = NO;
         [tableview reloadData];
+        UIView *view = [self adddeleteview:CGRectMake(100,SCREEN_HEIGHT-IPhone_SafeBottomMargin-49-StatusBarAndNavigationHeight-50, SCREEN_WIDTH-100, 50)];
+        view.tag = EnShoppingCarDeleteViewBgTag;
+        [self.view addSubview:view];
     }
     else
     {
+        [[self.view viewWithTag:EnShoppingCarDeleteViewBgTag] removeFromSuperview];
         [arraydelete removeAllObjects];
         selectdelete = EnShoppingCarNotSelect;
         buttonselectall.hidden = YES;
@@ -210,7 +235,7 @@
     for(int i=0;i<[arraydelete count];i++)
     {
         NSString *strid = [arraydelete objectAtIndex:i];
-        if([[dictemp objectForKey:@"id"] isEqualToString:strid])
+        if([[dictemp objectForKey:@"shoppingCartId"] isEqualToString:strid])
         {
             [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
             [arraydelete removeObject:strid];
@@ -220,7 +245,7 @@
     }
     if(flag == 0)
     {
-        [arraydelete addObject:[dictemp objectForKey:@"id"]];
+        [arraydelete addObject:[dictemp objectForKey:@"shoppingCartId"]];
         [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
     }
 }
@@ -240,14 +265,16 @@
     {
         labelnum.text = [NSString stringWithFormat:@"%d",numnow+1];
         NSMutableDictionary *dictemp = [arraydata objectAtIndex:tagnow];
-        if(dictemp)
+        for(int i=0;i<[arrayproductnum count];i++)
         {
-            [dictemp setObject:labelnum.text forKey:@"productnum"];
+            NSMutableDictionary *dicnum= [arrayproductnum objectAtIndex:i];
+            if([[dicnum objectForKey:@"shoppingCartId"] isEqualToString:[dictemp objectForKey:@"shoppingCartId"]])
+            {
+                [dicnum setObject:labelnum.text forKey:@"count"];
+            }
         }
-        else
-        {
-            [dictemp setObject:labelnum.text forKey:@"productnum"];
-        }
+        [dictemp setObject:labelnum.text forKey:@"productnum"];
+
     }
 }
 
@@ -266,14 +293,16 @@
     {
         labelnum.text = [NSString stringWithFormat:@"%d",numnow-1];
         NSMutableDictionary *dictemp = [arraydata objectAtIndex:tagnow];
-        if(dictemp)
+        for(int i=0;i<[arrayproductnum count];i++)
         {
-            [dictemp setObject:labelnum.text forKey:@"productnum"];
+            NSMutableDictionary *dicnum= [arrayproductnum objectAtIndex:i];
+            if([[dicnum objectForKey:@"shoppingCartId"] isEqualToString:[dictemp objectForKey:@"shoppingCartId"]])
+            {
+                [dicnum setObject:labelnum.text forKey:@"count"];
+            }
         }
-        else
-        {
-            [dictemp setObject:labelnum.text forKey:@"productnum"];
-        }
+        [dictemp setObject:labelnum.text forKey:@"productnum"];
+       
     }
 }
 
@@ -288,7 +317,7 @@
         for(int i=0;i<[arraydata count];i++)
         {
             NSDictionary *dictemp = [arraydata objectAtIndex:i];
-            [arraydelete addObject:[dictemp objectForKey:@"id"]];
+            [arraydelete addObject:[dictemp objectForKey:@"shoppingCartId"]];
             
             UIButton *buttondelete = [tableview viewWithTag:EnShopCarDeleteBtTag+i];
             [buttondelete setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
@@ -311,8 +340,9 @@
 {
     DoneOrderViewController *doneorder = [[DoneOrderViewController alloc] init];
     doneorder.hidesBottomBarWhenPushed = YES;
-    doneorder.arraydata = arraydata;
+    doneorder.arrayproductnum = arrayproductnum;
     [self.navigationController pushViewController:doneorder animated:YES];
+
 }
 
 #pragma mark - viewcontroller delegate
@@ -420,13 +450,43 @@
 }
 
 #pragma mark - 获取首页数据
+
+-(void)deleteshopcarproduct:(id)sender
+{
+    ShoppingCarService *shoppingcar = [ShoppingCarService new];
+    NSString *ids = @"";
+    for(int i=0;i<[arraydelete count];i++)
+    {
+        NSString *strid = [arraydelete objectAtIndex:i];
+        ids = [ids length]>0?[NSString stringWithFormat:@"%@,%@",ids,strid]:strid;
+    }
+    if([ids length]>0)
+    {
+        [shoppingcar sendShoppingCarDeleteRequest:ids App:app ReqUrl:RQDeleteShoppingCar successBlock:^(NSDictionary *dicData) {
+            [self getshoppingcarinterface];
+        }];
+    }
+    else
+    {
+        [MBProgressHUD showError:@"请选择要删除的商品" toView:app.window];
+    }
+}
+
 -(void)getshoppingcarinterface
 {
     ShoppingCarService *shoppingcar = [ShoppingCarService new];
     [shoppingcar sendShoppingCarRequest:app.userinfo.userid App:app ReqUrl:RQMyShoppingCar successBlock:^(NSDictionary *dicData) {
         arraydata = [NSMutableArray arrayWithArray:[dicData objectForKey:@"rows"]];
+        for(int i=0;i<[arraydata count];i++)
+        {
+            [arrayproductnum removeAllObjects];
+            NSDictionary *dictemp = [arraydata objectAtIndex:i];
+            NSMutableDictionary *dicnum = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dictemp objectForKey:@"productNumber"]],@"count", [dictemp objectForKey:@"shoppingCartId"],@"shoppingCartId",[dictemp objectForKey:@"id"],@"productId",nil];
+            [arrayproductnum addObject:dicnum];
+        }
         tableview.delegate = self;
         tableview.dataSource = self;
+        
         [tableview reloadData];
     }];
 }

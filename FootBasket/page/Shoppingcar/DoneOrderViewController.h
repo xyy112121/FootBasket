@@ -9,13 +9,19 @@
 //订单确认
 
 #import <UIKit/UIKit.h>
-
-@interface DoneOrderViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,ActionDelegate>
+#import "DateTimePickerView.h"
+@interface DoneOrderViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,ActionDelegate,UITextFieldDelegate,DateTimePickerViewDelegate>
 {
     AppDelegate *app;
     UITableView *tableview;
+    NSArray *arraydata;
+    NSDictionary *dicresponse;
+    NSString *selectaddrid;
+    NSString *payway;
     
+    NSString *receivetime;
+    UIButton *receivebuttontime;
 }
-
-@property(nonatomic,strong)NSArray *arraydata;
+//@property(nonatomic,strong)DateTimePickerView *datePickerView;
+@property(nonatomic,strong)NSArray *arrayproductnum;
 @end

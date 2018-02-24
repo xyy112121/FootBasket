@@ -32,4 +32,78 @@
     }];
 }
 
+-(void)sendShoppingCarDeleteRequest:(NSString * )ids App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:ids forKey:@"ids"];
+    
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            [MBProgressHUD showSuccess:[dic objectForKey:@"resultInfo"] toView:app.window];
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+    } Failur:^(NSString *strmsg) {
+        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+    }];
+}
+
+-(void)sendShoppingCarSettlementRequest:(NSString * )products Userid:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:userid forKey:@"userId"];
+    [params setObject:products forKey:@"products"];
+    
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+    } Failur:^(NSString *strmsg) {
+        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+    }];
+}
+
+-(void)sendCommitOrderRequest:(NSString * )products Userid:(NSString *)userid AddrId:(NSString *)addrid PayWay:(NSString *)payway DeliveryTime:(NSString *)deliverytime App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:userid forKey:@"userId"];
+    [params setObject:products forKey:@"products"];
+    [params setObject:addrid forKey:@"addressId"];
+    [params setObject:payway forKey:@"payChannel"];
+    [params setObject:deliverytime forKey:@"deliveryTime"];
+    
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+    } Failur:^(NSString *strmsg) {
+        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+    }];
+}
+
 @end

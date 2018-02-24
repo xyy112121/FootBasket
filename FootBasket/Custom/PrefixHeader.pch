@@ -74,6 +74,11 @@
 #import "CZHAddressPickerView.h"
 #import "SearchViewController.h"
 #import "SearchResultViewController.h"
+#import "MangeAddressService.h"
+#import "DateTimePickerView.h"
+#import "OrderService.h"
+#import "UserOrderViewController.h"
+#import "OrderDetailViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

@@ -65,9 +65,9 @@
 -(void)clickselectpayway:(id)sender
 {
     imageviewselect.image = LOADIMAGE(@"选择框选中", @"png");
-    if(_delegate1 &&[_delegate1 respondsToSelector:@selector(DGClickPayWay:)])
+    if(_delegate1 &&[_delegate1 respondsToSelector:@selector(DGClickPayWay:TitleName:)])
     {
-        [_delegate1 DGClickPayWay:imageviewselect];
+        [_delegate1 DGClickPayWay:imageviewselect TitleName:labeltitle];
     }
 }
 
