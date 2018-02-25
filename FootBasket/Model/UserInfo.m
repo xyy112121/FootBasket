@@ -15,4 +15,5 @@
 @synthesize usertel;
 @synthesize userstate;
 @synthesize useradmin;
+@synthesize usertype;
 @end

@@ -1,18 +1,18 @@
 //
-//  UserOrderViewController.m
+//  DeliveryViewController.m
 //  FootBasket
 //
 //  Created by xyy on 2018/2/24.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "UserOrderViewController.h"
+#import "DeliveryViewController.h"
 
-@interface UserOrderViewController ()
+@interface DeliveryViewController ()
 
 @end
 
-@implementation UserOrderViewController
+@implementation DeliveryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@
 {
     self.view.backgroundColor = COLORNOW(240, 240, 240);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.title = @"我的订单";
+    self.title = @"送货单";
     
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -49,7 +49,7 @@
     [self.view addSubview:tableview];
     [self setExtraCellLineHidden:tableview];
     
-    [self getmyorderlist];
+    [self getmydeliverylist];
     
     [self initheaderview];
 }
@@ -71,11 +71,11 @@
         }
         else if(i==1)
         {
-            [button setTitle:@"待收货" forState:UIControlStateNormal];
+            [button setTitle:@"未送货" forState:UIControlStateNormal];
         }
         else if(i==2)
         {
-            [button setTitle:@"已收货" forState:UIControlStateNormal];
+            [button setTitle:@"已送货" forState:UIControlStateNormal];
         }
         button.titleLabel.font = FONTN(15.0f);
         [button setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
@@ -83,11 +83,7 @@
         button.tag = i+EnMyOrderListStateBtTag;
         [view addSubview:button];
     }
-    float spacenow = 0;
-    if([_orderstate isEqualToString:@"2"]) // 待收货
-        spacenow = widthnow+20;
-    else if([_orderstate isEqualToString:@"3"]) // 已收货
-        spacenow = widthnow*2+20;
+    float spacenow = 20;
     selectline = [[UIImageView alloc] initWithFrame:CGRectMake(spacenow, XYViewHeight(view)-3, widthnow-40, 3)];
     selectline.backgroundColor = COLORNOW(32, 188, 167);
     [view addSubview:selectline];
@@ -187,14 +183,6 @@
     UIButton *button = (UIButton *)sender;
     int tagnow = (int)[button tag] - EnMyOrderListStateBtTag;
     selectline.frame = CGRectMake(XYViewL(button)+20, XYViewTop(selectline), XYViewWidth(selectline), XYViewHeight(selectline));
-    
-    if(tagnow == 0)
-        _orderstate = @"";
-    else if(tagnow == 1)
-        _orderstate = @"2";
-    else
-        _orderstate = @"3";
-    [self getmyorderlist];
 }
 
 #pragma mark - tableview delegate
@@ -288,15 +276,16 @@
 }
 
 #pragma mark - 接口
--(void)getmyorderlist
+-(void)getmydeliverylist
 {
-    OrderService *order = [OrderService new];
-    [order sendOrderListRequest:_orderstate UserId:app.userinfo.userid App:app ReqUrl:RQMyOrderList successBlock:^(NSDictionary *dicData) {
-        arraydata = [dicData objectForKey:@"rows"];
-        tableview.delegate = self;
-        tableview.dataSource = self;
-        [tableview reloadData];
+    DeliveryService *delivery = [DeliveryService new];
+    [delivery sendDeliveryListRequest:app.userinfo.userid App:app ReqUrl:RQDeliveryList successBlock:^(NSDictionary *dicData) {
+//        arraydata = [dicData objectForKey:@"rows"];
+//        tableview.delegate = self;
+//        tableview.dataSource = self;
+//        [tableview reloadData];
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

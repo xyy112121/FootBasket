@@ -16,4 +16,6 @@ typedef void (^OrderSuccessBlock)(NSDictionary *dicData);
 
 -(void)sendOrderDetailRequest:(NSString *)orderid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
 
+
+-(void)sendOrderDoneReceiveRequest:(NSString *)orderid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
 @end

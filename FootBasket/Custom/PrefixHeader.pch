@@ -79,6 +79,8 @@
 #import "OrderService.h"
 #import "UserOrderViewController.h"
 #import "OrderDetailViewController.h"
+#import "DeliveryViewController.h"
+#import "DeliveryService.h"
 #endif /* PrefixHeader_pch */
 
 /**

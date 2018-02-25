@@ -106,53 +106,58 @@
     
     //待收货
     float nowwidth = (SCREEN_WIDTH-120)/4;
-    UIButton *imagewaitreceive = [UIButton buttonWithType:UIButtonTypeCustom];
-    imagewaitreceive.frame = CGRectMake(30, XYViewBottom(imageviewline)+5, nowwidth, 50);
-    imagewaitreceive.backgroundColor = [UIColor clearColor];
-    [imagewaitreceive setImage:LOADIMAGE(@"待收货", @"png") forState:UIControlStateNormal];
-    [imagewaitreceive addTarget:self action:@selector(clickwaitorderlist:) forControlEvents:UIControlEventTouchUpInside];
-    [viewheader addSubview:imagewaitreceive];
-    
-    UILabel *labelleft = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagewaitreceive), XYViewBottom(imagewaitreceive)-5, XYViewWidth(imagewaitreceive), 20)];
-    labelleft.text = @"待收货";
-    labelleft.backgroundColor = [UIColor clearColor];
-    labelleft.font = FONTN(15.0f);
-    labelleft.textAlignment = NSTextAlignmentCenter;
-    labelleft.textColor = COLORNOW(51, 51, 51);
-    [viewheader addSubview:labelleft];
-    
-    //已收货
-    UIButton *imagereceived = [UIButton buttonWithType:UIButtonTypeCustom];
-    imagereceived.frame = CGRectMake(30+XYViewR(imagewaitreceive), XYViewTop(imagewaitreceive), nowwidth, 50);
-    imagereceived.backgroundColor = [UIColor clearColor];
-    [imagereceived setImage:LOADIMAGE(@"已收货", @"png") forState:UIControlStateNormal];
-    [imagereceived addTarget:self action:@selector(clickreceiveorderlist:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [viewheader addSubview:imagereceived];
-    
-    UILabel *labelmiddle = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagereceived), XYViewBottom(imagereceived)-5, XYViewWidth(imagereceived), 20)];
-    labelmiddle.text = @"已收货";
-    labelmiddle.backgroundColor = [UIColor clearColor];
-    labelmiddle.font = FONTN(15.0f);
-    labelmiddle.textAlignment = NSTextAlignmentCenter;
-    labelmiddle.textColor = COLORNOW(51, 51, 51);
-    [viewheader addSubview:labelmiddle];
-    
+    if([app.userinfo.usertype isEqualToString:@"0"])
+    {
+        UIButton *imagewaitreceive = [UIButton buttonWithType:UIButtonTypeCustom];
+        imagewaitreceive.frame = CGRectMake(30, XYViewBottom(imageviewline)+5, nowwidth, 50);
+        imagewaitreceive.backgroundColor = [UIColor clearColor];
+        [imagewaitreceive setImage:LOADIMAGE(@"待收货", @"png") forState:UIControlStateNormal];
+        [imagewaitreceive addTarget:self action:@selector(clickwaitorderlist:) forControlEvents:UIControlEventTouchUpInside];
+        [viewheader addSubview:imagewaitreceive];
+        
+        UILabel *labelleft = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagewaitreceive), XYViewBottom(imagewaitreceive)-5, XYViewWidth(imagewaitreceive), 20)];
+        labelleft.text = @"待收货";
+        labelleft.backgroundColor = [UIColor clearColor];
+        labelleft.font = FONTN(15.0f);
+        labelleft.textAlignment = NSTextAlignmentCenter;
+        labelleft.textColor = COLORNOW(51, 51, 51);
+        [viewheader addSubview:labelleft];
+        
+        //已收货
+        UIButton *imagereceived = [UIButton buttonWithType:UIButtonTypeCustom];
+        imagereceived.frame = CGRectMake(30+XYViewR(imagewaitreceive), XYViewTop(imagewaitreceive), nowwidth, 50);
+        imagereceived.backgroundColor = [UIColor clearColor];
+        [imagereceived setImage:LOADIMAGE(@"已收货", @"png") forState:UIControlStateNormal];
+        [imagereceived addTarget:self action:@selector(clickreceiveorderlist:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [viewheader addSubview:imagereceived];
+        
+        UILabel *labelmiddle = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagereceived), XYViewBottom(imagereceived)-5, XYViewWidth(imagereceived), 20)];
+        labelmiddle.text = @"已收货";
+        labelmiddle.backgroundColor = [UIColor clearColor];
+        labelmiddle.font = FONTN(15.0f);
+        labelmiddle.textAlignment = NSTextAlignmentCenter;
+        labelmiddle.textColor = COLORNOW(51, 51, 51);
+        [viewheader addSubview:labelmiddle];
+    }
     //送货单
-    UIButton *imagedelivery = [UIButton buttonWithType:UIButtonTypeCustom];
-    imagedelivery.frame = CGRectMake(30+XYViewR(imagereceived), XYViewTop(imagewaitreceive), nowwidth, 50);
-    imagedelivery.backgroundColor = [UIColor clearColor];
-    [imagedelivery setImage:LOADIMAGE(@"待发货", @"png") forState:UIControlStateNormal];
-    [viewheader addSubview:imagedelivery];
-    
-    UILabel *labeldelivery = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagedelivery), XYViewBottom(imagedelivery)-5, XYViewWidth(imagedelivery), 20)];
-    labeldelivery.text = @"送货单";
-    labeldelivery.backgroundColor = [UIColor clearColor];
-    labeldelivery.font = FONTN(15.0f);
-    labeldelivery.textAlignment = NSTextAlignmentCenter;
-    labeldelivery.textColor = COLORNOW(51, 51, 51);
-    [viewheader addSubview:labeldelivery];
-    
+    else if([app.userinfo.usertype isEqualToString:@"1"])
+    {
+        UIButton *imagedelivery = [UIButton buttonWithType:UIButtonTypeCustom];
+        imagedelivery.frame = CGRectMake(30, XYViewBottom(imageviewline)+5, nowwidth, 50);
+        imagedelivery.backgroundColor = [UIColor clearColor];
+        [imagedelivery setImage:LOADIMAGE(@"待发货", @"png") forState:UIControlStateNormal];
+        [imagedelivery addTarget:self action:@selector(clickdelivery:) forControlEvents:UIControlEventTouchUpInside];
+        [viewheader addSubview:imagedelivery];
+        
+        UILabel *labeldelivery = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagedelivery), XYViewBottom(imagedelivery)-5, XYViewWidth(imagedelivery), 20)];
+        labeldelivery.text = @"送货单";
+        labeldelivery.backgroundColor = [UIColor clearColor];
+        labeldelivery.font = FONTN(15.0f);
+        labeldelivery.textAlignment = NSTextAlignmentCenter;
+        labeldelivery.textColor = COLORNOW(51, 51, 51);
+        [viewheader addSubview:labeldelivery];
+    }
     tableview.tableHeaderView = viewheader;
 }
 
@@ -176,6 +181,13 @@
     userorder.hidesBottomBarWhenPushed = YES;
     userorder.orderstate = @"3";
     [self.navigationController pushViewController:userorder animated:YES];
+}
+
+-(void)clickdelivery:(id)sender
+{
+    DeliveryViewController *delivery = [[DeliveryViewController alloc] init];
+    delivery.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:delivery animated:YES];
 }
 
 #pragma mark - viewcontroller delegate

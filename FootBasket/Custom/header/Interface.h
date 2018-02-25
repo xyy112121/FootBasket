@@ -25,5 +25,9 @@
 #define RQMyOrderList @"/Basket/business/OrderNavigate_searchPageOL_OL.action" //我的订单userId deliveryState 2 待收货  3 已收货
 
 #define RQMyOrderDetail @"/Basket/business/OrderNavigate_detail_OL.action" // 订单详情 objectID 
+#define RQDoneReceiveOrder @"/Basket/business/DeliveryNavigate_confirmReceipt_OL.action"//确认收货 orderId
+
+#define RQDeliveryList @"/Basket/business/DeliveryNavigate_searchPageOL_OL.action" // 送货单 userId
+
 
 

@@ -19,4 +19,5 @@
 @property(nonatomic,strong)NSString *usertel;
 @property(nonatomic,strong)NSString *userstate;
 @property(nonatomic,strong)NSString *useradmin;
+@property(nonatomic,strong)NSString *usertype;  //0表示普通用户 1表示送货员
 @end

@@ -54,24 +54,54 @@
     
     [self getorderdetail];
     
+    
+    buttonreceivedone = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonreceivedone.frame = CGRectMake(0, SCREEN_HEIGHT-50-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);
+    [buttonreceivedone setTitle:@"确认收货" forState:UIControlStateNormal];
+    buttonreceivedone.titleLabel.font = FONTN(15.0f);
+    [buttonreceivedone setBackgroundColor:COLORNOW(250, 111, 73)];
+    [buttonreceivedone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [buttonreceivedone addTarget:self action:@selector(clickreceivedone:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:buttonreceivedone];
+    
 }
 
 //确认收货
--(UIView *)viewbottomSettlement:(CGRect)frame
+-(void)viewbottomSettlement:(CGRect)frame
 {
     UIView *viewbottom = [[UIView alloc] initWithFrame:frame];
     viewbottom.backgroundColor = [UIColor whiteColor];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(SCREEN_WIDTH-100, 0, 100, 50);
-    [button setTitle:@"确认收货" forState:UIControlStateNormal];
-    button.titleLabel.font = FONTN(15.0f);
-    button.backgroundColor = COLORNOW(250, 111, 73);
-    [button addTarget:self action:@selector(clickcommitorder:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [viewbottom addSubview:button];
+    UIImageView *imageline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.7)];
+    imageline.backgroundColor = COLORNOW(220, 220, 220);
+    [viewbottom addSubview:imageline];
     
-    return viewbottom;
+    UILabel *labelall = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-120, 15, 35, 20)];
+    labelall.textColor = COLORNOW(52, 52, 52);
+    labelall.font = FONTN(15.0f);
+    labelall.text = @"合计";
+    [viewbottom addSubview:labelall];
+    
+    UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
+    labelmoney.textColor = COLORNOW(248, 88, 37);
+    labelmoney.font = FONTN(15.0f);
+    labelmoney.text = [NSString stringWithFormat:@"￥%@",[dicresponse objectForKey:@"realPayPrice"]];
+    [viewbottom addSubview:labelmoney];
+    
+    UILabel *labelproductnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelall)-100, 15, 95, 20)];
+    labelproductnum.textColor = COLORNOW(52, 52, 52);
+    labelproductnum.font = FONTN(15.0f);
+    labelproductnum.text = [NSString stringWithFormat:@"共计%ld款产品",[arraydata count]];
+    [viewbottom addSubview:labelproductnum];
+    
+    UILabel *labelpay = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 85, 20)];
+    labelpay.textColor = COLORNOW(248, 88, 37);
+    labelpay.font = FONTN(15.0f);
+    labelpay.text = [dicresponse objectForKey:@"displayIsPay"];
+    [viewbottom addSubview:labelpay];
+    
+    
+    tableview.tableFooterView = viewbottom;
 }
 
 //地址选择
@@ -87,8 +117,7 @@
     
     UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 8, SCREEN_WIDTH-100, 30)];
     textfield.backgroundColor = [UIColor clearColor];
-    textfield.placeholder = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
-    // textfield.text = [dicarrd objectForKey:@"address"];
+    textfield.text = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
     textfield.font = FONTN(15.0f);
     textfield.textColor = COLORNOW(52, 52, 52);
     [viewaddr addSubview:textfield];
@@ -168,6 +197,11 @@
         else if(i==2)
             [payway initviewbutton:@"到店取货" Alignment:EnButtonTextRight];
         [view addSubview:payway];
+        
+        if([[dicresponse objectForKey:@"payChannel"] intValue]==i)
+        {
+            [payway updateimageselected];
+        }
     }
     
     return view;
@@ -191,10 +225,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)clickcommitorder:(id)sender
+-(void)clickreceivedone:(id)sender
 {
     NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = [NSString stringWithFormat:@"请你在确认收到货的时候点击确认收货,请问是否确认收货"];
+    NSString *message = [NSString stringWithFormat:@"请您在确认收到货的时候点击确认收货,请问是否确认收货"];
     NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
     NSString *otherButtonTitle = NSLocalizedString(@"确认收货", nil);
     
@@ -206,7 +240,7 @@
     }];
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
+        [self commitreceivedone];
     }];
     
     // Add the actions.
@@ -319,7 +353,7 @@
         
         UIButton *receivebuttontime  = [UIButton buttonWithType:UIButtonTypeCustom];
         receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-155, 21, 130, 30);
-        [receivebuttontime setTitle:@"请选择送达时间" forState:UIControlStateNormal];
+        [receivebuttontime setTitle:[dicresponse objectForKey:@"deliveryTime"] forState:UIControlStateNormal];
         receivebuttontime.titleLabel.font = FONTN(15.0f);
         [receivebuttontime setTitleColor:COLORNOW(32, 188, 167) forState:UIControlStateNormal];
         receivebuttontime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -436,7 +470,26 @@
 {
     OrderService *order = [OrderService new];
     [order sendOrderDetailRequest:_FCorderid App:app ReqUrl:RQMyOrderDetail successBlock:^(NSDictionary *dicData) {
+        dicresponse = dicData;
+        arraydata = [dicresponse objectForKey:@"products"];
+        tableview.delegate = self;
+        tableview.dataSource = self;
+        [tableview reloadData];
         
+        if([[dicresponse objectForKey:@"deliveryState"] intValue]==3)
+        {
+            buttonreceivedone.hidden = YES;
+        }
+        
+        [self viewbottomSettlement:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    }];
+}
+
+-(void)commitreceivedone
+{
+    OrderService *order = [OrderService new];
+    [order sendOrderDoneReceiveRequest:_FCorderid App:app ReqUrl:RQDoneReceiveOrder successBlock:^(NSDictionary *dicData) {
+        [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
     }];
 }
 

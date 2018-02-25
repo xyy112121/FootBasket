@@ -99,7 +99,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, XYViewBottom(view)-40, 100, 40);
     [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
-    if([[dic objectForKey:@"default"] intValue]==1)
+    if([[dic objectForKey:@"isDefault"] intValue]==1)
         [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
     [button setTitle:@"默认地址" forState:UIControlStateNormal];
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];

@@ -92,11 +92,7 @@
 -(void)clicklogin:(id)sender
 {
     CommonHeader *common = [CommonHeader new];
-    if(![common CMisMobileNumber:textfieldtel.text])
-    {
-        [MBProgressHUD showError:@"请输入正确的手机号" toView:app.window];
-    }
-    else if([textfieldcode.text length]<4)
+    if([textfieldcode.text length]<4)
     {
         [MBProgressHUD showError:@"请输入验证码" toView:app.window];
     }
@@ -109,6 +105,7 @@
             app.userinfo.userid = [dicData objectForKey:@"id"];
             app.userinfo.usertel = [dicData objectForKey:@"mobile"];
             app.userinfo.username = [dicData objectForKey:@"mobile"];
+            app.userinfo.usertype = [NSString stringWithFormat:@"%@",[dicData objectForKey:@"userType"]];
             [self removeFromSuperview];
             if(_delegate1&&[_delegate1 respondsToSelector:@selector(DGLoginSuccess:)])
             {

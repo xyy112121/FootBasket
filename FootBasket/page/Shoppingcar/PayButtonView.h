@@ -18,5 +18,6 @@
 @property(nonatomic,strong)UIButton *buttonselect;
 @property(nonatomic,weak)id<ActionDelegate>delegate1;
 -(void)updateimageselect;
+-(void)updateimageselected;
 -(void)initviewbutton:(NSString *)str Alignment:(EnButtonTextAlignment)alignment;
 @end

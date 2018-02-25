@@ -105,8 +105,7 @@
     
     UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 8, SCREEN_WIDTH-100, 30)];
     textfield.backgroundColor = [UIColor clearColor];
-    textfield.placeholder = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
-   // textfield.text = [dicarrd objectForKey:@"address"];
+    textfield.text = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
     textfield.font = FONTN(15.0f);
     textfield.delegate = self;
     textfield.textColor = COLORNOW(52, 52, 52);

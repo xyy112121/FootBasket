@@ -14,7 +14,7 @@
     UITableView *tableview;
     NSArray *arraydata;
     NSDictionary *dicresponse;
-
+    UIButton *buttonreceivedone;
 }
 
 @property(nonatomic,strong)NSString *FCorderid;

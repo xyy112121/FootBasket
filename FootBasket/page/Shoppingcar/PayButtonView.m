@@ -62,6 +62,11 @@
     imageviewselect.image = LOADIMAGE(@"选区", @"png");
 }
 
+-(void)updateimageselected
+{
+    imageviewselect.image = LOADIMAGE(@"选择框选中", @"png");
+}
+
 -(void)clickselectpayway:(id)sender
 {
     imageviewselect.image = LOADIMAGE(@"选择框选中", @"png");

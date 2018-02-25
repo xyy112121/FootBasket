@@ -477,9 +477,10 @@
     ShoppingCarService *shoppingcar = [ShoppingCarService new];
     [shoppingcar sendShoppingCarRequest:app.userinfo.userid App:app ReqUrl:RQMyShoppingCar successBlock:^(NSDictionary *dicData) {
         arraydata = [NSMutableArray arrayWithArray:[dicData objectForKey:@"rows"]];
+        [arrayproductnum removeAllObjects];
         for(int i=0;i<[arraydata count];i++)
         {
-            [arrayproductnum removeAllObjects];
+            
             NSDictionary *dictemp = [arraydata objectAtIndex:i];
             NSMutableDictionary *dicnum = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dictemp objectForKey:@"productNumber"]],@"count", [dictemp objectForKey:@"shoppingCartId"],@"shoppingCartId",[dictemp objectForKey:@"id"],@"productId",nil];
             [arrayproductnum addObject:dicnum];
