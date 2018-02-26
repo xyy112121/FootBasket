@@ -15,7 +15,7 @@
     NSArray *arrayfocus;
     NSArray *arrayattributes;
     NSDictionary *dicproduct;
-    
+    UIView *viewpopbuy;
 }
 @property(nonatomic,strong)NSString *FCGoodsId;
 @end

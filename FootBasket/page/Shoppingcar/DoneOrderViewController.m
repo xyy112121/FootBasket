@@ -71,19 +71,19 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [viewbottom addSubview:button];
     
-    UILabel *labelall = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(button)-120, 15, 35, 20)];
+    UILabel *labelall = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(button)-110, 15, 35, 20)];
     labelall.textColor = COLORNOW(52, 52, 52);
     labelall.font = FONTN(15.0f);
     labelall.text = @"合计";
     [viewbottom addSubview:labelall];
     
-    UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
+    UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 75, 20)];
     labelmoney.textColor = COLORNOW(248, 88, 37);
     labelmoney.font = FONTN(15.0f);
-    labelmoney.text = [NSString stringWithFormat:@"%@",[dicresponse objectForKey:@"realPayPrice"]];
+    labelmoney.text = [NSString stringWithFormat:@"￥%@",[dicresponse objectForKey:@"realPayPrice"]];
     [viewbottom addSubview:labelmoney];
     
-    UILabel *labelproductnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelall)-100, 15, 95, 20)];
+    UILabel *labelproductnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelall)-105, 15, 100, 20)];
     labelproductnum.textColor = COLORNOW(52, 52, 52);
     labelproductnum.font = FONTN(15.0f);
     labelproductnum.text = [NSString stringWithFormat:@"共计:%ld款产品",[arraydata count]];
@@ -544,6 +544,7 @@
     DLog(@"jsonnum===%@",jsonnum);
     [shoppingcar sendCommitOrderRequest:jsonnum Userid:app.userinfo.userid AddrId:selectaddrid PayWay:payway DeliveryTime:receivetime App:app ReqUrl:RQCommitOrder successBlock:^(NSDictionary *dicData) {
         [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
     
 }

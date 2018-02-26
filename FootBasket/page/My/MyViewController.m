@@ -41,7 +41,7 @@
     self.view.backgroundColor = COLORNOW(245, 245, 245);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-49) style:UITableViewStylePlain];
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-49) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableview.delegate = self;
     tableview.dataSource = self;
@@ -237,6 +237,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if([app.userinfo.usertype isEqualToString:@"1"])
+        return 2;
     return 3;
 }
 
@@ -247,8 +249,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 0)
-        return 2;
+    if([app.userinfo.usertype isEqualToString:@"1"])
+    {
+        if(section == 0)
+            return 1;
+    }
+    else
+    {
+        if(section == 0)
+            return 2;
+    }
     return 1;
 }
 
@@ -293,33 +303,49 @@
     labelname.textColor = COLORNOW(51, 51, 51);
     [cell.contentView addSubview:labelname];
     
-    switch (indexPath.section)
+    if([app.userinfo.usertype isEqualToString:@"0"])
     {
-        case 0:
-            switch (indexPath.row)
-            {
-                case 0:
-                    imageview.image = LOADIMAGE(@"关于我们ICON", @"png");
-                    labelname.text = @"关于我们";
-                    break;
-                case 1:
-                    imageview.image = LOADIMAGE(@"收货地址icon", @"png");
-                    labelname.text = @"我的收货地址";
-                    break;
-            }
-            break;
-        case 1:
-            imageview.image = LOADIMAGE(@"礼物", @"png");
-            labelname.text = @"邀请有礼";
-            break;
-        case 2:
-            imageview.image = LOADIMAGE(@"电话", @"png");
-            labelname.text = @"联系客服";
-            break;
+        switch (indexPath.section)
+        {
+            case 0:
+                switch (indexPath.row)
+                {
+                    case 0:
+                        imageview.image = LOADIMAGE(@"关于我们ICON", @"png");
+                        labelname.text = @"关于我们";
+                        break;
+                    case 1:
+                        imageview.image = LOADIMAGE(@"收货地址icon", @"png");
+                        labelname.text = @"我的收货地址";
+                        break;
+                }
+                break;
+            case 1:
+                imageview.image = LOADIMAGE(@"礼物", @"png");
+                labelname.text = @"邀请有礼";
+                break;
+            case 2:
+                imageview.image = LOADIMAGE(@"电话", @"png");
+                labelname.text = @"联系客服";
+                break;
 
+        }
     }
-    
-    
+    else if([app.userinfo.usertype isEqualToString:@"1"])
+    {
+        switch (indexPath.section)
+        {
+            case 0:
+                imageview.image = LOADIMAGE(@"关于我们ICON", @"png");
+                labelname.text = @"关于我们";
+                break;
+            case 1:
+                imageview.image = LOADIMAGE(@"电话", @"png");
+                labelname.text = @"联系客服";
+                break;
+                
+        }
+    }
     
     return cell;
 }

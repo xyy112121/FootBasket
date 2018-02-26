@@ -33,11 +33,12 @@
     }];
 }
 
--(void)sendaddShoppingCarRequest:(NSString * )goodsid UserId:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock
+-(void)sendaddShoppingCarRequest:(NSString * )goodsid UserId:(NSString *)userid ProductNumber:(NSString *)productnumber App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:goodsid forKey:@"productBasicId"];
     [params setObject:userid forKey:@"userId"];
+    [params setObject:productnumber forKey:@"productNumber"];
     
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         

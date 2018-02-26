@@ -103,7 +103,7 @@
     labelname.font = FONTB(17.0f);
     [viewcell addSubview:labelname];
     
-    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, 100, 20)];
+    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(viewcell)-100, 20)];
     labelsummary.text = [dic objectForKey:@"summary"];
     labelsummary.font = FONTN(14.0f);
     labelsummary.textColor = COLORNOW(172, 172, 172);
@@ -169,42 +169,42 @@
     [leftcategorymenu getCategorysmall:dictemp];
 }
 
--(UIView *)viewcell:(NSDictionary *)dic Frame:(CGRect)frame
-{
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    view.backgroundColor = [UIColor clearColor];
-    
-    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
-    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"productBasic_headPicture"]];
-    [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
-    imageview.contentMode = UIViewContentModeScaleAspectFill;
-    imageview.clipsToBounds = YES;
-    [view addSubview:imageview];
-    
-    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10, XYViewTop(imageview), XYViewWidth(view)-110, 20)];
-    labelname.text = [dic objectForKey:@"productBasic_name"];
-    labelname.font = FONTB(17.0f);
-    [view addSubview:labelname];
-    
-    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, 100, 20)];
-    labelsummary.text = [dic objectForKey:@"productBasic_summary"];
-    labelsummary.font = FONTN(14.0f);
-    labelsummary.textColor = COLORNOW(172, 172, 172);
-    [view addSubview:labelsummary];
-    
-    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelsummary)+5, 100, 20)];
-    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"productBasic_salePrice"],[dic objectForKey:@"productBasic_displayUnit"]];
-    labelprice.font = FONTN(14.0f);
-    labelprice.textColor = COLORNOW(248, 88, 37);
-    [view addSubview:labelprice];
-    
-    UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonshoppingcar.frame = CGRectMake(XYViewWidth(view)-50,XYViewHeight(view)-50, 40, 40);
-    [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
-    [view addSubview:buttonshoppingcar];
-    
-    return view;
-}
+//-(UIView *)viewcell:(NSDictionary *)dic Frame:(CGRect)frame
+//{
+//    UIView *view = [[UIView alloc] initWithFrame:frame];
+//    view.backgroundColor = [UIColor clearColor];
+//
+//    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
+//    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"productBasic_headPicture"]];
+//    [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
+//    imageview.contentMode = UIViewContentModeScaleAspectFill;
+//    imageview.clipsToBounds = YES;
+//    [view addSubview:imageview];
+//
+//    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10, XYViewTop(imageview), XYViewWidth(view)-110, 20)];
+//    labelname.text = [dic objectForKey:@"productBasic_name"];
+//    labelname.font = FONTB(17.0f);
+//    [view addSubview:labelname];
+//
+//    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(view), 20)];
+//    labelsummary.text = [dic objectForKey:@"productBasic_summary"];
+//    labelsummary.font = FONTN(14.0f);
+//    labelsummary.textColor = COLORNOW(172, 172, 172);
+//    [view addSubview:labelsummary];
+//
+//    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelsummary)+5, 100, 20)];
+//    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"productBasic_salePrice"],[dic objectForKey:@"productBasic_displayUnit"]];
+//    labelprice.font = FONTN(14.0f);
+//    labelprice.textColor = COLORNOW(248, 88, 37);
+//    [view addSubview:labelprice];
+//
+//    UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
+//    buttonshoppingcar.frame = CGRectMake(XYViewWidth(view)-50,XYViewHeight(view)-50, 40, 40);
+//    [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
+//    [view addSubview:buttonshoppingcar];
+//
+//    return view;
+//}
 
 #pragma mark - tableview delegate
 //隐藏那些没有cell的线

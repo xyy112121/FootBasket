@@ -19,6 +19,9 @@
         self.layer.borderColor = COLORNOW(230, 230, 230).CGColor;
         self.layer.borderWidth = 0.5f;
         [self initView:dic];
+        dicfrom = dic;
+        
+        
     }
     return self;
 }
@@ -30,6 +33,9 @@
     [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
     imageview.contentMode = UIViewContentModeScaleAspectFill;
     imageview.clipsToBounds = YES;
+    UITapGestureRecognizer *recongizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickgoodsdetail:)];
+    [self addGestureRecognizer:recongizer];
+    self.userInteractionEnabled = YES;
     [self addSubview:imageview];
     
     UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10, XYViewTop(imageview), XYViewWidth(self)-110, 20)];
@@ -53,6 +59,14 @@
     buttonshoppingcar.frame = CGRectMake(XYViewWidth(self)-50,XYViewHeight(self)-50, 40, 40);
     [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
     [self addSubview:buttonshoppingcar];
+}
+
+-(void)clickgoodsdetail:(id)sender
+{
+    if(_delegate1 && [_delegate1 respondsToSelector:@selector(DGClickRecommendDetail:)])
+    {
+        [_delegate1 DGClickRecommendDetail:dicfrom];
+    }
 }
 
 @end

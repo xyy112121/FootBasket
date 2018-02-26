@@ -58,9 +58,11 @@
     [self setExtraCellLineHidden:tableview];
     
     
-    
-    UIView *viewbottom = [self viewbottomSettlement:CGRectMake(0, SCREEN_HEIGHT-IPhone_SafeBottomMargin-49-StatusBarAndNavigationHeight-50, SCREEN_WIDTH, 50)];
-    [self.view addSubview:viewbottom];
+    if(![app.userinfo.usertype isEqualToString:@"1"])
+    {
+        UIView *viewbottom = [self viewbottomSettlement:CGRectMake(0, SCREEN_HEIGHT-IPhone_SafeBottomMargin-49-StatusBarAndNavigationHeight-50, SCREEN_WIDTH, 50)];
+        [self.view addSubview:viewbottom];
+    }
 }
 
 //结算条
@@ -96,7 +98,7 @@
     UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
     labelmoney.textColor = COLORNOW(248, 88, 37);
     labelmoney.font = FONTN(15.0f);
-    labelmoney.text = @"￥125.09";
+    labelmoney.text = @"￥0.00";
     [viewbottom addSubview:labelmoney];
     
     
@@ -206,6 +208,8 @@
 #pragma mark - IBACtion
 -(void)clickdelete:(id)sender
 {
+    UIButton *button = (UIButton *)sender;
+    
     if(selectdelete == EnShoppingCarNotSelect)
     {
         [arraydelete removeAllObjects];
@@ -215,6 +219,7 @@
         UIView *view = [self adddeleteview:CGRectMake(100,SCREEN_HEIGHT-IPhone_SafeBottomMargin-49-StatusBarAndNavigationHeight-50, SCREEN_WIDTH-100, 50)];
         view.tag = EnShoppingCarDeleteViewBgTag;
         [self.view addSubview:view];
+        [button setTitle:@"确定" forState:UIControlStateNormal];
     }
     else
     {
@@ -223,6 +228,7 @@
         selectdelete = EnShoppingCarNotSelect;
         buttonselectall.hidden = YES;
         [tableview reloadData];
+        [button setTitle:@"删除" forState:UIControlStateNormal];
     }
 }
 
@@ -338,11 +344,17 @@
 
 -(void)clickSettlement:(id)sender
 {
-    DoneOrderViewController *doneorder = [[DoneOrderViewController alloc] init];
-    doneorder.hidesBottomBarWhenPushed = YES;
-    doneorder.arrayproductnum = arrayproductnum;
-    [self.navigationController pushViewController:doneorder animated:YES];
-
+    if([arraydata count]>0)
+    {
+        DoneOrderViewController *doneorder = [[DoneOrderViewController alloc] init];
+        doneorder.hidesBottomBarWhenPushed = YES;
+        doneorder.arrayproductnum = arrayproductnum;
+        [self.navigationController pushViewController:doneorder animated:YES];
+    }
+    else
+    {
+        [MBProgressHUD showError:@"请先填写商品进购物车" toView:app.window];
+    }
 }
 
 #pragma mark - viewcontroller delegate

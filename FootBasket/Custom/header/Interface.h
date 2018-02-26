@@ -29,5 +29,5 @@
 
 #define RQDeliveryList @"/Basket/business/DeliveryNavigate_searchPageOL_OL.action" // 送货单 userId
 
-
+#define RQPayDoneCommit @"/Basket/business/OrderNavigate_confirmPayed_OL.action"//确认付款 orderId deliveryUserId
 

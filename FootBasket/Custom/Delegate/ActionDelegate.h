@@ -16,4 +16,5 @@
 -(void)DGLoginSuccess:(id)sender; //登录成功
 -(void)DGClickCategorySmall:(NSDictionary *)sender;//点击小分类获取
 -(void)DGCickSearchTextfield:(id)sender;//点击搜索
+-(void)DGClickRecommendDetail:(NSDictionary *)sender;//点击精品推荐
 @end

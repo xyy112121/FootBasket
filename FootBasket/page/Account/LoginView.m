@@ -39,7 +39,7 @@
     
     textfieldtel = [[UITextField alloc] initWithFrame:CGRectMake(XYViewL(imageline1)+5, XYViewTop(imageline1)-35, XYViewWidth(imageline1)-20, 30)];
     textfieldtel.placeholder = @"输入电话号码";
-    textfieldtel.text = @"18669069389";
+    textfieldtel.text = @"xyy520";//@"18669069389";//
     textfieldtel.font = FONTN(16.0f);
     textfieldtel.delegate = self;
     [self addSubview:textfieldtel];
@@ -48,7 +48,7 @@
     textfieldcode.placeholder = @"输入验证码";
     textfieldcode.font = FONTN(16.0f);
     textfieldcode.delegate = self;
-    textfieldcode.text = @"1234";
+    textfieldcode.text = @"4321";//@"1234";
     [self addSubview:textfieldcode];
     
     buttoncode = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -116,7 +116,7 @@
         cell.contentView.backgroundColor = [UIColor whiteColor];
     
     cell.textLabel.text = [dictemp objectForKey:@"name"];
-    
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
     
     return cell;
 }

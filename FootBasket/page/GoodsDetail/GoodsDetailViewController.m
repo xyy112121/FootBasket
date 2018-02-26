@@ -52,7 +52,8 @@
     
     [self getGoodsDetail:_FCGoodsId];
     
-    [self initbottomview];
+    if(![app.userinfo.usertype isEqualToString:@"1"])
+        [self initbottomview];
     
 }
 
@@ -67,6 +68,15 @@
     UIView *viewbottom = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin-40, SCREEN_WIDTH, 40)];
     viewbottom.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:viewbottom];
+    
+    UIImageView *imageviewline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.7)];
+    imageviewline.backgroundColor = COLORNOW(210, 210, 210);
+    [viewbottom addSubview:imageviewline];
+    
+    UIImageView *imageviewshopcar = [[UIImageView alloc] initWithFrame:CGRectMake(10, 9, 24, 21)];
+    imageviewshopcar.image = LOADIMAGE(@"购物车选择后", @"png");
+    [viewbottom addSubview:imageviewshopcar];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(SCREEN_WIDTH-100, 0, 100, 40);
     [button setTitle:@"加入购物车" forState:UIControlStateNormal];
@@ -76,8 +86,94 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [viewbottom addSubview:button];
     
+}
+
+-(UIView *)popbuyproductview:(CGRect)frame
+{
+    UIView *view = [[UIView alloc] initWithFrame:frame];
+    view.backgroundColor = [UIColor clearColor];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, SCREEN_WIDTH, XYViewHeight(view));
+    button.backgroundColor = [UIColor blackColor];
+    button.alpha = 0.2;
+    [button addTarget:self action:@selector(removepopbuyview:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:button];
     
+    UIImageView *viewbg = [[UIImageView alloc] initWithFrame:CGRectMake(0, XYViewHeight(view)-200, XYViewWidth(button), 200)];
+    viewbg.backgroundColor = [UIColor whiteColor];
+    [view addSubview:viewbg];
+    
+    NSDictionary *dictemp;
+    if([arrayfocus count]>0)
+        dictemp = [arrayfocus objectAtIndex:0];
+    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dictemp objectForKey:@"picture_pictureUrl"]];
+    UIImageView *imagepic = [[UIImageView alloc] initWithFrame:CGRectMake(10, XYViewTop(viewbg)+10, 80, 80)];
+    [imagepic setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
+    imagepic.layer.cornerRadius = 3.0f;
+    imagepic.clipsToBounds = YES;
+    [view addSubview:imagepic];
+    
+    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imagepic)+10,XYViewBottom(imagepic)-40, 200, 20)];
+    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dicproduct objectForKey:@"salePrice"],[dicproduct objectForKey:@"displayUnit"]];
+    labelprice.font = FONTN(15.0f);
+    labelprice.textColor = COLORNOW(248, 88, 37);
+    [view addSubview:labelprice];
+    
+    UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelprice), XYViewBottom(labelprice), 200, 20)];
+    labelName.text = [dicproduct objectForKey:@"name"];
+    labelName.font = FONTN(15.0f);
+    labelName.textColor = COLORNOW(52, 52, 52);
+    [view addSubview:labelName];
+    
+    UILabel *labeltitle = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagepic), XYViewBottom(imagepic)+30, 50, 20)];
+    labeltitle.text = @"数量";
+    labeltitle.font = FONTN(15.0f);
+    labeltitle.textColor = COLORNOW(52, 52, 52);
+    [view addSubview:labeltitle];
+    
+    //减少
+    UIButton *buttonreduce = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonreduce.frame = CGRectMake(XYViewR(imagepic)+10, XYViewTop(labeltitle)-10, 40, 40);
+    [buttonreduce setImage:LOADIMAGE(@"reduceicon", @"png") forState:UIControlStateNormal];
+    [buttonreduce addTarget:self action:@selector(clickreduceproduct:) forControlEvents:UIControlEventTouchUpInside];
+    buttonreduce.tag = EnShopCarReduceBtTag;
+    [view addSubview:buttonreduce];
+    
+    UILabel *labelnum = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(buttonreduce), XYViewTop(buttonreduce), 25, 40)];
+    labelnum.text = @"1";
+    labelnum.textAlignment = NSTextAlignmentCenter;
+    labelnum.font = FONTN(15.0f);
+    labelnum.textColor = COLORNOW(52, 52, 52);
+    labelnum.tag = EnShopCarLabelNumTag;
+    [view addSubview:labelnum];
+    
+    //增加
+    UIButton *buttonadd = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonadd.frame = CGRectMake(XYViewR(labelnum), XYViewTop(buttonreduce), 40, 40);
+    [buttonadd setImage:LOADIMAGE(@"addicon", @"png") forState:UIControlStateNormal];
+    [buttonadd addTarget:self action:@selector(clickaddproduct:) forControlEvents:UIControlEventTouchUpInside];
+    buttonadd.tag = EnShopCarAddBtTag;
+    [view addSubview:buttonadd];
+    
+    UIImageView *imageviewline = [[UIImageView alloc] initWithFrame:CGRectMake(0, XYViewHeight(view)-40, SCREEN_WIDTH, 0.7)];
+    imageviewline.backgroundColor = COLORNOW(210, 210, 210);
+    [view addSubview:imageviewline];
+    
+    UIImageView *imageviewshopcar = [[UIImageView alloc] initWithFrame:CGRectMake(10, XYViewBottom(imageviewline)+9, 24, 21)];
+    imageviewshopcar.image = LOADIMAGE(@"购物车选择后", @"png");
+    [view addSubview:imageviewshopcar];
+    
+    UIButton *buttonaddshopcar = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonaddshopcar.frame = CGRectMake(SCREEN_WIDTH-130, XYViewBottom(imageviewline), 130, 40);
+    [buttonaddshopcar setTitle:@"立即加入购物车" forState:UIControlStateNormal];
+    buttonaddshopcar.titleLabel.font = FONTN(15.0f);
+    buttonaddshopcar.backgroundColor = COLORNOW(32, 188, 167);
+    [buttonaddshopcar addTarget:self action:@selector(clickaddshoppingcar:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonaddshopcar setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [view addSubview:buttonaddshopcar];
+    
+    return view;
 }
 
 
@@ -129,7 +225,53 @@
 
 -(void)clickaddtarget:(id)sender
 {
-    [self addshoppingcar:_FCGoodsId UserId:app.userinfo.userid];
+    viewpopbuy =  [self popbuyproductview:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin)];
+    [self.view addSubview:viewpopbuy];
+   
+}
+
+-(void)clickaddshoppingcar:(id)sender
+{
+    UILabel *labelnum = [viewpopbuy viewWithTag:EnShopCarLabelNumTag];
+    [self addshoppingcar:_FCGoodsId UserId:app.userinfo.userid ProductNumber:labelnum.text];
+    
+    [self removepopbuyview:nil];
+}
+
+-(void)removepopbuyview:(id)sender
+{
+    [viewpopbuy removeFromSuperview];
+    viewpopbuy = nil;
+}
+
+-(void)clickaddproduct:(id)sender
+{
+    UILabel *labelnum = [viewpopbuy viewWithTag:EnShopCarLabelNumTag];
+    
+    int numnow = [labelnum.text intValue];
+    if(numnow+1>99)
+    {
+        [MBProgressHUD showError:@"单一商品最大数量订购99件" toView:app.window];
+    }
+    else
+    {
+        labelnum.text = [NSString stringWithFormat:@"%d",numnow+1];
+    }
+}
+
+-(void)clickreduceproduct:(id)sender
+{
+    UILabel *labelnum = [viewpopbuy viewWithTag:EnShopCarLabelNumTag];
+    
+    int numnow = [labelnum.text intValue];
+    if(numnow-1<1)
+    {
+        [MBProgressHUD showError:@"单一商品最小数量订购1件" toView:app.window];
+    }
+    else
+    {
+        labelnum.text = [NSString stringWithFormat:@"%d",numnow-1];
+    }
 }
 
 #pragma mark - tableview delegate
@@ -182,7 +324,7 @@
     if(section == 0)
         return 1;
     else
-        return [arrayattributes count];
+        return [arrayattributes count]>0?[arrayattributes count]+1:0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -290,12 +432,12 @@
 }
 
 
--(void)addshoppingcar:(NSString *)goodsid UserId:(NSString *)userid
+-(void)addshoppingcar:(NSString *)goodsid UserId:(NSString *)userid ProductNumber:(NSString *)productnumber
 {
     GoodsDetailService *goodsdetail = [GoodsDetailService new];
-    [goodsdetail sendaddShoppingCarRequest:goodsid UserId:userid App:app ReqUrl:RQAddShoppingCar successBlock:^(NSDictionary *dicData) {
+    [goodsdetail sendaddShoppingCarRequest:goodsid UserId:userid ProductNumber:productnumber App:app ReqUrl:RQAddShoppingCar successBlock:^(NSDictionary *dicData) {
        
-        
+        [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
     }];
 }
 

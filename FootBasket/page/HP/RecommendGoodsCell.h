@@ -11,6 +11,9 @@
 @interface RecommendGoodsCell : UIView
 {
     AppDelegate *app;
+    NSDictionary *dicfrom;
 }
+
+@property(nonatomic,weak)id<ActionDelegate>delegate1;
 - (instancetype)initWithFrame:(CGRect)frame DicRecommend:(NSDictionary *)dic;
 @end

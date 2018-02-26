@@ -1,18 +1,18 @@
 //
-//  OrderDetailViewController.m
+//  DeliveryDetailViewController.m
 //  FootBasket
 //
-//  Created by xyy on 2018/2/24.
+//  Created by xyy on 2018/2/26.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "OrderDetailViewController.h"
+#import "DeliveryDetailViewController.h"
 
-@interface OrderDetailViewController ()
+@interface DeliveryDetailViewController ()
 
 @end
 
-@implementation OrderDetailViewController
+@implementation DeliveryDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,7 +57,7 @@
     
     buttonreceivedone = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonreceivedone.frame = CGRectMake(0, SCREEN_HEIGHT-50-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);
-    [buttonreceivedone setTitle:@"确认收货" forState:UIControlStateNormal];
+    [buttonreceivedone setTitle:@"确认付款" forState:UIControlStateNormal];
     buttonreceivedone.titleLabel.font = FONTN(15.0f);
     [buttonreceivedone setBackgroundColor:COLORNOW(250, 111, 73)];
     [buttonreceivedone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -228,8 +228,14 @@
 
 -(void)clickreceivedone:(id)sender
 {
+    if([[dicresponse objectForKey:@"deliveryState"] intValue]==2)
+    {
+        [MBProgressHUD showError:@"用户还未确认收货,请先确认用户已收货" toView:app.window];
+        return;
+    }
+    
     NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = [NSString stringWithFormat:@"请您在确认收到货的时候点击确认收货,请问是否确认收货"];
+    NSString *message = [NSString stringWithFormat:@"请您在确认用户已付款的情况下选择确认付款,请问是否确认商家已付款"];
     NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
     NSString *otherButtonTitle = NSLocalizedString(@"确认收货", nil);
     
@@ -241,7 +247,7 @@
     }];
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self commitreceivedone];
+        [self commitdonepay];
     }];
     
     // Add the actions.
@@ -477,7 +483,7 @@
         tableview.dataSource = self;
         [tableview reloadData];
         
-        if([[dicresponse objectForKey:@"deliveryState"] intValue]==3)
+        if([[dicresponse objectForKey:@"isPay"] intValue]==1)
         {
             buttonreceivedone.hidden = YES;
             tableview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight);
@@ -492,6 +498,15 @@
     OrderService *order = [OrderService new];
     [order sendOrderDoneReceiveRequest:_FCorderid App:app ReqUrl:RQDoneReceiveOrder successBlock:^(NSDictionary *dicData) {
         [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
+    }];
+}
+
+-(void)commitdonepay
+{
+    DeliveryService *order = [DeliveryService new];
+    [order sendDeliveryDonePayRequest:_FCorderid DeliveryUserId:app.userinfo.userid App:app ReqUrl:RQPayDoneCommit successBlock:^(NSDictionary *dicData) {
+        [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
+        [self getorderdetail];
     }];
 }
 

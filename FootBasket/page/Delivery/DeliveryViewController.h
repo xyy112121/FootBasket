@@ -15,7 +15,7 @@
     NSArray *arraydata;
     UIImageView *selectline;
     NSDictionary *dicresponse;
+    NSString *deliverystate;
 }
-@property(nonatomic,strong)NSString *orderstate;
 
 @end

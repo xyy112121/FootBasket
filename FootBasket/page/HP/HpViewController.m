@@ -66,6 +66,7 @@
     {
         NSDictionary *dictemp = [arrayrecommend objectAtIndex:i];
         RecommendGoodsCell *cell = [[RecommendGoodsCell alloc] initWithFrame:CGRectMake(260*i,0, 250, 100) DicRecommend:dictemp];
+        cell.delegate1 = self;
         [scrollview addSubview:cell];
     }
     scrollview.contentSize = CGSizeMake(260*[arrayrecommend count], 100);
@@ -136,6 +137,14 @@
     SearchViewController *searchview = [[SearchViewController alloc] init];
     UINavigationController *nctl = [[UINavigationController alloc] initWithRootViewController:searchview];
     [self.navigationController presentViewController:nctl animated:YES completion:nil];
+}
+
+-(void)DGClickRecommendDetail:(NSDictionary *)sender
+{
+    GoodsDetailViewController *goodsdetail = [[GoodsDetailViewController alloc] init];
+    goodsdetail.FCGoodsId = [sender objectForKey:@"id"];
+    goodsdetail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:goodsdetail animated:YES];
 }
 
 #pragma mark - viewcontroller delegate

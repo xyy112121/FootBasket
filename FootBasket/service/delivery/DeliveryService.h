@@ -13,6 +13,8 @@ typedef void (^DeliverSuccessBlock)(NSDictionary *dicData);
 @interface DeliveryService : RequestInterface
 
 
--(void)sendDeliveryListRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
+-(void)sendDeliveryListRequest:(NSString *)userid DeliveryState:(NSString *)deliverystate App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
+
+-(void)sendDeliveryDonePayRequest:(NSString *)orderid DeliveryUserId:(NSString *)deliveryuserid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
 
 @end

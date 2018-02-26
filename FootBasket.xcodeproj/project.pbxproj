@@ -296,6 +296,7 @@
 		74AAAAEB203F0225006AD3EB /* 添加icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE8203F0225006AD3EB /* 添加icon@3x.png */; };
 		74AAAAEE203F03D8006AD3EB /* MyNewAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */; };
 		74B5BA06204164DF00B43BC2 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B5BA05204164DF00B43BC2 /* OrderDetailViewController.m */; };
+		74CD213E2043AC720047F8F6 /* DeliveryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CD213D2043AC720047F8F6 /* DeliveryDetailViewController.m */; };
 		74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7833020405B2E00FE8091 /* MyOrderViewController.m */; };
 		74DA127B2041A65E00C1C5DA /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */; };
 		74DA127F2041B67F00C1C5DA /* DeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127E2041B67F00C1C5DA /* DeliveryService.m */; };
@@ -786,6 +787,8 @@
 		74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewAddrViewController.m; sourceTree = "<group>"; };
 		74B5BA04204164DF00B43BC2 /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		74B5BA05204164DF00B43BC2 /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		74CD213C2043AC720047F8F6 /* DeliveryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryDetailViewController.h; sourceTree = "<group>"; };
+		74CD213D2043AC720047F8F6 /* DeliveryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryDetailViewController.m; sourceTree = "<group>"; };
 		74D7832F20405B2E00FE8091 /* MyOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrderViewController.h; sourceTree = "<group>"; };
 		74D7833020405B2E00FE8091 /* MyOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderViewController.m; sourceTree = "<group>"; };
 		74DA12792041A65E00C1C5DA /* DeliveryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
@@ -1746,6 +1749,8 @@
 			children = (
 				74DA12792041A65E00C1C5DA /* DeliveryViewController.h */,
 				74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */,
+				74CD213C2043AC720047F8F6 /* DeliveryDetailViewController.h */,
+				74CD213D2043AC720047F8F6 /* DeliveryDetailViewController.m */,
 			);
 			path = Delivery;
 			sourceTree = "<group>";
@@ -1849,7 +1854,7 @@
 				TargetAttributes = {
 					740F3D3920280CE40050A6BF = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -2177,6 +2182,7 @@
 				740F3FB7202847F90050A6BF /* MJRefreshBackGifFooter.m in Sources */,
 				740F3FAD202847F90050A6BF /* MBProgressHUD.m in Sources */,
 				743B523C203FBD340004E673 /* UIView+CZHExtension.m in Sources */,
+				74CD213E2043AC720047F8F6 /* DeliveryDetailViewController.m in Sources */,
 				740F3F94202847F90050A6BF /* AFURLSessionManager.m in Sources */,
 				740F4019202847F90050A6BF /* View+MASAdditions.m in Sources */,
 				74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */,
@@ -2326,13 +2332,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 483ZA3A2UA;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 64VCC3B3JQ;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FootBasket/Custom/PrefixHeader.pch";
 				INFOPLIST_FILE = FootBasket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xy.footbasket.FootBasket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reerapp.FootBasket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "df47ff10-4ff7-4317-89ee-9819cdcac6e0";
+				PROVISIONING_PROFILE_SPECIFIER = developreerapp;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2341,13 +2349,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 483ZA3A2UA;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 64VCC3B3JQ;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FootBasket/Custom/PrefixHeader.pch";
 				INFOPLIST_FILE = FootBasket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xy.footbasket.FootBasket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reerapp.FootBasket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "df47ff10-4ff7-4317-89ee-9819cdcac6e0";
+				PROVISIONING_PROFILE_SPECIFIER = developreerapp;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
