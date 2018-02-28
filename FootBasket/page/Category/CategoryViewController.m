@@ -86,7 +86,7 @@
     [self.view addSubview:leftcategorymenu];
 }
 
--(UIView *)getcellView:(NSDictionary *)dic Frame:(CGRect)frame
+-(UIView *)getcellView:(NSDictionary *)dic Frame:(CGRect)frame TagNow:(int)tagnow
 {
     UIView *viewcell = [[UIView alloc] initWithFrame:frame];
     viewcell.backgroundColor = [UIColor whiteColor];
@@ -118,6 +118,9 @@
     UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonshoppingcar.frame = CGRectMake(XYViewWidth(viewcell)-50,XYViewHeight(viewcell)-50, 40, 40);
     [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
+    [buttonshoppingcar addTarget:self action:@selector(clickCategoryGoods:)
+                forControlEvents:UIControlEventTouchUpInside];
+    buttonshoppingcar.tag = EnMyCategoryProductShopCarTag +tagnow;
     [viewcell addSubview:buttonshoppingcar];
     
     return viewcell;
@@ -145,11 +148,39 @@
 }
 
 #pragma mark - ActionDelegate
+-(void)DGClickCategorySmall:(NSDictionary *)sender
+{
+    CategoryService *categoryservice = [CategoryService new];
+    
+    [categoryservice sendCategoryGoodsRequest:@"1" PageSize:@"10" SmallId:[sender objectForKey:@"id"] App:app ReqUrl:RQCategoryGood successBlock:^(NSDictionary *dicData) {
+        
+        arraydata = [dicData objectForKey:@"rows"];
+        tableview.delegate = self;
+        tableview.dataSource = self;
+        [tableview reloadData];
+    }];
+}
+
 -(void)DGCickSearchTextfield:(id)sender
 {
     SearchViewController *searchview = [[SearchViewController alloc] init];
     UINavigationController *nctl = [[UINavigationController alloc] initWithRootViewController:searchview];
     [self.navigationController presentViewController:nctl animated:YES completion:nil];
+}
+
+-(void)DGAddShoppingCar:(NSDictionary *)sender
+{
+    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) DicRecommend:sender];
+    [app.window addSubview:addshoppingcar];
+    
+}
+
+-(void)clickCategoryGoods:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag]-EnMyCategoryProductShopCarTag;
+    NSDictionary *dic = [arraydata objectAtIndex:tagnow];
+    [self DGAddShoppingCar:dic];
 }
 
 #pragma mark - IBAction
@@ -168,43 +199,6 @@
     NSDictionary *dictemp = [arraymain objectAtIndex:button.tag-EnCategoryTopBtTag];
     [leftcategorymenu getCategorysmall:dictemp];
 }
-
-//-(UIView *)viewcell:(NSDictionary *)dic Frame:(CGRect)frame
-//{
-//    UIView *view = [[UIView alloc] initWithFrame:frame];
-//    view.backgroundColor = [UIColor clearColor];
-//
-//    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
-//    NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"productBasic_headPicture"]];
-//    [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
-//    imageview.contentMode = UIViewContentModeScaleAspectFill;
-//    imageview.clipsToBounds = YES;
-//    [view addSubview:imageview];
-//
-//    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10, XYViewTop(imageview), XYViewWidth(view)-110, 20)];
-//    labelname.text = [dic objectForKey:@"productBasic_name"];
-//    labelname.font = FONTB(17.0f);
-//    [view addSubview:labelname];
-//
-//    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(view), 20)];
-//    labelsummary.text = [dic objectForKey:@"productBasic_summary"];
-//    labelsummary.font = FONTN(14.0f);
-//    labelsummary.textColor = COLORNOW(172, 172, 172);
-//    [view addSubview:labelsummary];
-//
-//    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelsummary)+5, 100, 20)];
-//    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"productBasic_salePrice"],[dic objectForKey:@"productBasic_displayUnit"]];
-//    labelprice.font = FONTN(14.0f);
-//    labelprice.textColor = COLORNOW(248, 88, 37);
-//    [view addSubview:labelprice];
-//
-//    UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
-//    buttonshoppingcar.frame = CGRectMake(XYViewWidth(view)-50,XYViewHeight(view)-50, 40, 40);
-//    [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
-//    [view addSubview:buttonshoppingcar];
-//
-//    return view;
-//}
 
 #pragma mark - tableview delegate
 //隐藏那些没有cell的线
@@ -284,7 +278,7 @@
     cell.backgroundColor = [UIColor clearColor];
     
     NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
-    UIView *viewcell = [self getcellView:dictemp Frame:CGRectMake(0, 0, XYViewWidth(tableView), 100)];
+    UIView *viewcell = [self getcellView:dictemp Frame:CGRectMake(0, 0, XYViewWidth(tableView), 100) TagNow:(int)indexPath.row];
     [cell.contentView addSubview:viewcell];
     
     
@@ -298,21 +292,6 @@
     goodsdetail.FCGoodsId = [dictemp objectForKey:@"id"];
     goodsdetail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:goodsdetail animated:YES];
-}
-
-
-#pragma mark - ACtionDelegate
--(void)DGClickCategorySmall:(NSDictionary *)sender
-{
-    CategoryService *categoryservice = [CategoryService new];
-    
-    [categoryservice sendCategoryGoodsRequest:@"1" PageSize:@"10" SmallId:[sender objectForKey:@"id"] App:app ReqUrl:RQCategoryGood successBlock:^(NSDictionary *dicData) {
-        
-        arraydata = [dicData objectForKey:@"rows"];
-        tableview.delegate = self;
-        tableview.dataSource = self;
-        [tableview reloadData];
-    }];
 }
 
 #pragma mark - 接口

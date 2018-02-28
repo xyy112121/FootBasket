@@ -82,6 +82,9 @@
 #import "DeliveryViewController.h"
 #import "DeliveryService.h"
 #import "DeliveryDetailViewController.h"
+#import "AddShoppingCarView.h"
+#import "SearchService.h"
+#import "PTLoadingHubView.h"
 #endif /* PrefixHeader_pch */
 
 /**

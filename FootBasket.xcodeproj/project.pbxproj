@@ -296,6 +296,9 @@
 		74AAAAEB203F0225006AD3EB /* 添加icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE8203F0225006AD3EB /* 添加icon@3x.png */; };
 		74AAAAEE203F03D8006AD3EB /* MyNewAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */; };
 		74B5BA06204164DF00B43BC2 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B5BA05204164DF00B43BC2 /* OrderDetailViewController.m */; };
+		74BC2FF920465C9E00C6B9DD /* AddShoppingCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC2FF820465C9E00C6B9DD /* AddShoppingCarView.m */; };
+		74BC2FFD2046931200C6B9DD /* SearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC2FFC2046931200C6B9DD /* SearchService.m */; };
+		74BC300120469C1400C6B9DD /* PTLoadingHubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC300020469C1400C6B9DD /* PTLoadingHubView.m */; };
 		74CD213E2043AC720047F8F6 /* DeliveryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CD213D2043AC720047F8F6 /* DeliveryDetailViewController.m */; };
 		74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7833020405B2E00FE8091 /* MyOrderViewController.m */; };
 		74DA127B2041A65E00C1C5DA /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */; };
@@ -787,6 +790,12 @@
 		74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewAddrViewController.m; sourceTree = "<group>"; };
 		74B5BA04204164DF00B43BC2 /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		74B5BA05204164DF00B43BC2 /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		74BC2FF720465C9E00C6B9DD /* AddShoppingCarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddShoppingCarView.h; sourceTree = "<group>"; };
+		74BC2FF820465C9E00C6B9DD /* AddShoppingCarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddShoppingCarView.m; sourceTree = "<group>"; };
+		74BC2FFB2046931200C6B9DD /* SearchService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchService.h; sourceTree = "<group>"; };
+		74BC2FFC2046931200C6B9DD /* SearchService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchService.m; sourceTree = "<group>"; };
+		74BC2FFF20469C1400C6B9DD /* PTLoadingHubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTLoadingHubView.h; sourceTree = "<group>"; };
+		74BC300020469C1400C6B9DD /* PTLoadingHubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTLoadingHubView.m; sourceTree = "<group>"; };
 		74CD213C2043AC720047F8F6 /* DeliveryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryDetailViewController.h; sourceTree = "<group>"; };
 		74CD213D2043AC720047F8F6 /* DeliveryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryDetailViewController.m; sourceTree = "<group>"; };
 		74D7832F20405B2E00FE8091 /* MyOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrderViewController.h; sourceTree = "<group>"; };
@@ -1092,6 +1101,7 @@
 		740F3E3F202847F90050A6BF /* CommLib */ = {
 			isa = PBXGroup;
 			children = (
+				74BC2FFE20469C1400C6B9DD /* NetworkLoading */,
 				74DF55BE20413FFC005276CC /* 时间选择器 */,
 				743B522E203FBD330004E673 /* AddressPickerView */,
 				74E3A013202D51B0003A06A7 /* 无限循环支持gif */,
@@ -1705,6 +1715,7 @@
 		743DC44920295574004E4DB0 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				74BC2FFA204692FE00C6B9DD /* search */,
 				74DA127C2041ACC700C1C5DA /* delivery */,
 				74DF55C620414BA3005276CC /* order */,
 				743B523D203FC1FA0004E673 /* mangeaddress */,
@@ -1742,6 +1753,24 @@
 				7484DFC7202BFC1A00900FB8 /* ShoppingCarService.m */,
 			);
 			path = shoppingcar;
+			sourceTree = "<group>";
+		};
+		74BC2FFA204692FE00C6B9DD /* search */ = {
+			isa = PBXGroup;
+			children = (
+				74BC2FFB2046931200C6B9DD /* SearchService.h */,
+				74BC2FFC2046931200C6B9DD /* SearchService.m */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		74BC2FFE20469C1400C6B9DD /* NetworkLoading */ = {
+			isa = PBXGroup;
+			children = (
+				74BC2FFF20469C1400C6B9DD /* PTLoadingHubView.h */,
+				74BC300020469C1400C6B9DD /* PTLoadingHubView.m */,
+			);
+			path = NetworkLoading;
 			sourceTree = "<group>";
 		};
 		74DA12782041A65100C1C5DA /* Delivery */ = {
@@ -1800,6 +1829,8 @@
 				74E3A010202D5174003A06A7 /* FocusNewsView.m */,
 				74E3A00D202D4D04003A06A7 /* GoodsDetailViewController.h */,
 				74E3A00E202D4D04003A06A7 /* GoodsDetailViewController.m */,
+				74BC2FF720465C9E00C6B9DD /* AddShoppingCarView.h */,
+				74BC2FF820465C9E00C6B9DD /* AddShoppingCarView.m */,
 			);
 			path = GoodsDetail;
 			sourceTree = "<group>";
@@ -2055,6 +2086,7 @@
 				740F4014202847F90050A6BF /* MASLayoutConstraint.m in Sources */,
 				740F4017202847F90050A6BF /* NSArray+MASAdditions.m in Sources */,
 				740F4005202847F90050A6BF /* SDWebImagePrefetcher.m in Sources */,
+				74BC2FF920465C9E00C6B9DD /* AddShoppingCarView.m in Sources */,
 				740F3F99202847F90050A6BF /* UIButton+AFNetworking.m in Sources */,
 				74E3A00F202D4D04003A06A7 /* GoodsDetailViewController.m in Sources */,
 				740F3FB8202847F90050A6BF /* MJRefreshBackNormalFooter.m in Sources */,
@@ -2079,6 +2111,7 @@
 				740F3F9F202847F90050A6BF /* CustomAnimation.m in Sources */,
 				740F3D4D20280CE40050A6BF /* main.m in Sources */,
 				740F3FF8202847F90050A6BF /* POPVector.mm in Sources */,
+				74BC2FFD2046931200C6B9DD /* SearchService.m in Sources */,
 				740F3FD8202847F90050A6BF /* RATreeView+UIScrollView.m in Sources */,
 				740F3FA6202847F90050A6BF /* JQCyclingCycleAnimation.m in Sources */,
 				740F4018202847F90050A6BF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -2185,6 +2218,7 @@
 				74CD213E2043AC720047F8F6 /* DeliveryDetailViewController.m in Sources */,
 				740F3F94202847F90050A6BF /* AFURLSessionManager.m in Sources */,
 				740F4019202847F90050A6BF /* View+MASAdditions.m in Sources */,
+				74BC300120469C1400C6B9DD /* PTLoadingHubView.m in Sources */,
 				74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */,
 				740F3FEF202847F90050A6BF /* POPBasicAnimation.mm in Sources */,
 				74DF55BD20411BB4005276CC /* MangeAddressService.m in Sources */,

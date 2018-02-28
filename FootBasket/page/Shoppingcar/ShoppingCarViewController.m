@@ -95,12 +95,18 @@
     labelall.text = @"合计";
     [viewbottom addSubview:labelall];
     
-    UILabel *labelmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
-    labelmoney.textColor = COLORNOW(248, 88, 37);
-    labelmoney.font = FONTN(15.0f);
-    labelmoney.text = @"￥0.00";
-    [viewbottom addSubview:labelmoney];
+    labeltotalmoney = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelall), 15, 85, 20)];
+    labeltotalmoney.textColor = COLORNOW(248, 88, 37);
+    labeltotalmoney.font = FONTN(15.0f);
+    labeltotalmoney.text = @"";
+    [viewbottom addSubview:labeltotalmoney];
     
+    
+    labeltotalproduct = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 130, 20)];
+    labeltotalproduct.textColor = COLORNOW(122, 122, 122);
+    labeltotalproduct.font = FONTN(15.0f);
+    labeltotalproduct.text = @"";
+    [viewbottom addSubview:labeltotalproduct];
     
     
     return viewbottom;
@@ -277,10 +283,17 @@
             if([[dicnum objectForKey:@"shoppingCartId"] isEqualToString:[dictemp objectForKey:@"shoppingCartId"]])
             {
                 [dicnum setObject:labelnum.text forKey:@"count"];
+                
+                NSDictionary *dicdata = [arraydata objectAtIndex:i];
+                float productprice = [[dicdata objectForKey:@"salePrice"] floatValue];
+                float totalprice = [[labeltotalmoney.text substringFromIndex:1] floatValue];
+                totalprice = totalprice+productprice;
+                [labeltotalmoney setText:[NSString stringWithFormat:@"￥%.2f",totalprice]];
+                break;
             }
         }
         [dictemp setObject:labelnum.text forKey:@"productnum"];
-
+        
     }
 }
 
@@ -305,6 +318,13 @@
             if([[dicnum objectForKey:@"shoppingCartId"] isEqualToString:[dictemp objectForKey:@"shoppingCartId"]])
             {
                 [dicnum setObject:labelnum.text forKey:@"count"];
+                
+                NSDictionary *dicdata = [arraydata objectAtIndex:i];
+                float productprice = [[dicdata objectForKey:@"salePrice"] floatValue];
+                float totalprice = [[labeltotalmoney.text substringFromIndex:1] floatValue];
+                totalprice = totalprice-productprice;
+                [labeltotalmoney setText:[NSString stringWithFormat:@"￥%.2f",totalprice]];
+                break;
             }
         }
         [dictemp setObject:labelnum.text forKey:@"productnum"];
@@ -392,11 +412,13 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
@@ -426,7 +448,6 @@
 {
     UIImageView *imageviewline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     imageviewline.backgroundColor = COLORNOW(245, 245, 245);
-    
     return imageviewline;
 }
 
@@ -490,13 +511,20 @@
     [shoppingcar sendShoppingCarRequest:app.userinfo.userid App:app ReqUrl:RQMyShoppingCar successBlock:^(NSDictionary *dicData) {
         arraydata = [NSMutableArray arrayWithArray:[dicData objectForKey:@"rows"]];
         [arrayproductnum removeAllObjects];
+        float nowprice = 0;
         for(int i=0;i<[arraydata count];i++)
         {
-            
             NSDictionary *dictemp = [arraydata objectAtIndex:i];
             NSMutableDictionary *dicnum = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[dictemp objectForKey:@"productNumber"]],@"count", [dictemp objectForKey:@"shoppingCartId"],@"shoppingCartId",[dictemp objectForKey:@"id"],@"productId",nil];
             [arrayproductnum addObject:dicnum];
+            
+            int productnum = [[dictemp objectForKey:@"productNumber"] intValue];
+            float productprice = [[dictemp objectForKey:@"salePrice"] floatValue];
+            nowprice = nowprice+productprice*productnum;
         }
+        
+        labeltotalmoney.text = [NSString stringWithFormat:@"￥%.2f",nowprice];
+        labeltotalproduct.text = [NSString stringWithFormat:@"共计%ld款商品",[arraydata count]];
         tableview.delegate = self;
         tableview.dataSource = self;
         

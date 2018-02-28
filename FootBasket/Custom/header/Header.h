@@ -16,7 +16,7 @@
 #define Cache_path [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"]
 #define Cache_Remarks [Cache_path stringByAppendingPathComponent:@"CacheRemarks.plist"]
 #define Cache_SearchHistory [Cache_path stringByAppendingPathComponent:@"SearchHistory.plist"]
-
+#define Cache_UserInfo [Cache_path stringByAppendingPathComponent:@"UserInfo.plist"]
 
 #define COLORNOW(a,b,c) [UIColor colorWithRed:a/255.0f green:b/255.0f blue:c/255.0f alpha:1]
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)

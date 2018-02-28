@@ -12,8 +12,8 @@ typedef void (^MangeAddressSuccessBlock)(NSDictionary *dicData);
 
 @interface MangeAddressService : RequestInterface
 
--(void)sendAddNewAddressRequest:(NSString * )provice City:(NSString *)city Area:(NSString *)area Address:(NSString *)address Tel:(NSString *)tel IsDefault:(NSString *)isdefault UserName:(NSString *)username UserId:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
+-(void)sendAddNewAddressRequest:(NSString * )provice City:(NSString *)city Area:(NSString *)area Address:(NSString *)address Tel:(NSString *)tel IsDefault:(NSString *)isdefault UserName:(NSString *)username UserId:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(MangeAddressSuccessBlock)successBlock;
 
--(void)sendAddrListRequest:(NSString * )userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock;
+-(void)sendAddrListRequest:(NSString * )userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(MangeAddressSuccessBlock)successBlock;
 
 @end

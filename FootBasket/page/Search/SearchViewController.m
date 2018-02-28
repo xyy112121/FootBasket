@@ -90,7 +90,8 @@
     textfieldsearch = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageicon)+5, XYViewTop(imagebg)+1, XYViewWidth(imagebg)-40, XYViewHeight(imagebg)-2)];
     textfieldsearch.font = FONTN(15.0f);
     textfieldsearch.delegate = self;
-    textfieldsearch.placeholder = @"搜索";
+    textfieldsearch.placeholder = @"请输入搜索产品名称";
+    textfieldsearch.returnKeyType = UIReturnKeySearch;
     textfieldsearch.backgroundColor = [UIColor clearColor];
     [view addSubview:textfieldsearch];
     
@@ -161,6 +162,9 @@
             [tableview reloadData];
         }
         
+        SearchResultViewController *result = [[SearchResultViewController alloc] init];
+        result.FCSearchStr = textfieldsearch.text;
+        [self.navigationController pushViewController:result animated:YES];
         
     }
     else

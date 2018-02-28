@@ -15,7 +15,7 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:goodsid forKey:@"objectID"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,7 +28,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
@@ -39,7 +41,7 @@
     [params setObject:goodsid forKey:@"productBasicId"];
     [params setObject:userid forKey:@"userId"];
     [params setObject:productnumber forKey:@"productNumber"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -52,7 +54,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }

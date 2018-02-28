@@ -38,7 +38,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:tel forKey:@"mobile"];
     [params setObject:code forKey:@"code"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -53,8 +53,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
-        
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"登录失败,请检查网络" toView:app.window];
     }];
 }

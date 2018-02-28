@@ -11,6 +11,7 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (copy,nonatomic)NSString *FCDisplayShoppingCar;
 @property (strong,nonatomic)UserInfo *userinfo;
 @property (strong, nonatomic) UIWindow *window;
 

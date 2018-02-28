@@ -22,7 +22,7 @@
 
 #define RQCommitOrder @"/Basket/business/OrderForm_confirmOrder_OL.action" // 提交订单userId addressId products
 
-#define RQMyOrderList @"/Basket/business/OrderNavigate_searchPageOL_OL.action" //我的订单userId deliveryState 2 待收货  3 已收货
+#define RQMyOrderList @"/Basket/business/OrderNavigate_searchPageOL_OL.action" //我的订单userId deliveryState 2 待收货  3 已收货   page rows=10
 
 #define RQMyOrderDetail @"/Basket/business/OrderNavigate_detail_OL.action" // 订单详情 objectID 
 #define RQDoneReceiveOrder @"/Basket/business/DeliveryNavigate_confirmReceipt_OL.action"//确认收货 orderId
@@ -30,4 +30,9 @@
 #define RQDeliveryList @"/Basket/business/DeliveryNavigate_searchPageOL_OL.action" // 送货单 userId
 
 #define RQPayDoneCommit @"/Basket/business/OrderNavigate_confirmPayed_OL.action"//确认付款 orderId deliveryUserId
+
+#define RQSearchProductList @"/Basket/resource/ProductBasicNavigate_searchPageOL_OL.action"// 搜索产品 productName page rows
+
+
+
 

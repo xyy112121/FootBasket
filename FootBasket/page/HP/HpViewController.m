@@ -39,6 +39,16 @@
     
     [self setExtraCellLineHidden:tableview];
     
+    __weak __typeof(self) weakSelf = self;
+    tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf gethpinterface];
+    }];
+    
+//    tableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        [weakSelf getmyfansperson:@"1" PageSize:[NSString stringWithFormat:@"%d",(int)[FCarraydata count]+10]];
+//    }];
+//    // 默认先隐藏footer
+//    tableview.mj_footer.hidden = YES;
     
 }
 
@@ -109,6 +119,7 @@
     [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
     buttonshoppingcar.backgroundColor = [UIColor clearColor];
     buttonshoppingcar.tag = EnHpDiscountShopCarBtTag+tagnow;
+    [buttonshoppingcar addTarget:self action:@selector(clickDiscountgoods:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:buttonshoppingcar];
     
     return view;
@@ -125,6 +136,15 @@
     goodsdetail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:goodsdetail animated:YES];
 }
+
+-(void)clickDiscountgoods:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag]-EnHpDiscountShopCarBtTag;
+    NSDictionary *dic = [arraydata objectAtIndex:tagnow];
+    [self DGAddShoppingCar:dic];
+}
+
 
 #pragma mark - ActionDelegate
 -(void)DGLoginSuccess:(id)sender
@@ -147,9 +167,17 @@
     [self.navigationController pushViewController:goodsdetail animated:YES];
 }
 
+-(void)DGAddShoppingCar:(NSDictionary *)sender
+{
+    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) DicRecommend:sender];
+    [app.window addSubview:addshoppingcar];
+
+}
+
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -176,6 +204,11 @@
     hpnav.tag = EnHpNavigationBgTag;
     [hpnav initViewHP];
     [self.navigationController.navigationBar addSubview:hpnav];
+    
+    if([app.FCDisplayShoppingCar isEqualToString:@"1"])
+    {
+        [self.tabBarController setSelectedIndex:2];
+    }
 }
 
 #pragma mark - tableview delegate
@@ -299,8 +332,9 @@
 {
     HpService *discount = [HpService new];
     //推荐商品
-    [discount sendRecommendRequest:@"1" PageSize:@"10" App:app ReqUrl:RQRecommend successBlock:^(NSDictionary *dicData) {
+    [discount sendRecommendRequest:@"1" PageSize:@"20" App:app ReqUrl:RQRecommend successBlock:^(NSDictionary *dicData) {
         
+        [tableview.mj_header endRefreshing];
         NSArray *recommendarraydata = [dicData objectForKey:@"rows"];
         UIView *viewrecommend = [self RecommendGoods:CGRectMake(0, 0, SCREEN_WIDTH, 160) RecommendData:recommendarraydata];
         [tableview setTableHeaderView:viewrecommend];
@@ -308,8 +342,8 @@
     }];
     
     //特惠商品
-    [discount sendDiscountRequest:@"1" PageSize:@"10" App:app ReqUrl:RQDiscount successBlock:^(NSDictionary *dicData) {
-
+    [discount sendDiscountRequest:@"1" PageSize:@"20" App:app ReqUrl:RQDiscount successBlock:^(NSDictionary *dicData) {
+        [tableview.mj_header endRefreshing];
         tableview.delegate = self;
         tableview.dataSource = self;
         arraydata = [dicData objectForKey:@"rows"];

@@ -15,7 +15,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,8 +28,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
-        
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品主要类别列表失败,请检查网络" toView:app.window];
     }];
 }
@@ -40,7 +41,7 @@
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
     [params setObject:categoryid forKey:@"categoryId"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -53,7 +54,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
     }];
 }
@@ -64,7 +67,7 @@
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
     [params setObject:smallid forKey:@"categorySmallId"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -77,7 +80,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
     }];
 }

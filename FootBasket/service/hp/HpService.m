@@ -15,7 +15,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,8 +28,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
-        
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取推荐商品列表失败,请检查网络" toView:app.window];
     }];
 }
@@ -39,7 +40,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {

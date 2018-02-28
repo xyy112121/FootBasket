@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.userinfo = [UserInfo new];
+    self.FCDisplayShoppingCar = @"0";
     // Override point for customization after application launch.
     return YES;
 }

@@ -43,7 +43,7 @@
     labelname.font = FONTB(17.0f);
     [self addSubview:labelname];
     
-    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, 100, 20)];
+    UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(self)-110, 20)];
     labelsummary.text = [dic objectForKey:@"summary"];
     labelsummary.font = FONTN(14.0f);
     labelsummary.textColor = COLORNOW(172, 172, 172);
@@ -58,6 +58,7 @@
     UIButton *buttonshoppingcar = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonshoppingcar.frame = CGRectMake(XYViewWidth(self)-50,XYViewHeight(self)-50, 40, 40);
     [buttonshoppingcar setImage:LOADIMAGE(@"加入购物车small", @"png") forState:UIControlStateNormal];
+    [buttonshoppingcar addTarget:self action:@selector(addshoppingcar:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:buttonshoppingcar];
 }
 
@@ -66,6 +67,14 @@
     if(_delegate1 && [_delegate1 respondsToSelector:@selector(DGClickRecommendDetail:)])
     {
         [_delegate1 DGClickRecommendDetail:dicfrom];
+    }
+}
+
+-(void)addshoppingcar:(id)sender
+{
+    if(_delegate1 && [_delegate1 respondsToSelector:@selector(DGAddShoppingCar:)])
+    {
+        [_delegate1 DGAddShoppingCar:dicfrom];
     }
 }
 

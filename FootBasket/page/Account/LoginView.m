@@ -39,7 +39,7 @@
     
     textfieldtel = [[UITextField alloc] initWithFrame:CGRectMake(XYViewL(imageline1)+5, XYViewTop(imageline1)-35, XYViewWidth(imageline1)-20, 30)];
     textfieldtel.placeholder = @"输入电话号码";
-    textfieldtel.text = @"xyy520";//@"18669069389";//
+    textfieldtel.text = @"18669069389";//
     textfieldtel.font = FONTN(16.0f);
     textfieldtel.delegate = self;
     [self addSubview:textfieldtel];
@@ -91,17 +91,16 @@
 
 -(void)clicklogin:(id)sender
 {
-    CommonHeader *common = [CommonHeader new];
     if([textfieldcode.text length]<4)
     {
         [MBProgressHUD showError:@"请输入验证码" toView:app.window];
     }
     else
     {
-
         LoginService *loginservice = [LoginService new];
-        
         [loginservice sendloginrequest:textfieldtel.text Code:textfieldcode.text App:app ReqUrl:RQLogin successBlock:^(NSDictionary *dicData) {
+            NSDictionary *dictemp = [dicData objectForKey:@"user"];
+            [dictemp writeToFile:Cache_UserInfo atomically:NO];
             app.userinfo.userid = [dicData objectForKey:@"id"];
             app.userinfo.usertel = [dicData objectForKey:@"mobile"];
             app.userinfo.username = [dicData objectForKey:@"mobile"];
@@ -112,8 +111,6 @@
                 [_delegate1 DGLoginSuccess:nil];
             }
         }];
-    
-        
     }
 }
 

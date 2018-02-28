@@ -79,7 +79,7 @@ static NSString *cache;
     [self addSubview:self.describeLabel];
 	self.imagealpha = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-30, SCREEN_WIDTH, 30)];
 	self.imagealpha.backgroundColor = [UIColor blackColor];
-	self.imagealpha.alpha = 0.5;
+	self.imagealpha.alpha = 0.0;
 	self.imagealpha.contentMode = UIViewContentModeScaleAspectFill;
 	[self addSubview:self.imagealpha];
     [self addSubview:self.pageControl];

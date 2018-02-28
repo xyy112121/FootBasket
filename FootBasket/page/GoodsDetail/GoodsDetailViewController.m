@@ -75,6 +75,9 @@
     
     UIImageView *imageviewshopcar = [[UIImageView alloc] initWithFrame:CGRectMake(10, 9, 24, 21)];
     imageviewshopcar.image = LOADIMAGE(@"购物车选择后", @"png");
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickshopcar:)];
+    imageviewshopcar.userInteractionEnabled = YES;
+    [imageviewshopcar addGestureRecognizer:recognizer];
     [viewbottom addSubview:imageviewshopcar];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -272,6 +275,12 @@
     {
         labelnum.text = [NSString stringWithFormat:@"%d",numnow-1];
     }
+}
+
+-(void)clickshopcar:(id)sender
+{
+    app.FCDisplayShoppingCar = @"1";
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - tableview delegate

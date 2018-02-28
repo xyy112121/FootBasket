@@ -51,6 +51,10 @@ typedef enum
 
 #define EnMyOrderListStateBtTag 6700 //搜索背景
 
+#define EnMyCategoryProductShopCarTag 6800 //分类里面点击购物车按钮
+
+#define EnSearchProductListTag 6900
+
 #endif /* Enum_set_h */
 
 

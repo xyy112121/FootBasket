@@ -10,12 +10,12 @@
 
 @implementation DeliveryService
 
--(void)sendDeliveryListRequest:(NSString *)userid DeliveryState:(NSString *)deliverystate App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock
+-(void)sendDeliveryListRequest:(NSString *)userid DeliveryState:(NSString *)deliverystate App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DeliverSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"userId"];
     [params setObject:deliverystate forKey:@"deliveryState"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,17 +28,19 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
 
--(void)sendDeliveryDonePayRequest:(NSString *)orderid DeliveryUserId:(NSString *)deliveryuserid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(GoodsDetaiolSuccessBlock)successBlock
+-(void)sendDeliveryDonePayRequest:(NSString *)orderid DeliveryUserId:(NSString *)deliveryuserid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DeliverSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:orderid forKey:@"orderId"];
     [params setObject:deliveryuserid forKey:@"deliveryUserId"];
-    
+    [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -51,7 +53,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }

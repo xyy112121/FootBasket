@@ -43,15 +43,26 @@
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.title = @"我的订单";
     
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight) style:UITableViewStylePlain];
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-40) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tableview];
     [self setExtraCellLineHidden:tableview];
     
-    [self getmyorderlist];
+    [self getmyorderlist:@"10"];
     
     [self initheaderview];
+    
+    __weak __typeof(self) weakSelf = self;
+    tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf getmyorderlist:@"10"];
+    }];
+    
+    tableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf getmyorderlist:[NSString stringWithFormat:@"%ld",[arraydata count]+10]];
+    }];
+    // 默认先隐藏footer
+    tableview.mj_footer.hidden = YES;
 }
 
 -(void)initheaderview
@@ -92,7 +103,7 @@
     selectline.backgroundColor = COLORNOW(32, 188, 167);
     [view addSubview:selectline];
     
-    tableview.tableHeaderView = view;
+    [self.view addSubview:view];
 }
 
 //cell
@@ -122,12 +133,14 @@
     labelstate.textColor = COLORNOW(255, 110, 64);
     [view addSubview:labelstate];
     
+    NSArray *arrayproduct = [dic objectForKey:@"products"];
     float heightnow = XYViewBottom(imageline1);
     float widthnow = (SCREEN_WIDTH-90)/8;
-    for(int i=0;i<10;i++)
+    for(int i=0;i<[arrayproduct count];i++)
     {
+        NSDictionary *dicproduct = [arrayproduct objectAtIndex:i];
         UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10+(10+widthnow)*i,XYViewBottom(imageline1)+10, widthnow, widthnow)];
-        NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dic objectForKey:@"productBasic_headPicture"]];
+        NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dicproduct objectForKey:@"productBasic_headPicture"]];
         [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
         imageview.contentMode = UIViewContentModeScaleAspectFill;
         imageview.clipsToBounds = YES;
@@ -156,8 +169,28 @@
     labeldes.textColor = COLORNOW(122, 122,122);
     [view addSubview:labeldes];
     
-    
-    
+    //未支付  已收货  显示欠款
+    if(([[dic objectForKey:@"isPay"] intValue]==0)&&([[dic objectForKey:@"deliveryState"] integerValue]==3))
+    {
+        UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, XYViewBottom(imageline2)+12, 15, 16)];
+        imageview.image = LOADIMAGE(@"代付款", @"png");
+        [view addSubview:imageview];
+        
+        UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+5, XYViewTop(imageview)-2, 150, 20)];
+        labelprice.text = [NSString stringWithFormat:@"欠款:￥%@元",[dic objectForKey:@"debtPrice"]];
+        labelprice.font = FONTN(16.0f);
+        labelprice.textColor = COLORNOW(255, 110, 64);
+        [view addSubview:labelprice];
+    }
+    else
+    {
+        UILabel *labelstate = [[UILabel alloc] initWithFrame:CGRectMake(10,XYViewTop(imageline2)+10, 100, 20)];
+        labelstate.text = [dic objectForKey:@"displayIsPay"];
+        labelstate.font = FONTN(16.0f);
+        labelstate.textColor = COLORNOW(255, 110, 64);
+        [view addSubview:labelstate];
+    }
+
     return view;
 }
 
@@ -194,7 +227,7 @@
         _orderstate = @"2";
     else
         _orderstate = @"3";
-    [self getmyorderlist];
+    [self getmyorderlist:@"10"];
 }
 
 #pragma mark - tableview delegate
@@ -235,7 +268,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 140;
+    float widthnow = (SCREEN_WIDTH-90)/8;
+    NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
+    NSArray *arrayproduct = [dic objectForKey:@"products"];
+    int row = (int)[arrayproduct count]==0?0:(int)[arrayproduct count]/8+1;
+    return 85+((widthnow+10)*row+10);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -288,14 +325,19 @@
 }
 
 #pragma mark - 接口
--(void)getmyorderlist
+-(void)getmyorderlist:(NSString *)rows
 {
     OrderService *order = [OrderService new];
-    [order sendOrderListRequest:_orderstate UserId:app.userinfo.userid App:app ReqUrl:RQMyOrderList successBlock:^(NSDictionary *dicData) {
+    [order sendOrderListRequest:_orderstate UserId:app.userinfo.userid Rows:rows App:app ReqUrl:RQMyOrderList successBlock:^(NSDictionary *dicData) {
         arraydata = [dicData objectForKey:@"rows"];
         tableview.delegate = self;
         tableview.dataSource = self;
         [tableview reloadData];
+        
+        if([arraydata count]>10)
+            tableview.mj_footer.hidden = NO;
+        [tableview.mj_header endRefreshing];
+        [tableview.mj_footer endRefreshing];
     }];
 }
 

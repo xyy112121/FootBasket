@@ -147,6 +147,7 @@
     
     [categoryservice sendCategorySmallRequest:@"1" PageSize:@"10" CategoryId:[dic objectForKey:@"id"] App:app ReqUrl:RQCategoryOther successBlock:^(NSDictionary *dicData) {
         
+        selectone = 0;
         arraydata = [dicData objectForKey:@"rows"];
         tableview.delegate = self;
         tableview.dataSource = self;

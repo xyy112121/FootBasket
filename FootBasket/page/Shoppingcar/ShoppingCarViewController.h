@@ -18,6 +18,8 @@
     NSMutableArray *arraydelete;
     UIButton *buttonselectall;//全选中按钮
     NSMutableArray *arrayproductnum;//记录每一个的数目
+    UILabel *labeltotalmoney;
+    UILabel *labeltotalproduct;
 }
 
 @end
