@@ -85,6 +85,11 @@
 #import "AddShoppingCarView.h"
 #import "SearchService.h"
 #import "PTLoadingHubView.h"
+#import "SettingViewController.h"
+#import "RestaurantInfoViewController.h"
+#import "RestaurantAuthViewController.h"
+#import "SettingService.h"
+#import "JPhotoMagenage.h"
 #endif /* PrefixHeader_pch */
 
 /**

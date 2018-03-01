@@ -25,14 +25,7 @@
     self.tabBarController.tabBar.barTintColor = COLORNOW(250, 250, 250);
     [self initview];
     
-//    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(2, 2, 60, 40)];
-//    UIButton *button = [[UIButton alloc] initWithFrame:contentView.bounds];
-//    [button setTitle:@"设置"forState:UIControlStateNormal];
-//    button.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
-//    [button addTarget:self action: @selector(gotosetting:) forControlEvents: UIControlEventTouchUpInside];
-//    [contentView addSubview:button];
-//    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:contentView];
-//    self.navigationItem.leftBarButtonItem = barButtonItem;
+
     // Do any additional setup after loading the view.
 }
 
@@ -56,6 +49,14 @@
     [self setExtraCellLineHidden:tableview];
 
     [self initheaderview];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, StatusBarHeight, 50, 40)];
+    [button setTitle:@"设置"forState:UIControlStateNormal];
+    [button setBackgroundColor:[UIColor clearColor]];
+    button.titleLabel.font = FONTN(15.0f);
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action: @selector(gotosetting:) forControlEvents: UIControlEventTouchUpInside];
+    [self.view addSubview:button];
 }
 
 -(void)initheaderview
@@ -71,17 +72,19 @@
     imageview.image = LOADIMAGE(@"top-bg", @"png");
     [viewheader addSubview:imageview];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 56, 56);
-    button.layer.cornerRadius = 28.0f;
-    button.clipsToBounds = YES;
-    button.layer.borderColor = [UIColor whiteColor].CGColor;
-    button.layer.borderWidth = 2.0f;
-    [button setBackgroundImage:LOADIMAGE(@"个人头像", @"png") forState:UIControlStateNormal];
-    button.center = CGPointMake(SCREEN_WIDTH/2, 80);
-    [viewheader addSubview:button];
+    buttonheader = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonheader.frame = CGRectMake(0, 0, 56, 56);
+    buttonheader.layer.cornerRadius = 28.0f;
+    buttonheader.clipsToBounds = YES;
+    buttonheader.layer.borderColor = [UIColor whiteColor].CGColor;
+    buttonheader.layer.borderWidth = 2.0f;
+    buttonheader.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    buttonheader.imageView.clipsToBounds = YES;
+    [buttonheader setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPicHeader,app.userinfo.userheader]] placeholderImage:LOADIMAGE(@"个人头像", @"png")];
+    buttonheader.center = CGPointMake(SCREEN_WIDTH/2, 80);
+    [viewheader addSubview:buttonheader];
     
-    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-150)/2, XYViewBottom(button)+5, 150, 20)];
+    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-150)/2, XYViewBottom(buttonheader)+5,150, 20)];
     labelname.text = app.userinfo.username;
     labelname.backgroundColor = [UIColor clearColor];
     labelname.font = FONTN(15.0f);
@@ -164,7 +167,9 @@
 #pragma mark - IBAction
 -(void)gotosetting:(id)sender
 {
-    
+    SettingViewController *settingview = [[SettingViewController alloc] init];
+    settingview.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingview animated:YES];
 }
 
 -(void)clickwaitorderlist:(id)sender
@@ -190,6 +195,7 @@
     [self.navigationController pushViewController:delivery animated:YES];
 }
 
+
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -202,6 +208,15 @@
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
     [self.navigationController setNavigationBarHidden:YES];
+    if([app.userinfo.userheader length]>0)
+        [buttonheader setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPicHeader,app.userinfo.userheader]] placeholderImage:LOADIMAGE(@"个人头像", @"png")];
+    
+    NSFileManager *filemanger = [NSFileManager defaultManager];
+    if(![filemanger fileExistsAtPath:Cache_UserInfo])
+    {
+        
+        [self.tabBarController setSelectedIndex:0];
+    }
 }
 
 #pragma mark - tableview delegate

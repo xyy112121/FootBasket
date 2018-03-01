@@ -116,6 +116,7 @@
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
+    [PTLoadingHubView dismiss];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

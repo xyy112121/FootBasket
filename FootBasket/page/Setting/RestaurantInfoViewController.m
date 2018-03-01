@@ -1,18 +1,18 @@
 //
-//  MyAddrListViewController.m
+//  RestaurantInfoViewController.m
 //  FootBasket
 //
-//  Created by xyy on 2018/2/22.
+//  Created by xyy on 2018/3/1.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "MyAddrListViewController.h"
+#import "RestaurantInfoViewController.h"
 
-@interface MyAddrListViewController ()
+@interface RestaurantInfoViewController ()
 
 @end
 
-@implementation MyAddrListViewController
+@implementation RestaurantInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,99 +41,26 @@
 {
     self.view.backgroundColor = COLORNOW(240, 240, 240);
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.title = @"我的收货地址";
+    self.title = @"餐馆列表";
     
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-50) style:UITableViewStylePlain];
-    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight) style:UITableViewStylePlain];
+    tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableview.backgroundColor = [UIColor clearColor];
+    tableview.delegate = self;
+    tableview.dataSource = self;
     [self.view addSubview:tableview];
-    
     [self setExtraCellLineHidden:tableview];
     
     UIButton *buttonaddnew = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonaddnew.frame = CGRectMake(0, SCREEN_HEIGHT-50-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);
     [buttonaddnew setImage:LOADIMAGE(@"添加icon", @"png") forState:UIControlStateNormal];
-    [buttonaddnew setTitle:@"添加新地址" forState:UIControlStateNormal];
+    [buttonaddnew setTitle:@"添加新店" forState:UIControlStateNormal];
     [buttonaddnew setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     buttonaddnew.titleLabel.font = FONTN(15.0f);
     [buttonaddnew setBackgroundColor:COLORNOW(32, 188, 167)];
     [buttonaddnew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [buttonaddnew addTarget:self action:@selector(clickaddnew:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonaddnew addTarget:self action:@selector(clickaddnewrestaurant:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonaddnew];
-    
-    [self getaddrlist];
-}
-
-//cell
--(UIView *)ViewCell:(CGRect)frame Dic:(NSDictionary *)dic IndexPath:(NSIndexPath *)indexpath
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height)];
-    view.backgroundColor = [UIColor clearColor];
-    
-    UIImageView *imagebg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, frame.size.height-10)];
-    imagebg.backgroundColor = [UIColor whiteColor];
-    [view addSubview:imagebg];
-    
-
-    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10,20, 100, 20)];
-    labelname.text = [dic objectForKey:@"userName"];
-    labelname.font = FONTB(16.0f);
-    labelname.textColor = COLORNOW(52, 52, 52);
-    [view addSubview:labelname];
-    
-    UILabel *labeltel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-150,XYViewTop(labelname), 140, 20)];
-    labeltel.text = [dic objectForKey:@"mobile"];
-    labeltel.font = FONTN(16.0f);
-    labeltel.textAlignment = NSTextAlignmentRight;
-    labeltel.textColor = COLORNOW(52, 52, 52);
-    [view addSubview:labeltel];
-    
-    UILabel *labeladdr = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname),XYViewBottom(labelname)+5, SCREEN_WIDTH-20, 40)];
-    labeladdr.text =[NSString stringWithFormat:@"%@%@%@%@",[dic objectForKey:@"province"],[dic objectForKey:@"city"],[dic objectForKey:@"county"],[dic objectForKey:@"address"]];
-    labeladdr.font = FONTN(14.0f);
-    labeladdr.backgroundColor = [UIColor clearColor];
-    labeladdr.textColor = COLORNOW(72, 72, 72);
-    labeladdr.numberOfLines = 2;
-    [view addSubview:labeladdr];
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, XYViewBottom(view)-40, 100, 40);
-    [button setImage:LOADIMAGE(@"选区", @"png") forState:UIControlStateNormal];
-    if([[dic objectForKey:@"isDefault"] intValue]==1)
-        [button setImage:LOADIMAGE(@"选择框选中", @"png") forState:UIControlStateNormal];
-    [button setTitle:@"默认地址" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    button.titleLabel.font = FONTN(15.0f);
-    [button setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    button.tag = indexpath.row+EnMyAddrListDefaultBtTag;
-    [view addSubview:button];
-    
-    UIButton *buttonedit = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonedit.frame = CGRectMake(SCREEN_WIDTH-80, XYViewBottom(view)-40, 70, 40);
-    [buttonedit setImage:LOADIMAGE(@"编辑", @"png") forState:UIControlStateNormal];
-    [buttonedit setTitle:@"编辑" forState:UIControlStateNormal];
-    buttonedit.titleLabel.font = FONTN(15.0f);
-    [buttonedit setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [buttonedit setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [buttonedit addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    buttonedit.tag = indexpath.row+EnMyAddrListDefaultBtTag;
-    [view addSubview:buttonedit];
-    
-    UIButton *buttondelete = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttondelete.frame = CGRectMake(XYViewL(buttonedit)-70, XYViewTop(buttonedit), 70, 40);
-    [buttondelete setImage:LOADIMAGE(@"删除", @"png") forState:UIControlStateNormal];
-    [buttondelete setTitle:@"删除" forState:UIControlStateNormal];
-    buttondelete.titleLabel.font = FONTN(15.0f);
-    [buttondelete setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [buttondelete setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [buttondelete addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    buttondelete.tag = indexpath.row+EnMyAddrListDefaultBtTag;
-    [view addSubview:buttondelete];
-    
-    
-    
-    return view;
 }
 
 #pragma mark - viewcontroller delegate
@@ -148,6 +75,7 @@
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
     [self.navigationController setNavigationBarHidden:NO];
+    [self getrestaurantlist];
 }
 
 #pragma mark - IBAction
@@ -157,25 +85,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)clicksetdefault:(id)sender
+-(void)clickaddnewrestaurant:(id)sender
 {
-    
-}
-
--(void)clicksetedit:(id)sender
-{
-    
-}
-
--(void)clicksetdelete:(id)sender
-{
-    
-}
-
--(void)clickaddnew:(id)sender
-{
-    MyNewAddrViewController *addnew = [[MyNewAddrViewController alloc] init];
-    [self.navigationController pushViewController:addnew animated:YES];
+    RestaurantAuthViewController *auth = [[RestaurantAuthViewController alloc] init];
+    [self.navigationController pushViewController:auth animated:YES];
 }
 
 #pragma mark - tableview delegate
@@ -216,7 +129,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 40;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -226,13 +139,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.01;
+    return 10;
     
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    UIImageView *imageline = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    imageline.backgroundColor = COLORNOW(240, 240, 240);
+    return imageline;
 }
 
 
@@ -242,7 +157,7 @@
     static NSString *reuseIdetify = @"cell";
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdetify];
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -252,31 +167,39 @@
         [view removeFromSuperview];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
-    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
-    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 120) Dic:dictemp IndexPath:indexPath];
-    [cell.contentView addSubview:view];
-    
+    cell.backgroundColor = [UIColor whiteColor];
+    NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
+    UILabel *labeltitle = [[UILabel alloc] initWithFrame:CGRectMake(10,(XYViewHeight(cell.contentView)-20)/2, 200, 20)];
+    labeltitle.backgroundColor = [UIColor clearColor];
+    labeltitle.textColor = COLORNOW(52, 52, 52);
+    labeltitle.font = FONTN(15.0f);
+    labeltitle.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]];
+    [cell.contentView addSubview:labeltitle];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
+    RestaurantAuthViewController *auth = [[RestaurantAuthViewController alloc] init];
+    auth.FCrestaurantid = [dic objectForKey:@"id"];
+    [self.navigationController pushViewController:auth animated:YES];
     
 }
 
 #pragma mark - 接口
--(void)getaddrlist
+-(void)getrestaurantlist
 {
-    MangeAddressService *address = [MangeAddressService new];
-    [address sendAddrListRequest:app.userinfo.userid App:app ReqUrl:RQAddrList successBlock:^(NSDictionary *dicData) {
+    SettingService *setservice = [SettingService new];
+    [setservice sendGetRestaurangListRequest:app.userinfo.userid App:app ReqUrl:RQRestaurantList successBlock:^(NSDictionary *dicData) {
         arraydata = [dicData objectForKey:@"rows"];
         tableview.delegate = self;
         tableview.dataSource = self;
         [tableview reloadData];
     }];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

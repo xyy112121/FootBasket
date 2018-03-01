@@ -103,7 +103,8 @@
             [dictemp writeToFile:Cache_UserInfo atomically:NO];
             app.userinfo.userid = [dicData objectForKey:@"id"];
             app.userinfo.usertel = [dicData objectForKey:@"mobile"];
-            app.userinfo.username = [dicData objectForKey:@"mobile"];
+            app.userinfo.username = [dicData objectForKey:@"realName"];
+            app.userinfo.userheader = [dicData objectForKey:@"avatar"];
             app.userinfo.usertype = [NSString stringWithFormat:@"%@",[dicData objectForKey:@"userType"]];
             [self removeFromSuperview];
             if(_delegate1&&[_delegate1 respondsToSelector:@selector(DGLoginSuccess:)])

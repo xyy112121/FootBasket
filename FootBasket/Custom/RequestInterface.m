@@ -197,7 +197,7 @@
 			UIImage *image = [arrayimage objectAtIndex:i];//LOADIMAGE(@"testpic", @"jpg");
 			imageData = UIImageJPEGRepresentation(image, 0.5f);
 
-			[formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpg/png/jpeg"];
+			[formData appendPartWithFileData:imageData name:@"files" fileName:fileName mimeType:@"image/jpg/png/jpeg"];
 		}
 	} progress:^(NSProgress * _Nonnull uploadProgress) {
 		

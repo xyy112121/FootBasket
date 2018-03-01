@@ -1,25 +1,25 @@
 //
-//  ShoppingCarService.m
+//  SettingService.m
 //  FootBasket
 //
-//  Created by xyy on 2018/2/8.
+//  Created by xyy on 2018/3/1.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "ShoppingCarService.h"
+#import "SettingService.h"
 
-@implementation ShoppingCarService
+@implementation SettingService
 
--(void)sendShoppingCarRequest:(NSString * )userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+-(void)sendGetUserInfoRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:userid forKey:@"userId"];
+    [params setObject:userid forKey:@"objectID"];
+
     [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
         DLog(@"dic====%@",dic);
-        [PTLoadingHubView dismiss];
         if([[dic objectForKey:@"success"] isEqualToString:@"true"])
         {
             successBlock(dic);
@@ -28,24 +28,25 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
+        [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
         [PTLoadingHubView dismiss];
-        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+        [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
 
--(void)sendShoppingCarDeleteRequest:(NSString * )ids App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+-(void)sendUserInfoAvatarRequest:(NSString *)userid Avatar:(NSArray *)avatar App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:ids forKey:@"ids"];
+    [params setObject:userid forKey:@"objectID"];
+    
     [PTLoadingHubView show];
-    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+    [RequestInterface doGetJsonWithArraypic:avatar Parameter:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
         DLog(@"dic====%@",dic);
         if([[dic objectForKey:@"success"] isEqualToString:@"true"])
         {
-            [MBProgressHUD showSuccess:[dic objectForKey:@"resultInfo"] toView:app.window];
             successBlock(dic);
         }
         else
@@ -53,25 +54,27 @@
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
         [PTLoadingHubView dismiss];
+        
     } Failur:^(NSString *strmsg) {
         [PTLoadingHubView dismiss];
-        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+        [MBProgressHUD showError:@"上传图片失败,请检查网络" toView:app.window];
     }];
 }
 
--(void)sendShoppingCarSettlementRequest:(NSString * )products Userid:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+-(void)sendrestaurantpicRequest:(NSString *)userid Name:(NSString *)name Address:(NSString *)address RestaurantPic:(NSArray *)restaurantpic App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"userId"];
-    [params setObject:products forKey:@"products"];
+    [params setObject:name forKey:@"name"];
+    [params setObject:address forKey:@"address"];
+
     [PTLoadingHubView show];
-    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+    [RequestInterface doGetJsonWithArraypic:restaurantpic Parameter:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
         DLog(@"dic====%@",dic);
         if([[dic objectForKey:@"success"] isEqualToString:@"true"])
         {
-            
             successBlock(dic);
         }
         else
@@ -79,20 +82,18 @@
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
         [PTLoadingHubView dismiss];
+        
     } Failur:^(NSString *strmsg) {
         [PTLoadingHubView dismiss];
-        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+        [MBProgressHUD showError:@"餐馆上传图片失败,请检查网络" toView:app.window];
     }];
 }
 
--(void)sendCommitOrderRequest:(NSString * )products Userid:(NSString *)userid AddrId:(NSString *)addrid PayWay:(NSString *)payway DeliveryTime:(NSString *)deliverytime App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(ShoppingCarSuccessBlock)successBlock
+-(void)sendGetRestaurangListRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"userId"];
-    [params setObject:products forKey:@"products"];
-    [params setObject:addrid forKey:@"addressId"];
-    [params setObject:payway forKey:@"payChannel"];
-    [params setObject:deliverytime forKey:@"deliveryTime"];
+    
     [PTLoadingHubView show];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
@@ -100,7 +101,6 @@
         DLog(@"dic====%@",dic);
         if([[dic objectForKey:@"success"] isEqualToString:@"true"])
         {
-            
             successBlock(dic);
         }
         else
@@ -110,7 +110,32 @@
         [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
         [PTLoadingHubView dismiss];
-        [MBProgressHUD showError:@"获取商品分类别列表失败,请检查网络" toView:app.window];
+        [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
+    }];
+}
+
+-(void)sendGetRestaurangDetailRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:userid forKey:@"objectID"];
+    
+    [PTLoadingHubView show];
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+        [PTLoadingHubView dismiss];
+    } Failur:^(NSString *strmsg) {
+        [PTLoadingHubView dismiss];
+        [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
 

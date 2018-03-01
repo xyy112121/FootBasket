@@ -12,5 +12,6 @@
 {
     AppDelegate *app;
     UITableView *tableview;
+    UIButton *buttonheader;
 }
 @end

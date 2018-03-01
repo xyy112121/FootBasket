@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740037C62047A0DB0065E7DF /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037C52047A0DB0065E7DF /* SettingViewController.m */; };
+		740037C92047A7100065E7DF /* RestaurantInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037C82047A7100065E7DF /* RestaurantInfoViewController.m */; };
+		740037CC2047A91D0065E7DF /* RestaurantAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037CB2047A91D0065E7DF /* RestaurantAuthViewController.m */; };
+		740037D02047AFDA0065E7DF /* addpic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037CD2047AFDA0065E7DF /* addpic@3x.png */; };
+		740037D12047AFDA0065E7DF /* addpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037CE2047AFDA0065E7DF /* addpic.png */; };
+		740037D22047AFDA0065E7DF /* addpic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037CF2047AFDA0065E7DF /* addpic@2x.png */; };
+		740037D62047D2C90065E7DF /* SettingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037D52047D2C90065E7DF /* SettingService.m */; };
+		740037EF2047D7070065E7DF /* JPhotoMagenage.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037D92047D7070065E7DF /* JPhotoMagenage.m */; };
+		740037F02047D7070065E7DF /* PHFetchResult+PhotoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037DB2047D7070065E7DF /* PHFetchResult+PhotoObject.m */; };
+		740037F12047D7070065E7DF /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037DD2047D7070065E7DF /* PhotoCollectionViewCell.m */; };
+		740037F22047D7070065E7DF /* PhotoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037E02047D7070065E7DF /* PhotoFooter.m */; };
+		740037F32047D7070065E7DF /* PhotoGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037E22047D7070065E7DF /* PhotoGroupViewController.m */; };
+		740037F42047D7070065E7DF /* PhotoNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037E42047D7070065E7DF /* PhotoNavigationViewController.m */; };
+		740037F52047D7070065E7DF /* PhotoStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037E62047D7070065E7DF /* PhotoStore.m */; };
+		740037F62047D7070065E7DF /* PhotoStoreConfiguraion.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037E82047D7070065E7DF /* PhotoStoreConfiguraion.m */; };
+		740037F72047D7070065E7DF /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037EA2047D7070065E7DF /* PhotoTableViewCell.m */; };
+		740037F82047D7070065E7DF /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037EC2047D7070065E7DF /* PhotoViewController.m */; };
+		740037F92047D7070065E7DF /* 未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037ED2047D7070065E7DF /* 未选中.png */; };
+		740037FA2047D7070065E7DF /* 选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037EE2047D7070065E7DF /* 选中.png */; };
 		740F3D3F20280CE40050A6BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F3D3E20280CE40050A6BF /* AppDelegate.m */; };
 		740F3D4220280CE40050A6BF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F3D4120280CE40050A6BF /* ViewController.m */; };
 		740F3D4520280CE40050A6BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740F3D4320280CE40050A6BF /* Main.storyboard */; };
@@ -321,6 +340,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		740037C42047A0DB0065E7DF /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		740037C52047A0DB0065E7DF /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		740037C72047A7100065E7DF /* RestaurantInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestaurantInfoViewController.h; sourceTree = "<group>"; };
+		740037C82047A7100065E7DF /* RestaurantInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfoViewController.m; sourceTree = "<group>"; };
+		740037CA2047A91D0065E7DF /* RestaurantAuthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestaurantAuthViewController.h; sourceTree = "<group>"; };
+		740037CB2047A91D0065E7DF /* RestaurantAuthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestaurantAuthViewController.m; sourceTree = "<group>"; };
+		740037CD2047AFDA0065E7DF /* addpic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addpic@3x.png"; sourceTree = "<group>"; };
+		740037CE2047AFDA0065E7DF /* addpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addpic.png; sourceTree = "<group>"; };
+		740037CF2047AFDA0065E7DF /* addpic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addpic@2x.png"; sourceTree = "<group>"; };
+		740037D42047D2C90065E7DF /* SettingService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingService.h; sourceTree = "<group>"; };
+		740037D52047D2C90065E7DF /* SettingService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingService.m; sourceTree = "<group>"; };
+		740037D82047D7070065E7DF /* JPhotoMagenage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPhotoMagenage.h; sourceTree = "<group>"; };
+		740037D92047D7070065E7DF /* JPhotoMagenage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPhotoMagenage.m; sourceTree = "<group>"; };
+		740037DA2047D7070065E7DF /* PHFetchResult+PhotoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHFetchResult+PhotoObject.h"; sourceTree = "<group>"; };
+		740037DB2047D7070065E7DF /* PHFetchResult+PhotoObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHFetchResult+PhotoObject.m"; sourceTree = "<group>"; };
+		740037DC2047D7070065E7DF /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		740037DD2047D7070065E7DF /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		740037DE2047D7070065E7DF /* PhotoDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDefine.h; sourceTree = "<group>"; };
+		740037DF2047D7070065E7DF /* PhotoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoFooter.h; sourceTree = "<group>"; };
+		740037E02047D7070065E7DF /* PhotoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoFooter.m; sourceTree = "<group>"; };
+		740037E12047D7070065E7DF /* PhotoGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoGroupViewController.h; sourceTree = "<group>"; };
+		740037E22047D7070065E7DF /* PhotoGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGroupViewController.m; sourceTree = "<group>"; };
+		740037E32047D7070065E7DF /* PhotoNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoNavigationViewController.h; sourceTree = "<group>"; };
+		740037E42047D7070065E7DF /* PhotoNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNavigationViewController.m; sourceTree = "<group>"; };
+		740037E52047D7070065E7DF /* PhotoStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoStore.h; sourceTree = "<group>"; };
+		740037E62047D7070065E7DF /* PhotoStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoStore.m; sourceTree = "<group>"; };
+		740037E72047D7070065E7DF /* PhotoStoreConfiguraion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoStoreConfiguraion.h; sourceTree = "<group>"; };
+		740037E82047D7070065E7DF /* PhotoStoreConfiguraion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoStoreConfiguraion.m; sourceTree = "<group>"; };
+		740037E92047D7070065E7DF /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
+		740037EA2047D7070065E7DF /* PhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTableViewCell.m; sourceTree = "<group>"; };
+		740037EB2047D7070065E7DF /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		740037EC2047D7070065E7DF /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		740037ED2047D7070065E7DF /* 未选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选中.png"; sourceTree = "<group>"; };
+		740037EE2047D7070065E7DF /* 选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选中.png"; sourceTree = "<group>"; };
 		740F3D3A20280CE40050A6BF /* FootBasket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootBasket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		740F3D3D20280CE40050A6BF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		740F3D3E20280CE40050A6BF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -843,6 +896,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		740037C32047A0C80065E7DF /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				740037C42047A0DB0065E7DF /* SettingViewController.h */,
+				740037C52047A0DB0065E7DF /* SettingViewController.m */,
+				740037C72047A7100065E7DF /* RestaurantInfoViewController.h */,
+				740037C82047A7100065E7DF /* RestaurantInfoViewController.m */,
+				740037CA2047A91D0065E7DF /* RestaurantAuthViewController.h */,
+				740037CB2047A91D0065E7DF /* RestaurantAuthViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		740037D32047D2B40065E7DF /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				740037D42047D2C90065E7DF /* SettingService.h */,
+				740037D52047D2C90065E7DF /* SettingService.m */,
+			);
+			path = setting;
+			sourceTree = "<group>";
+		};
+		740037D72047D7070065E7DF /* 选择图片不裁剪 */ = {
+			isa = PBXGroup;
+			children = (
+				740037D82047D7070065E7DF /* JPhotoMagenage.h */,
+				740037D92047D7070065E7DF /* JPhotoMagenage.m */,
+				740037DA2047D7070065E7DF /* PHFetchResult+PhotoObject.h */,
+				740037DB2047D7070065E7DF /* PHFetchResult+PhotoObject.m */,
+				740037DC2047D7070065E7DF /* PhotoCollectionViewCell.h */,
+				740037DD2047D7070065E7DF /* PhotoCollectionViewCell.m */,
+				740037DE2047D7070065E7DF /* PhotoDefine.h */,
+				740037DF2047D7070065E7DF /* PhotoFooter.h */,
+				740037E02047D7070065E7DF /* PhotoFooter.m */,
+				740037E12047D7070065E7DF /* PhotoGroupViewController.h */,
+				740037E22047D7070065E7DF /* PhotoGroupViewController.m */,
+				740037E32047D7070065E7DF /* PhotoNavigationViewController.h */,
+				740037E42047D7070065E7DF /* PhotoNavigationViewController.m */,
+				740037E52047D7070065E7DF /* PhotoStore.h */,
+				740037E62047D7070065E7DF /* PhotoStore.m */,
+				740037E72047D7070065E7DF /* PhotoStoreConfiguraion.h */,
+				740037E82047D7070065E7DF /* PhotoStoreConfiguraion.m */,
+				740037E92047D7070065E7DF /* PhotoTableViewCell.h */,
+				740037EA2047D7070065E7DF /* PhotoTableViewCell.m */,
+				740037EB2047D7070065E7DF /* PhotoViewController.h */,
+				740037EC2047D7070065E7DF /* PhotoViewController.m */,
+				740037ED2047D7070065E7DF /* 未选中.png */,
+				740037EE2047D7070065E7DF /* 选中.png */,
+			);
+			path = "选择图片不裁剪";
+			sourceTree = "<group>";
+		};
 		740F3D3120280CE40050A6BF = {
 			isa = PBXGroup;
 			children = (
@@ -883,6 +988,9 @@
 		740F3D5320280E210050A6BF /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				740037CE2047AFDA0065E7DF /* addpic.png */,
+				740037CF2047AFDA0065E7DF /* addpic@2x.png */,
+				740037CD2047AFDA0065E7DF /* addpic@3x.png */,
 				74AAAAE7203F0225006AD3EB /* 添加icon.png */,
 				74AAAAE6203F0225006AD3EB /* 添加icon@2x.png */,
 				74AAAAE8203F0225006AD3EB /* 添加icon@3x.png */,
@@ -1016,6 +1124,7 @@
 		740F3E2D2028454C0050A6BF /* page */ = {
 			isa = PBXGroup;
 			children = (
+				740037C32047A0C80065E7DF /* Setting */,
 				74DA12782041A65100C1C5DA /* Delivery */,
 				74DF55C220414AC9005276CC /* Order */,
 				743B523F203FCAA10004E673 /* Search */,
@@ -1101,6 +1210,7 @@
 		740F3E3F202847F90050A6BF /* CommLib */ = {
 			isa = PBXGroup;
 			children = (
+				740037D72047D7070065E7DF /* 选择图片不裁剪 */,
 				74BC2FFE20469C1400C6B9DD /* NetworkLoading */,
 				74DF55BE20413FFC005276CC /* 时间选择器 */,
 				743B522E203FBD330004E673 /* AddressPickerView */,
@@ -1715,6 +1825,7 @@
 		743DC44920295574004E4DB0 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				740037D32047D2B40065E7DF /* setting */,
 				74BC2FFA204692FE00C6B9DD /* search */,
 				74DA127C2041ACC700C1C5DA /* delivery */,
 				74DF55C620414BA3005276CC /* order */,
@@ -1918,6 +2029,7 @@
 				740F3E0720280E210050A6BF /* 收货地址icon@3x.png in Resources */,
 				740F3DCC20280E210050A6BF /* Shape38x38.png in Resources */,
 				740F3FC1202847F90050A6BF /* dropdown_loading1_02@2x.png in Resources */,
+				740037D12047AFDA0065E7DF /* addpic.png in Resources */,
 				740F3E1320280E210050A6BF /* 电话@3x.png in Resources */,
 				740F3E2B20280E210050A6BF /* 首页选择后@3x.png in Resources */,
 				740F3DE120280E210050A6BF /* 关于我们ICON.png in Resources */,
@@ -2000,6 +2112,7 @@
 				740F3DED20280E210050A6BF /* 图层20.png in Resources */,
 				740F3D4720280CE40050A6BF /* Assets.xcassets in Resources */,
 				740F3FBD202847F90050A6BF /* dropdown_loading1_01.png in Resources */,
+				740037D22047AFDA0065E7DF /* addpic@2x.png in Resources */,
 				740F3DEC20280E210050A6BF /* 加入购物车icon@3x.png in Resources */,
 				740F3DD320280E210050A6BF /* usercloseeye@2x.png in Resources */,
 				740F3DD620280E210050A6BF /* 个人头像@2x.png in Resources */,
@@ -2038,15 +2151,18 @@
 				740F3DF420280E210050A6BF /* 已收货@2x.png in Resources */,
 				740F402220284A710050A6BF /* hpicon@3x.png in Resources */,
 				740F3FC0202847F90050A6BF /* dropdown_loading1_02.png in Resources */,
+				740037FA2047D7070065E7DF /* 选中.png in Resources */,
 				740F3DC320280E210050A6BF /* arrow_left.png in Resources */,
 				740F3E0420280E210050A6BF /* 我的选择后@3x.png in Resources */,
 				740F3FE6202847F90050A6BF /* pop-osx-Info.plist in Resources */,
 				743DC45520299943004E4DB0 /* 加入购物车small@2x.png in Resources */,
 				740F3E2220280E210050A6BF /* 选区@3x.png in Resources */,
+				740037D02047AFDA0065E7DF /* addpic@3x.png in Resources */,
 				740F402620284A710050A6BF /* 消息@2x.png in Resources */,
 				740F3DE820280E210050A6BF /* 删除@2x.png in Resources */,
 				740F3E1B20280E210050A6BF /* 购物车@2x.png in Resources */,
 				740F3DCD20280E210050A6BF /* Shape38x38@2x.png in Resources */,
+				740037F92047D7070065E7DF /* 未选中.png in Resources */,
 				740F3E2720280E210050A6BF /* 首页选择前@2x.png in Resources */,
 				740F3DE720280E210050A6BF /* 删除.png in Resources */,
 				740F3DCF20280E210050A6BF /* top-bg.png in Resources */,
@@ -2084,6 +2200,7 @@
 				740F3FA8202847F90050A6BF /* JQIndicatorView.m in Sources */,
 				740F3FFF202847F90050A6BF /* SDImageCacheConfig.m in Sources */,
 				740F4014202847F90050A6BF /* MASLayoutConstraint.m in Sources */,
+				740037F22047D7070065E7DF /* PhotoFooter.m in Sources */,
 				740F4017202847F90050A6BF /* NSArray+MASAdditions.m in Sources */,
 				740F4005202847F90050A6BF /* SDWebImagePrefetcher.m in Sources */,
 				74BC2FF920465C9E00C6B9DD /* AddShoppingCarView.m in Sources */,
@@ -2117,12 +2234,14 @@
 				740F4018202847F90050A6BF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				740F400D202847F90050A6BF /* VBTextView.m in Sources */,
 				740F3FDB202847F90050A6BF /* MKPeopleHeadTableViewCell.m in Sources */,
+				740037F62047D7070065E7DF /* PhotoStoreConfiguraion.m in Sources */,
 				740F401A202847F90050A6BF /* ViewController+MASAdditions.m in Sources */,
 				743DC44020294854004E4DB0 /* RequestInterface.m in Sources */,
 				743B5239203FBD340004E673 /* CZHAddressPickerView.m in Sources */,
 				740F4002202847F90050A6BF /* SDWebImageDownloader.m in Sources */,
 				740F3FAE202847F90050A6BF /* MJRefreshAutoFooter.m in Sources */,
 				740F401B202847F90050A6BF /* NullSafe.m in Sources */,
+				740037F12047D7070065E7DF /* PhotoCollectionViewCell.m in Sources */,
 				740F3FCA202847F90050A6BF /* MJRefreshConst.m in Sources */,
 				74B5BA06204164DF00B43BC2 /* OrderDetailViewController.m in Sources */,
 				740F3FE8202847F90050A6BF /* POPAnimatableProperty.mm in Sources */,
@@ -2137,16 +2256,20 @@
 				740F4015202847F90050A6BF /* MASViewAttribute.m in Sources */,
 				740F4009202847F90050A6BF /* UIImageView+HighlightedWebCache.m in Sources */,
 				740F400E202847F90050A6BF /* CommonHeader.m in Sources */,
+				740037C62047A0DB0065E7DF /* SettingViewController.m in Sources */,
+				740037EF2047D7070065E7DF /* JPhotoMagenage.m in Sources */,
 				740F3FF4202847F90050A6BF /* POPLayerExtras.mm in Sources */,
 				740F3FB2202847F90050A6BF /* MJRefreshHeader.m in Sources */,
 				743DC44820294EA6004E4DB0 /* UserInfo.m in Sources */,
 				74E8187B203E76B90016B4E1 /* DoneOrderViewController.m in Sources */,
 				740F3FF7202847F90050A6BF /* POPSpringAnimation.mm in Sources */,
+				740037F52047D7070065E7DF /* PhotoStore.m in Sources */,
 				740F3FDA202847F90050A6BF /* MKPeopleCellModel.m in Sources */,
 				740F3F9C202847F90050A6BF /* UIRefreshControl+AFNetworking.m in Sources */,
 				740F3D3F20280CE40050A6BF /* AppDelegate.m in Sources */,
 				740F400C202847F90050A6BF /* UIView+WebCacheOperation.m in Sources */,
 				740F400B202847F90050A6BF /* UIView+WebCache.m in Sources */,
+				740037C92047A7100065E7DF /* RestaurantInfoViewController.m in Sources */,
 				740F3F95202847F90050A6BF /* AFAutoPurgingImageCache.m in Sources */,
 				740F3FF9202847F90050A6BF /* TransformationMatrix.cpp in Sources */,
 				740F3F9A202847F90050A6BF /* UIImageView+AFNetworking.m in Sources */,
@@ -2162,6 +2285,7 @@
 				740F4012202847F90050A6BF /* MASConstraint.m in Sources */,
 				740F3FEC202847F90050A6BF /* POPAnimationRuntime.mm in Sources */,
 				740F3FFD202847F90050A6BF /* NSImage+WebCache.m in Sources */,
+				740037F02047D7070065E7DF /* PHFetchResult+PhotoObject.m in Sources */,
 				740F3FE3202847F90050A6BF /* Algorithm.m in Sources */,
 				740F3FD2202847F90050A6BF /* RATreeNodeInfo+Private.m in Sources */,
 				740F3E3A2028472F0050A6BF /* CategoryViewController.m in Sources */,
@@ -2186,13 +2310,16 @@
 				740F3FAC202847F90050A6BF /* MBProgressHUD+Add.m in Sources */,
 				740F3FC8202847F90050A6BF /* MJDIYHeader.m in Sources */,
 				740F3FEE202847F90050A6BF /* POPAnimator.mm in Sources */,
+				740037F72047D7070065E7DF /* PhotoTableViewCell.m in Sources */,
 				74E8187E203EA7210016B4E1 /* PayButtonView.m in Sources */,
 				74AAAAEE203F03D8006AD3EB /* MyNewAddrViewController.m in Sources */,
 				740F3FAA202847F90050A6BF /* JQMusic2Animation.m in Sources */,
 				743B5242203FEB3A0004E673 /* SearchViewController.m in Sources */,
 				740F402D202856B20050A6BF /* RecommendGoodsCell.m in Sources */,
+				740037F32047D7070065E7DF /* PhotoGroupViewController.m in Sources */,
 				740F402A20284C560050A6BF /* HpNavigationView.m in Sources */,
 				74E3A01C202D5325003A06A7 /* GoodsDetailService.m in Sources */,
+				740037CC2047A91D0065E7DF /* RestaurantAuthViewController.m in Sources */,
 				740F400A202847F90050A6BF /* UIImageView+WebCache.m in Sources */,
 				740F3F98202847F90050A6BF /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				743DC450202955E9004E4DB0 /* LoginService.m in Sources */,
@@ -2202,6 +2329,7 @@
 				740F3FDF202847F90050A6BF /* MKSelectArray.m in Sources */,
 				74DA127F2041B67F00C1C5DA /* DeliveryService.m in Sources */,
 				740F3FC7202847F90050A6BF /* MJDIYBackFooter.m in Sources */,
+				740037D62047D2C90065E7DF /* SettingService.m in Sources */,
 				740F3FB5202847F90050A6BF /* MJRefreshAutoNormalFooter.m in Sources */,
 				740F3E372028471C0050A6BF /* MyViewController.m in Sources */,
 				740F3FD5202847F90050A6BF /* RATreeView+Private.m in Sources */,
@@ -2211,6 +2339,7 @@
 				740F4004202847F90050A6BF /* SDWebImageManager.m in Sources */,
 				740F3FF6202847F90050A6BF /* POPPropertyAnimation.mm in Sources */,
 				740F3FA9202847F90050A6BF /* JQMusic1Animation.m in Sources */,
+				740037F82047D7070065E7DF /* PhotoViewController.m in Sources */,
 				74DA127B2041A65E00C1C5DA /* DeliveryViewController.m in Sources */,
 				740F3FB7202847F90050A6BF /* MJRefreshBackGifFooter.m in Sources */,
 				740F3FAD202847F90050A6BF /* MBProgressHUD.m in Sources */,
@@ -2222,6 +2351,7 @@
 				74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */,
 				740F3FEF202847F90050A6BF /* POPBasicAnimation.mm in Sources */,
 				74DF55BD20411BB4005276CC /* MangeAddressService.m in Sources */,
+				740037F42047D7070065E7DF /* PhotoNavigationViewController.m in Sources */,
 				740F4016202847F90050A6BF /* MASViewConstraint.m in Sources */,
 				74E3A012202D5174003A06A7 /* FocusNewsView.m in Sources */,
 				740F4007202847F90050A6BF /* UIImage+GIF.m in Sources */,

@@ -25,7 +25,7 @@
         }
         else
         {
-           [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
+           [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
     } Failur:^(NSString *strmsg) {
 

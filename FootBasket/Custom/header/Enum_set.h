@@ -55,6 +55,7 @@ typedef enum
 
 #define EnSearchProductListTag 6900
 
+#define EnUserInfoAvatarTag 7000
 #endif /* Enum_set_h */
 
 

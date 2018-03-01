@@ -33,6 +33,11 @@
 
 #define RQSearchProductList @"/Basket/resource/ProductBasicNavigate_searchPageOL_OL.action"// 搜索产品 productName page rows
 
+#define RQUploadUserAvatar @"/Basket/control/UserForm_uploadAvatar_OL.action" // 上传objectID 参数 file
 
+#define RQUploadRestaurantInfo @"/Basket/control/MerchantForm_save_OL.action" //餐馆信息userId name address files
 
+#define RQRestaurantList @"/Basket/control/MerchantNavigate_searchPageOL_OL.action" //餐饮列表 userId
+
+#define RQRestaurantDetail @"/Basket/control/MerchantNavigate_detail_OL.action" //餐馆详情 objectID
 

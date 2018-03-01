@@ -186,7 +186,8 @@
     NSDictionary* dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
-    if(app.userinfo.userid)
+    NSFileManager *filemanger = [NSFileManager defaultManager];
+    if((app.userinfo.userid)||[filemanger fileExistsAtPath:Cache_UserInfo])
     {
         [self gethpinterface];
     }

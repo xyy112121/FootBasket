@@ -26,7 +26,7 @@
         }
         else
         {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
         [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
@@ -52,7 +52,7 @@
         }
         else
         {
-            [MBProgressHUD showError:[dic objectForKey:@"msg"] toView:app.window];
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
         [PTLoadingHubView dismiss];
     } Failur:^(NSString *strmsg) {
