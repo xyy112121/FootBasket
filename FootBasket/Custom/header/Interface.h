@@ -27,15 +27,15 @@
 #define RQMyOrderDetail @"/Basket/business/OrderNavigate_detail_OL.action" // 订单详情 objectID 
 #define RQDoneReceiveOrder @"/Basket/business/DeliveryNavigate_confirmReceipt_OL.action"//确认收货 orderId
 
-#define RQDeliveryList @"/Basket/business/DeliveryNavigate_searchPageOL_OL.action" // 送货单 userId
+#define RQDeliveryList @"/Basket/business/DeliveryNavigate_searchPageOL_OL.action" // 送货单 userId deliveryState  2未送货  3已送货
 
 #define RQPayDoneCommit @"/Basket/business/OrderNavigate_confirmPayed_OL.action"//确认付款 orderId deliveryUserId
 
 #define RQSearchProductList @"/Basket/resource/ProductBasicNavigate_searchPageOL_OL.action"// 搜索产品 productName page rows
 
-#define RQUploadUserAvatar @"/Basket/control/UserForm_uploadAvatar_OL.action" // 上传objectID 参数 file
+#define RQUploadUserAvatar @"/Basket/control/UserForm_uploadAvatar_OL.action" // 上传头像objectID 参数 file
 
-#define RQUploadRestaurantInfo @"/Basket/control/MerchantForm_save_OL.action" //餐馆信息userId name address files
+#define RQUploadRestaurantInfo @"/Basket/control/MerchantForm_save_OL.action" //添加新餐馆信息userId name address files
 
 #define RQRestaurantList @"/Basket/control/MerchantNavigate_searchPageOL_OL.action" //餐饮列表 userId
 

@@ -56,9 +56,13 @@
 -(UIView *)RecommendGoods:(CGRect)frame RecommendData:(NSArray *)arrayrecommend
 {
     UIView *view = [[UIView alloc] initWithFrame:frame];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [UIColor clearColor];
     
-    UIImageView *imageviewline = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 5, 20)];
+    UIImageView *imagebg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, frame.size.height-10)];
+    imagebg.backgroundColor = [UIColor whiteColor];
+    [view addSubview:imagebg];
+    
+    UIImageView *imageviewline = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 5, 20)];
     imageviewline.backgroundColor = COLORNOW(32, 188, 167);
     [view addSubview:imageviewline];
     
@@ -66,7 +70,7 @@
     label.text = @"精品推荐";
     [view addSubview:label];
     
-    UIScrollView *scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 40, SCREEN_WIDTH-10, XYViewHeight(view)-60)];
+    UIScrollView *scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 50, SCREEN_WIDTH-10, XYViewHeight(view)-60)];
     scrollview.backgroundColor = [UIColor clearColor];
     scrollview.showsHorizontalScrollIndicator = NO;
     scrollview.showsVerticalScrollIndicator = NO;
@@ -337,7 +341,7 @@
         
         [tableview.mj_header endRefreshing];
         NSArray *recommendarraydata = [dicData objectForKey:@"rows"];
-        UIView *viewrecommend = [self RecommendGoods:CGRectMake(0, 0, SCREEN_WIDTH, 160) RecommendData:recommendarraydata];
+        UIView *viewrecommend = [self RecommendGoods:CGRectMake(0, 0, SCREEN_WIDTH, 170) RecommendData:recommendarraydata];
         [tableview setTableHeaderView:viewrecommend];
         DLog(@"dicdata====%@",dicData);
     }];

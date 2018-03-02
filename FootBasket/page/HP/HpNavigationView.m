@@ -48,7 +48,7 @@
     
     UIButton *buttonright = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonright.frame = CGRectMake(SCREEN_WIDTH-50, 2, 40, 40);
-    [buttonright setImage:LOADIMAGE(@"消息", @"png") forState:UIControlStateNormal];
+    [buttonright setImage:LOADIMAGE(@"活动", @"png") forState:UIControlStateNormal];
     [self addSubview:buttonright];
 }
 
