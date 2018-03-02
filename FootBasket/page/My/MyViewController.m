@@ -80,7 +80,7 @@
     buttonheader.layer.borderWidth = 2.0f;
     buttonheader.imageView.contentMode = UIViewContentModeScaleAspectFill;
     buttonheader.imageView.clipsToBounds = YES;
-    [buttonheader setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPicHeader,app.userinfo.userheader]] placeholderImage:LOADIMAGE(@"个人头像", @"png")];
+    [buttonheader setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",URLPicHeader,app.userinfo.userheader]] placeholderImage:LOADIMAGE(@"个人头像", @"png")];
     buttonheader.center = CGPointMake(SCREEN_WIDTH/2, 80);
     [viewheader addSubview:buttonheader];
     
@@ -142,6 +142,22 @@
         labelmiddle.textAlignment = NSTextAlignmentCenter;
         labelmiddle.textColor = COLORNOW(51, 51, 51);
         [viewheader addSubview:labelmiddle];
+        
+        //我的优惠
+        UIButton *imagecoupon = [UIButton buttonWithType:UIButtonTypeCustom];
+        imagecoupon.frame = CGRectMake(30+XYViewR(imagereceived), XYViewTop(imagereceived), nowwidth, 50);
+        imagecoupon.backgroundColor = [UIColor clearColor];
+        [imagecoupon setImage:LOADIMAGE(@"优惠券", @"png") forState:UIControlStateNormal];
+        [imagecoupon addTarget:self action:@selector(clickmycoupon:) forControlEvents:UIControlEventTouchUpInside];
+        [viewheader addSubview:imagecoupon];
+        
+        UILabel *labelcoupon = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagecoupon), XYViewBottom(imagecoupon)-5, XYViewWidth(imagecoupon), 20)];
+        labelcoupon.text = @"我的钱包";
+        labelcoupon.backgroundColor = [UIColor clearColor];
+        labelcoupon.font = FONTN(15.0f);
+        labelcoupon.textAlignment = NSTextAlignmentCenter;
+        labelcoupon.textColor = COLORNOW(51, 51, 51);
+        [viewheader addSubview:labelcoupon];
     }
     //送货单
     else if([app.userinfo.usertype isEqualToString:@"1"])
@@ -195,6 +211,13 @@
     [self.navigationController pushViewController:delivery animated:YES];
 }
 
+-(void)clickmycoupon:(id)sender
+{
+    MyCouponViewController *mycoupon = [[MyCouponViewController alloc] init];
+    mycoupon.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:mycoupon animated:YES];
+}
+
 
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
@@ -214,7 +237,6 @@
     NSFileManager *filemanger = [NSFileManager defaultManager];
     if(![filemanger fileExistsAtPath:Cache_UserInfo])
     {
-        
         [self.tabBarController setSelectedIndex:0];
     }
 }

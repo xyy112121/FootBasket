@@ -51,7 +51,8 @@
     [self.view addSubview:tableview];
     [self setExtraCellLineHidden:tableview];
     
-    [self getuserinfo];
+    if(![app.userinfo.usertype isEqualToString:@"1"])
+        [self getuserinfo];
     
     UIButton *buttonlogout = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonlogout.frame = CGRectMake(0, SCREEN_HEIGHT-StatusBarAndNavigationHeight-50-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);

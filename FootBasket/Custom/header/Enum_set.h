@@ -28,6 +28,12 @@ typedef enum
     EnSelected   //已选中
 }EnSelect;
 
+typedef enum
+{
+    EnNormalSelect,   //普通 用户
+    EnDeliverySelected   //送货员
+}EnUserTypeLogin;
+
 #define EnCategoryTopBtTag     5000 //分类buttontag
 #define EnHpDiscountImageViewTag   5100//首页特优惠imagetag
 #define EnHpDiscountShopCarBtTag   5300//首页特优惠购物车按钮

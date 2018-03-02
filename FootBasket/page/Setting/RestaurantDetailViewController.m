@@ -1,18 +1,18 @@
 //
-//  RestaurantAuthViewController.m
+//  RestaurantDetailViewController.m
 //  FootBasket
 //
-//  Created by xyy on 2018/3/1.
+//  Created by xyy on 2018/3/2.
 //  Copyright © 2018年 谢毅. All rights reserved.
 //
 
-#import "RestaurantAuthViewController.h"
+#import "RestaurantDetailViewController.h"
 
-@interface RestaurantAuthViewController ()
+@interface RestaurantDetailViewController ()
 
 @end
 
-@implementation RestaurantAuthViewController
+@implementation RestaurantDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,15 +56,15 @@
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableview.backgroundColor = [UIColor clearColor];
-    tableview.delegate = self;
-    tableview.dataSource = self;
     [self.view addSubview:tableview];
     [self setExtraCellLineHidden:tableview];
-   
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    [self getrestaurantdetail];
 }
 
 #pragma mark - viewcontroller delegate
@@ -245,7 +245,7 @@
         
         return view;
     }
-
+    
     return nil;
 }
 
@@ -299,19 +299,35 @@
                 labeltitle.text = @"餐馆地址";
                 break;
         }
-
+        
     }
     else if(indexPath.section == 1)
     {
         UIButton *buttonpositive = [UIButton buttonWithType:UIButtonTypeCustom];
         buttonpositive.frame = CGRectMake((SCREEN_WIDTH-193)/2, 20, 193, 120);
         [buttonpositive setBackgroundImage:LOADIMAGE(@"addpic", @"png") forState:UIControlStateNormal];
+        if(imagepositive)
+        {
+           [buttonpositive setBackgroundImage:imagepositive forState:UIControlStateNormal];
+        }
+        else if([FCpositive length]>0)
+        {
+            [buttonpositive setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",URLPicHeader,FCpositive]] placeholderImage:LOADIMAGE(@"addpic", @"png")];
+        }
         [buttonpositive addTarget:self action:@selector(addcardpositive:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:buttonpositive];
         
         UIButton *buttonopposite = [UIButton buttonWithType:UIButtonTypeCustom];
         buttonopposite.frame = CGRectMake((SCREEN_WIDTH-193)/2, XYViewBottom(buttonpositive)+20, 193, 120);
         [buttonopposite setBackgroundImage:LOADIMAGE(@"addpic", @"png") forState:UIControlStateNormal];
+        if(imageopposite)
+        {
+            [buttonopposite setBackgroundImage:imageopposite forState:UIControlStateNormal];
+        }
+        else if([FCopposite length]>0)
+        {
+            [buttonopposite setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",URLPicHeader,FCopposite]] placeholderImage:LOADIMAGE(@"addpic", @"png")];
+        }
         [buttonopposite addTarget:self action:@selector(addcardopposite:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:buttonopposite];
     }
@@ -320,6 +336,14 @@
         UIButton *buttonlicense = [UIButton buttonWithType:UIButtonTypeCustom];
         buttonlicense.frame = CGRectMake((SCREEN_WIDTH-193)/2, 20, 193, 120);
         [buttonlicense setBackgroundImage:LOADIMAGE(@"addpic", @"png") forState:UIControlStateNormal];
+        if(imagelicense)
+        {
+            [buttonlicense setBackgroundImage:imagelicense forState:UIControlStateNormal];
+        }
+        else if([FClicense length]>0)
+        {
+            [buttonlicense setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",URLPicHeader,FClicense]] placeholderImage:LOADIMAGE(@"addpic", @"png")];
+        }
         [buttonlicense addTarget:self action:@selector(addlicense:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:buttonlicense];
     }
@@ -353,7 +377,22 @@
     }];
 }
 
-
+#pragma mark - 接口
+-(void)getrestaurantdetail
+{
+    SettingService *setservice = [SettingService new];
+    [setservice sendGetRestaurangDetailRequest:_FCrestaurantid App:app ReqUrl:RQRestaurantDetail successBlock:^(NSDictionary *dicData) {
+        dicresponse = [dicData objectForKey:@"merchant"];
+        FCname = [dicresponse objectForKey:@"name"];
+        FCaddr = [dicresponse objectForKey:@"address"];
+        FCpositive = [dicresponse objectForKey:@"cardPositive"];
+        FCopposite = [dicresponse objectForKey:@"cardReverse"];
+        FClicense = [dicresponse objectForKey:@"license"];
+        tableview.delegate = self;
+        tableview.dataSource = self;
+        [tableview reloadData];
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

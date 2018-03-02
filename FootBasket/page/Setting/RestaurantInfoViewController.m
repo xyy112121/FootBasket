@@ -182,10 +182,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
-    RestaurantAuthViewController *auth = [[RestaurantAuthViewController alloc] init];
+    RestaurantDetailViewController *auth = [[RestaurantDetailViewController alloc] init];
     auth.FCrestaurantid = [dic objectForKey:@"id"];
     [self.navigationController pushViewController:auth animated:YES];
-    
 }
 
 #pragma mark - 接口

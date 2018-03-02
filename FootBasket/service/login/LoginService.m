@@ -45,9 +45,7 @@
         DLog(@"dic====%@",dic);
         if([[dic objectForKey:@"success"] isEqualToString:@"true"])
         {
-            NSDictionary *dictemp = [dic objectForKey:@"user"];
-            
-            successBlock(dictemp);
+            successBlock(dic);
         }
         else
         {

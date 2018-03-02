@@ -322,6 +322,8 @@
 		74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7833020405B2E00FE8091 /* MyOrderViewController.m */; };
 		74DA127B2041A65E00C1C5DA /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */; };
 		74DA127F2041B67F00C1C5DA /* DeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127E2041B67F00C1C5DA /* DeliveryService.m */; };
+		74DE88F42048EFC5007F4923 /* RestaurantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DE88F32048EFC5007F4923 /* RestaurantDetailViewController.m */; };
+		74DE88F720490077007F4923 /* MyCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DE88F620490077007F4923 /* MyCouponViewController.m */; };
 		74DF55BD20411BB4005276CC /* MangeAddressService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DF55BC20411BB4005276CC /* MangeAddressService.m */; };
 		74DF55C120413FFC005276CC /* DateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DF55C020413FFC005276CC /* DateTimePickerView.m */; };
 		74DF55C520414ADF005276CC /* UserOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DF55C420414ADF005276CC /* UserOrderViewController.m */; };
@@ -857,6 +859,10 @@
 		74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryViewController.m; sourceTree = "<group>"; };
 		74DA127D2041B67F00C1C5DA /* DeliveryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryService.h; sourceTree = "<group>"; };
 		74DA127E2041B67F00C1C5DA /* DeliveryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryService.m; sourceTree = "<group>"; };
+		74DE88F22048EFC5007F4923 /* RestaurantDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestaurantDetailViewController.h; sourceTree = "<group>"; };
+		74DE88F32048EFC5007F4923 /* RestaurantDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailViewController.m; sourceTree = "<group>"; };
+		74DE88F520490077007F4923 /* MyCouponViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCouponViewController.h; sourceTree = "<group>"; };
+		74DE88F620490077007F4923 /* MyCouponViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCouponViewController.m; sourceTree = "<group>"; };
 		74DF55BB20411BB4005276CC /* MangeAddressService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangeAddressService.h; sourceTree = "<group>"; };
 		74DF55BC20411BB4005276CC /* MangeAddressService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangeAddressService.m; sourceTree = "<group>"; };
 		74DF55BF20413FFC005276CC /* DateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimePickerView.h; sourceTree = "<group>"; };
@@ -905,6 +911,8 @@
 				740037C82047A7100065E7DF /* RestaurantInfoViewController.m */,
 				740037CA2047A91D0065E7DF /* RestaurantAuthViewController.h */,
 				740037CB2047A91D0065E7DF /* RestaurantAuthViewController.m */,
+				74DE88F22048EFC5007F4923 /* RestaurantDetailViewController.h */,
+				74DE88F32048EFC5007F4923 /* RestaurantDetailViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1162,6 +1170,8 @@
 				74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */,
 				74D7832F20405B2E00FE8091 /* MyOrderViewController.h */,
 				74D7833020405B2E00FE8091 /* MyOrderViewController.m */,
+				74DE88F520490077007F4923 /* MyCouponViewController.h */,
+				74DE88F620490077007F4923 /* MyCouponViewController.m */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -2268,6 +2278,7 @@
 				740F3F9C202847F90050A6BF /* UIRefreshControl+AFNetworking.m in Sources */,
 				740F3D3F20280CE40050A6BF /* AppDelegate.m in Sources */,
 				740F400C202847F90050A6BF /* UIView+WebCacheOperation.m in Sources */,
+				74DE88F42048EFC5007F4923 /* RestaurantDetailViewController.m in Sources */,
 				740F400B202847F90050A6BF /* UIView+WebCache.m in Sources */,
 				740037C92047A7100065E7DF /* RestaurantInfoViewController.m in Sources */,
 				740F3F95202847F90050A6BF /* AFAutoPurgingImageCache.m in Sources */,
@@ -2282,6 +2293,7 @@
 				740F400F202847F90050A6BF /* AddCustomView.m in Sources */,
 				740F3FD6202847F90050A6BF /* RATreeView+TableViewDataSource.m in Sources */,
 				740F3FC4202847F90050A6BF /* MJChiBaoZiFooter2.m in Sources */,
+				74DE88F720490077007F4923 /* MyCouponViewController.m in Sources */,
 				740F4012202847F90050A6BF /* MASConstraint.m in Sources */,
 				740F3FEC202847F90050A6BF /* POPAnimationRuntime.mm in Sources */,
 				740F3FFD202847F90050A6BF /* NSImage+WebCache.m in Sources */,

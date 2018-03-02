@@ -41,3 +41,5 @@
 
 #define RQRestaurantDetail @"/Basket/control/MerchantNavigate_detail_OL.action" //餐馆详情 objectID
 
+#define RQMyCouponList @"/Basket/business/OrderNavigate_searchPageOL_OL.action"//q我的优惠列表userId  isCoupon
+

@@ -17,6 +17,7 @@
     {
         self.backgroundColor = [UIColor whiteColor];
         app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        usertypelogin = EnNormalSelect;
         [self initView];
     }
     return self;
@@ -67,6 +68,22 @@
     buttonlogin.clipsToBounds = YES;
     [buttonlogin addTarget:self action:@selector(clicklogin:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:buttonlogin];
+    
+    
+    buttonchange = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonchange.frame = CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-IPhone_SafeBottomMargin-60, 100, 35);
+    [buttonchange setTitle:@"切换商家登录" forState:UIControlStateNormal];
+    [buttonchange setTitleColor:COLORNOW(152, 152, 152) forState:UIControlStateNormal];
+    buttonchange.titleLabel.font = FONTN(14.0f);
+    [buttonchange addTarget:self action:@selector(clickchangeuser:) forControlEvents:UIControlEventTouchUpInside];
+    buttonchange.backgroundColor = [UIColor whiteColor];
+    [self addSubview:buttonchange];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self addGestureRecognizer:tapGestureRecognizer];
+    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -99,13 +116,14 @@
     {
         LoginService *loginservice = [LoginService new];
         [loginservice sendloginrequest:textfieldtel.text Code:textfieldcode.text App:app ReqUrl:RQLogin successBlock:^(NSDictionary *dicData) {
+            DLog(@"dicData====%@",dicData);
             NSDictionary *dictemp = [dicData objectForKey:@"user"];
             [dictemp writeToFile:Cache_UserInfo atomically:NO];
-            app.userinfo.userid = [dicData objectForKey:@"id"];
-            app.userinfo.usertel = [dicData objectForKey:@"mobile"];
-            app.userinfo.username = [dicData objectForKey:@"realName"];
-            app.userinfo.userheader = [dicData objectForKey:@"avatar"];
-            app.userinfo.usertype = [NSString stringWithFormat:@"%@",[dicData objectForKey:@"userType"]];
+            app.userinfo.userid = [dictemp objectForKey:@"id"];
+            app.userinfo.usertel = [dictemp objectForKey:@"mobile"];
+            app.userinfo.username = [dictemp objectForKey:@"realName"];
+            app.userinfo.userheader = [dictemp objectForKey:@"avatar"];
+            app.userinfo.usertype = [NSString stringWithFormat:@"%@",[dictemp objectForKey:@"userType"]];
             [self removeFromSuperview];
             if(_delegate1&&[_delegate1 respondsToSelector:@selector(DGLoginSuccess:)])
             {
@@ -113,6 +131,38 @@
             }
         }];
     }
+}
+
+-(void)clickchangeuser:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if(usertypelogin == EnNormalSelect)
+    {
+        usertypelogin = EnDeliverySelected;
+        [button setTitle:@"切换用户登录" forState:UIControlStateNormal];
+        buttoncode.hidden = YES;
+        textfieldcode.placeholder = @"输入密码";
+        textfieldcode.secureTextEntry = YES;
+        textfieldcode.text = @"";
+        textfieldtel.text = @"";
+    }
+    else if(usertypelogin == EnDeliverySelected)
+    {
+        usertypelogin = EnNormalSelect;
+        [button setTitle:@"切换送货员登录" forState:UIControlStateNormal];
+        buttoncode.hidden = NO;
+        textfieldcode.placeholder = @"输入验证码";
+        textfieldcode.secureTextEntry = NO;
+        textfieldcode.text = @"";
+        textfieldtel.text = @"";
+    }
+}
+
+#pragma mark - IBAction
+-(void)keyboardHide:(id)sender
+{
+    [textfieldtel resignFirstResponder];
+    [textfieldcode resignFirstResponder];
 }
 
 @end

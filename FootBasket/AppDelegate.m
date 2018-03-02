@@ -15,7 +15,19 @@
 @implementation AppDelegate
 @synthesize userinfo;
 
+-(void)getuserinfo
+{
+    self.userinfo = [UserInfo new];
+    NSFileManager *filemanger = [NSFileManager defaultManager];
+    if([filemanger fileExistsAtPath:Cache_UserInfo])
+    {
+        NSDictionary *dictemp = [NSDictionary dictionaryWithContentsOfFile:Cache_UserInfo];
+    }
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     self.userinfo = [UserInfo new];
     self.FCDisplayShoppingCar = @"0";
     // Override point for customization after application launch.

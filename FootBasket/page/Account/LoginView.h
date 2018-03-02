@@ -15,6 +15,8 @@
     UIButton *buttonlogin;
     UITextField *textfieldtel;
     UITextField *textfieldcode;
+    UIButton *buttonchange;
+    EnUserTypeLogin usertypelogin;
 }
 @property(nonatomic,weak)id<ActionDelegate>delegate1;
 @end

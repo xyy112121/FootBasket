@@ -90,6 +90,8 @@
 #import "RestaurantAuthViewController.h"
 #import "SettingService.h"
 #import "JPhotoMagenage.h"
+#import "RestaurantDetailViewController.h"
+#import "MyCouponViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

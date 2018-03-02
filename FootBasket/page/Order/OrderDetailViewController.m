@@ -493,6 +493,7 @@
     OrderService *order = [OrderService new];
     [order sendOrderDoneReceiveRequest:_FCorderid App:app ReqUrl:RQDoneReceiveOrder successBlock:^(NSDictionary *dicData) {
         [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

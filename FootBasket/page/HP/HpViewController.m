@@ -187,7 +187,7 @@
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
     NSFileManager *filemanger = [NSFileManager defaultManager];
-    if((app.userinfo.userid)||[filemanger fileExistsAtPath:Cache_UserInfo])
+    if(app.userinfo.userid)
     {
         [self gethpinterface];
     }
