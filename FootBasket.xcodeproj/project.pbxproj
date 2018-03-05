@@ -290,6 +290,7 @@
 		740F402A20284C560050A6BF /* HpNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F402920284C560050A6BF /* HpNavigationView.m */; };
 		740F402D202856B20050A6BF /* RecommendGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F402C202856B20050A6BF /* RecommendGoodsCell.m */; };
 		7413048A202AA3B000D9AB80 /* HpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74130489202AA3B000D9AB80 /* HpService.m */; };
+		74150553204CF7540090DE05 /* MyEditAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74150552204CF7540090DE05 /* MyEditAddrViewController.m */; };
 		743B5238203FBD340004E673 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 743B5230203FBD330004E673 /* city.plist */; };
 		743B5239203FBD340004E673 /* CZHAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B5232203FBD330004E673 /* CZHAddressPickerView.m */; };
 		743B523A203FBD340004E673 /* description in Resources */ = {isa = PBXBuildFile; fileRef = 743B5233203FBD330004E673 /* description */; };
@@ -322,7 +323,6 @@
 		74D22141204947F2001D76C5 /* 活动@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74D2213E204947F2001D76C5 /* 活动@2x.png */; };
 		74D22142204947F2001D76C5 /* 活动.png in Resources */ = {isa = PBXBuildFile; fileRef = 74D2213F204947F2001D76C5 /* 活动.png */; };
 		74D22143204947F2001D76C5 /* 活动@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74D22140204947F2001D76C5 /* 活动@3x.png */; };
-		74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D7833020405B2E00FE8091 /* MyOrderViewController.m */; };
 		74DA127B2041A65E00C1C5DA /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */; };
 		74DA127F2041B67F00C1C5DA /* DeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127E2041B67F00C1C5DA /* DeliveryService.m */; };
 		74DE88F42048EFC5007F4923 /* RestaurantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DE88F32048EFC5007F4923 /* RestaurantDetailViewController.m */; };
@@ -808,6 +808,8 @@
 		740F402C202856B20050A6BF /* RecommendGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendGoodsCell.m; sourceTree = "<group>"; };
 		74130488202AA3B000D9AB80 /* HpService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HpService.h; sourceTree = "<group>"; };
 		74130489202AA3B000D9AB80 /* HpService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HpService.m; sourceTree = "<group>"; };
+		74150551204CF7540090DE05 /* MyEditAddrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyEditAddrViewController.h; sourceTree = "<group>"; };
+		74150552204CF7540090DE05 /* MyEditAddrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyEditAddrViewController.m; sourceTree = "<group>"; };
 		743B522F203FBD330004E673 /* AddressPickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerHeader.h; sourceTree = "<group>"; };
 		743B5230203FBD330004E673 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		743B5231203FBD330004E673 /* CZHAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHAddressPickerView.h; sourceTree = "<group>"; };
@@ -859,8 +861,6 @@
 		74D2213E204947F2001D76C5 /* 活动@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动@2x.png"; sourceTree = "<group>"; };
 		74D2213F204947F2001D76C5 /* 活动.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动.png"; sourceTree = "<group>"; };
 		74D22140204947F2001D76C5 /* 活动@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动@3x.png"; sourceTree = "<group>"; };
-		74D7832F20405B2E00FE8091 /* MyOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrderViewController.h; sourceTree = "<group>"; };
-		74D7833020405B2E00FE8091 /* MyOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderViewController.m; sourceTree = "<group>"; };
 		74DA12792041A65E00C1C5DA /* DeliveryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
 		74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryViewController.m; sourceTree = "<group>"; };
 		74DA127D2041B67F00C1C5DA /* DeliveryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryService.h; sourceTree = "<group>"; };
@@ -1177,8 +1177,8 @@
 				74E81880203EBCC50016B4E1 /* MyAddrListViewController.m */,
 				74AAAAEC203F03D8006AD3EB /* MyNewAddrViewController.h */,
 				74AAAAED203F03D8006AD3EB /* MyNewAddrViewController.m */,
-				74D7832F20405B2E00FE8091 /* MyOrderViewController.h */,
-				74D7833020405B2E00FE8091 /* MyOrderViewController.m */,
+				74150551204CF7540090DE05 /* MyEditAddrViewController.h */,
+				74150552204CF7540090DE05 /* MyEditAddrViewController.m */,
 				74DE88F520490077007F4923 /* MyCouponViewController.h */,
 				74DE88F620490077007F4923 /* MyCouponViewController.m */,
 			);
@@ -2293,6 +2293,7 @@
 				74DE88F42048EFC5007F4923 /* RestaurantDetailViewController.m in Sources */,
 				740F400B202847F90050A6BF /* UIView+WebCache.m in Sources */,
 				740037C92047A7100065E7DF /* RestaurantInfoViewController.m in Sources */,
+				74150553204CF7540090DE05 /* MyEditAddrViewController.m in Sources */,
 				740F3F95202847F90050A6BF /* AFAutoPurgingImageCache.m in Sources */,
 				740F3FF9202847F90050A6BF /* TransformationMatrix.cpp in Sources */,
 				740F3F9A202847F90050A6BF /* UIImageView+AFNetworking.m in Sources */,
@@ -2372,7 +2373,6 @@
 				740F3F94202847F90050A6BF /* AFURLSessionManager.m in Sources */,
 				740F4019202847F90050A6BF /* View+MASAdditions.m in Sources */,
 				74BC300120469C1400C6B9DD /* PTLoadingHubView.m in Sources */,
-				74D7833120405B2E00FE8091 /* MyOrderViewController.m in Sources */,
 				740F3FEF202847F90050A6BF /* POPBasicAnimation.mm in Sources */,
 				74DF55BD20411BB4005276CC /* MangeAddressService.m in Sources */,
 				740037F42047D7070065E7DF /* PhotoNavigationViewController.m in Sources */,

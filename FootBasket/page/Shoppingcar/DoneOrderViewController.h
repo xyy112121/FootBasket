@@ -21,6 +21,7 @@
     
     NSString *receivetime;
     UIButton *receivebuttontime;
+    NSDictionary *dicselectaddr;
 }
 //@property(nonatomic,strong)DateTimePickerView *datePickerView;
 @property(nonatomic,strong)NSArray *arrayproductnum;

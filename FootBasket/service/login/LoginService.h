@@ -12,6 +12,6 @@ typedef void (^LoginSuccessBlock)(NSDictionary *dicData);
 
 @interface LoginService : RequestInterface
 
--(void)sendVerifyCode:(NSString * )tel App:(AppDelegate *)app  ReqUrl:(NSString *)requrl;
+-(void)sendloginverifycoderequest:(NSString * )tel App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(LoginSuccessBlock)successBlock;
 -(void)sendloginrequest:(NSString * )tel Code:(NSString *)code App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(LoginSuccessBlock)successBlock;
 @end

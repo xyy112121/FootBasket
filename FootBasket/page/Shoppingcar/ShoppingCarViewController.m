@@ -54,7 +54,7 @@
     tableview.backgroundColor = [UIColor clearColor];
 
     [self.view addSubview:tableview];
-    
+    [self initviewheader];
     [self setExtraCellLineHidden:tableview];
     
     
@@ -63,6 +63,22 @@
         UIView *viewbottom = [self viewbottomSettlement:CGRectMake(0, SCREEN_HEIGHT-IPhone_SafeBottomMargin-49-StatusBarAndNavigationHeight-50, SCREEN_WIDTH, 50)];
         [self.view addSubview:viewbottom];
     }
+}
+
+-(void)initviewheader
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    UIView *viewbg = [[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 40)];
+    viewbg.backgroundColor = [UIColor whiteColor];
+    [view addSubview:viewbg];
+    
+    UILabel *labeltips = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, SCREEN_WIDTH-20, 30)];
+    labeltips.text = @"温馨提示: 本店购物当订单金额超过36元,我们为您送货到家,由于食材需要从仓库中提取并且为您精心准备,请您提前一个小时下单！谢谢！";
+    labeltips.textColor = COLORNOW(180, 180, 180);
+    labeltips.font = FONTN(13.0f);
+    [view addSubview:labeltips];
+    
+    tableview.tableHeaderView = view;
 }
 
 //结算条
@@ -366,11 +382,21 @@
 {
     if([arraydata count]>0)
     {
-        DoneOrderViewController *doneorder = [[DoneOrderViewController alloc] init];
-        doneorder.hidesBottomBarWhenPushed = YES;
-        doneorder.arrayproductnum = arrayproductnum;
-        [self.navigationController pushViewController:doneorder animated:YES];
+//        DLog(@"")
+        if([[labeltotalmoney.text substringFromIndex:1] floatValue]<36)
+        {
+            [MBProgressHUD showError:@"对不起订单金额必须大于36元,我们才能配送！" toView:app.window];
+        }
+        else
+        {
+            DoneOrderViewController *doneorder = [[DoneOrderViewController alloc] init];
+            doneorder.hidesBottomBarWhenPushed = YES;
+            doneorder.arrayproductnum = arrayproductnum;
+            [self.navigationController pushViewController:doneorder animated:YES];
+        }
+
     }
+    
     else
     {
         [MBProgressHUD showError:@"请先填写商品进购物车" toView:app.window];

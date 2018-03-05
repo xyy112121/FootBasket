@@ -10,7 +10,7 @@
 
 @implementation LoginService
 
--(void)sendVerifyCode:(NSString * )tel App:(AppDelegate *)app  ReqUrl:(NSString *)requrl
+-(void)sendloginverifycoderequest:(NSString * )tel App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(LoginSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:tel forKey:@"mobile"];

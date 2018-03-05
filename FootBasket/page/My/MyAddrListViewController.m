@@ -61,7 +61,7 @@
     [buttonaddnew addTarget:self action:@selector(clickaddnew:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonaddnew];
     
-    [self getaddrlist];
+    
 }
 
 //cell
@@ -116,8 +116,8 @@
     buttonedit.titleLabel.font = FONTN(15.0f);
     [buttonedit setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [buttonedit setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [buttonedit addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    buttonedit.tag = indexpath.row+EnMyAddrListDefaultBtTag;
+    [buttonedit addTarget:self action:@selector(clickeditaddr:) forControlEvents:UIControlEventTouchUpInside];
+    buttonedit.tag = indexpath.row+EnMyAddrEditBtTag;
     [view addSubview:buttonedit];
     
     UIButton *buttondelete = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -127,8 +127,8 @@
     buttondelete.titleLabel.font = FONTN(15.0f);
     [buttondelete setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [buttondelete setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [buttondelete addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
-    buttondelete.tag = indexpath.row+EnMyAddrListDefaultBtTag;
+    [buttondelete addTarget:self action:@selector(clickdeleteaddr:) forControlEvents:UIControlEventTouchUpInside];
+    buttondelete.tag = indexpath.row+EnMyAddrDeleteBtTag;
     [view addSubview:buttondelete];
     
     
@@ -148,6 +148,7 @@
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
     [self.navigationController setNavigationBarHidden:NO];
+    [self getaddrlist];
 }
 
 #pragma mark - IBAction
@@ -162,14 +163,46 @@
     
 }
 
--(void)clicksetedit:(id)sender
+-(void)clickeditaddr:(id)sender
 {
-    
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag] - EnMyAddrEditBtTag;
+    NSDictionary *dictemp = [arraydata objectAtIndex:tagnow];
+    MyEditAddrViewController *editaddr = [[MyEditAddrViewController alloc] init];
+    editaddr.FCdicaddr = dictemp;
+    [self.navigationController pushViewController:editaddr animated:YES];
 }
 
--(void)clicksetdelete:(id)sender
+-(void)clickdeleteaddr:(id)sender
 {
     
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = [NSString stringWithFormat:@"确定要删除选择的收货地址吗？"];
+    NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
+    NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Create the actions.
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UIButton *button = (UIButton *)sender;
+        int tagnow = (int)[button tag] - EnMyAddrDeleteBtTag;
+        NSDictionary *dictemp = [arraydata objectAtIndex:tagnow];
+        [self deleteaddress:[dictemp objectForKey:@"id"]];
+    }];
+    
+    // Add the actions.
+    [alertController addAction:cancelAction];
+    [alertController addAction:otherAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+
 }
 
 -(void)clickaddnew:(id)sender
@@ -263,7 +296,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
+    if([_fromflag isEqualToString:@"1"])
+    {
+        if(_delegate1 && [_delegate1 respondsToSelector:@selector(DGClickOrderAddress:)])
+        {
+            [_delegate1 DGClickOrderAddress:dictemp];
+            [self returnback:nil];
+        }
+    }
+    else
+    {
+        
+    }
 }
 
 #pragma mark - 接口
@@ -275,6 +320,14 @@
         tableview.delegate = self;
         tableview.dataSource = self;
         [tableview reloadData];
+    }];
+}
+
+-(void)deleteaddress:(NSString *)objectid
+{
+    MangeAddressService *address = [MangeAddressService new];
+    [address sendDeleteAddressRequest:objectid App:app ReqUrl:RQDeleteMyAddr successBlock:^(NSDictionary *dicData) {
+        [self getaddrlist];
     }];
 }
 

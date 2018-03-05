@@ -62,6 +62,11 @@ typedef enum
 #define EnSearchProductListTag 6900
 
 #define EnUserInfoAvatarTag 7000
+
+#define EnMyAddrEditBtTag 7100 //编辑地址
+
+#define EnMyAddrDeleteBtTag 7200 //删除地址
+
 #endif /* Enum_set_h */
 
 

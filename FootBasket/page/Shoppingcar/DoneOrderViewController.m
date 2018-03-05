@@ -92,26 +92,37 @@
 }
 
 //地址选择
--(UIView *)viewaddrcell:(CGRect)frame
+-(UIView *)viewaddrcell:(CGRect)frame DicAddr:(NSDictionary *)dicaddr
 {
     UIView *viewaddr = [[UIView alloc] initWithFrame:frame];
     viewaddr.backgroundColor = [UIColor whiteColor];
     
-    NSDictionary *dicarrd = [dicresponse objectForKey:@"address"];
-    selectaddrid = [dicarrd objectForKey:@"id"];
-    UIImageView *imageaddricon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 14, 14, 18)];
+    //NSDictionary *dicarrd = [dicresponse objectForKey:@"address"];
+    selectaddrid = [dicaddr objectForKey:@"id"];
+    UIImageView *imageaddricon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 24, 14, 18)];
     imageaddricon.image = LOADIMAGE(@"地址icon", @"png");
     [viewaddr addSubview:imageaddricon];
     
-    UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 8, SCREEN_WIDTH-100, 30)];
-    textfield.backgroundColor = [UIColor clearColor];
-    textfield.text = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
-    textfield.font = FONTN(15.0f);
-    textfield.delegate = self;
-    textfield.textColor = COLORNOW(52, 52, 52);
-    [viewaddr addSubview:textfield];
+    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 7, 100, 20)];
+    labelname.text = [dicaddr objectForKey:@"userName"];
+    labelname.font = FONTN(15.0f);
+    [viewaddr addSubview:labelname];
     
-    UIImageView *arrawleft = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-17, 14, 7, 15)];
+    UILabel *labeltel = [[UILabel alloc] initWithFrame:CGRectMake(XYViewWidth(viewaddr)-170, 7, 140, 20)];
+    labeltel.text = [dicaddr objectForKey:@"mobile"];
+    labeltel.textAlignment = NSTextAlignmentRight;
+    labeltel.font = FONTN(15.0f);
+    [viewaddr addSubview:labeltel];
+    
+    UILabel *labeladdr = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, XYViewBottom(labelname), SCREEN_WIDTH-60, 35)];
+    labeladdr.backgroundColor = [UIColor clearColor];
+    labeladdr.text = [NSString stringWithFormat:@"%@%@%@%@",[dicaddr objectForKey:@"province"],[dicaddr objectForKey:@"city"],[dicaddr objectForKey:@"county"],[dicaddr objectForKey:@"address"]];
+    labeladdr.font = FONTN(15.0f);
+    labeladdr.numberOfLines = 2;
+    labeladdr.textColor = COLORNOW(52, 52, 52);
+    [viewaddr addSubview:labeladdr];
+    
+    UIImageView *arrawleft = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-17, 24, 7, 15)];
     arrawleft.image = LOADIMAGE(@"arrow_left", @"png");
     [viewaddr addSubview:arrawleft];
     
@@ -119,6 +130,10 @@
     imagebottom.image = LOADIMAGE(@"彩色分割条", @"png");
     [viewaddr addSubview:imagebottom];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = viewaddr.bounds;
+    [button addTarget:self action:@selector(gotoselectaddrlist:) forControlEvents:UIControlEventTouchUpInside];
+    [viewaddr addSubview:button];
     return viewaddr;
 }
 
@@ -191,13 +206,7 @@
     return view;
 }
 
-#pragma mark - UItextfielddelegate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    MyAddrListViewController *myaddr = [[MyAddrListViewController alloc] init];
-    [self.navigationController pushViewController:myaddr animated:YES];
-    return NO;
-}
+
 
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
@@ -235,6 +244,12 @@
         [MBProgressHUD showError:@"请选择送达时间" toView:app.window];
         return;
     }
+    else if(((![[dicselectaddr objectForKey:@"county"] isEqualToString:@"西山区"])||(![[dicselectaddr objectForKey:@"county"] isEqualToString:@"高新区"]))&&([[dicresponse objectForKey:@"realPayPrice"] floatValue]<500))
+    {
+        [MBProgressHUD showMessage:@"对不起,我们当前区的配送设施正在紧张的建设之中,暂时不能下单,给你带来的不便,敬请谅解" toView:app.window];
+        return ;
+    }
+    
     
     NSString *title = NSLocalizedString(@"提示", nil);
     NSString *message = [NSString stringWithFormat:@"你实际需要支付%@元\n是否确定提交订单",[dicresponse objectForKey:@"realPayPrice"]];
@@ -268,7 +283,15 @@
         [self.view addSubview:pickerView];
         [pickerView showDateTimePickerView];
 }
-    
+
+-(void)gotoselectaddrlist:(id)sender
+{
+    MyAddrListViewController *myaddr = [[MyAddrListViewController alloc] init];
+    myaddr.fromflag = @"1";
+    myaddr.delegate1 = self;
+    [self.navigationController pushViewController:myaddr animated:YES];
+}
+
 #pragma mark - delegate
     
 - (void)didClickFinishDateTimePickerView:(NSString *)date
@@ -295,6 +318,13 @@
         payway = @"2";
     UIImageView *imageview = (UIImageView *)sender;
     imageview.image = LOADIMAGE(@"选择框选中", @"png");
+}
+
+-(void)DGClickOrderAddress:(NSDictionary *)sender
+{
+    dicselectaddr = sender;
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [tableview reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - tableview delegate
@@ -336,7 +366,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0)
-        return 50;
+        return 70;
     else if(indexPath.section == 1)
         return 60;
     else if(indexPath.section == 2)
@@ -461,7 +491,7 @@
     cell.backgroundColor = [UIColor whiteColor];
     if(indexPath.section == 0)
     {
-        UIView *viewaddr = [self viewaddrcell:CGRectMake(0,0, SCREEN_WIDTH, 50)];
+        UIView *viewaddr = [self viewaddrcell:CGRectMake(0,0, SCREEN_WIDTH, 70) DicAddr:dicselectaddr];
         [cell.contentView addSubview:viewaddr];
     }
     else if(indexPath.section == 1)
@@ -524,7 +554,7 @@
     [shoppingcar sendShoppingCarSettlementRequest:jsonnum Userid:app.userinfo.userid App:app ReqUrl:RQShoppingCarSettlement successBlock:^(NSDictionary *dicData) {
         
         dicresponse = dicData;
-        
+        dicselectaddr = [dicresponse objectForKey:@"address"];
         arraydata = [dicresponse objectForKey:@"products"];
         tableview.delegate = self;
         tableview.dataSource = self;

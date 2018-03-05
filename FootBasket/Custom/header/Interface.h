@@ -43,3 +43,7 @@
 
 #define RQMyCouponList @"/Basket/business/OrderNavigate_searchPageOL_OL.action"//q我的优惠列表userId  isCoupon
 
+#define RQMyUpdateAddr @"/Basket/resource/UserAddressForm_update_OL.action" //更新收货地址objectID address mobile userName defaultAdr province city county
+
+#define RQDeleteMyAddr  @"/Basket/resource/UserAddressForm_deleteEntity_OL.action" //删除地址 objectID
+

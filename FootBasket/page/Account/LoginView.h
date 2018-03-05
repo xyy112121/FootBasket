@@ -17,6 +17,8 @@
     UITextField *textfieldcode;
     UIButton *buttonchange;
     EnUserTypeLogin usertypelogin;
+    int getyanzhengcodeflag;
+    NSTimer *timerone;
 }
 @property(nonatomic,weak)id<ActionDelegate>delegate1;
 @end

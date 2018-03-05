@@ -18,6 +18,7 @@
         self.backgroundColor = [UIColor whiteColor];
         app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         usertypelogin = EnNormalSelect;
+        getyanzhengcodeflag = 0;
         [self initView];
     }
     return self;
@@ -49,15 +50,17 @@
     textfieldcode.placeholder = @"输入验证码";
     textfieldcode.font = FONTN(16.0f);
     textfieldcode.delegate = self;
-    textfieldcode.text = @"4321";//@"1234";
+    textfieldcode.text = @"4321";
     [self addSubview:textfieldcode];
     
     buttoncode = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttoncode.frame = CGRectMake(SCREEN_WIDTH-110, XYViewTop(imageline2)-43, 100, 35);
+    buttoncode.frame = CGRectMake(SCREEN_WIDTH-120, XYViewTop(imageline2)-40, 100, 30);
     [buttoncode setTitle:@"获取验证码" forState:UIControlStateNormal];
     buttoncode.backgroundColor = COLORNOW(230, 230, 230);
     buttoncode.layer.cornerRadius = 3.0f;
     buttoncode.clipsToBounds = YES;
+    buttoncode.titleLabel.font = FONTN(15.0f);
+    [buttoncode addTarget:self action:@selector(clickgetcode:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:buttoncode];
     
     buttonlogin = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -72,7 +75,7 @@
     
     buttonchange = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonchange.frame = CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-IPhone_SafeBottomMargin-60, 100, 35);
-    [buttonchange setTitle:@"切换商家登录" forState:UIControlStateNormal];
+    [buttonchange setTitle:@"切换送货员登录" forState:UIControlStateNormal];
     [buttonchange setTitleColor:COLORNOW(152, 152, 152) forState:UIControlStateNormal];
     buttonchange.titleLabel.font = FONTN(14.0f);
     [buttonchange addTarget:self action:@selector(clickchangeuser:) forControlEvents:UIControlEventTouchUpInside];
@@ -158,7 +161,76 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - IBAction
+-(void)clickgetcode:(id)sender
+{
+    if(getyanzhengcodeflag == 0)
+    {
+        CommonHeader *com = [CommonHeader new];
+        if([[textfieldtel text] length]==0)
+        {
+            [MBProgressHUD showError:@"请填写电话和密码" toView:self];
+        }
+        else if(![com CMisMobileNumber:textfieldtel.text])
+        {
+            [MBProgressHUD showError:@"请填写正确格式的电话号码" toView:self];
+        }
+        else
+        {
+            [self keyboardHide:nil];
+            getyanzhengcodeflag = 1;
+      //      [self getverifycode];
+            timerone= [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updasecond:) userInfo:nil repeats:YES];
+        }
+    }
+    
+}
+
+-(void)updasecond:(id)sender
+{
+    
+    NSString *strtemp = [buttoncode currentTitle];
+    if([strtemp length]== 5)
+    {
+        [buttoncode setTitle:@"重新获取60" forState:UIControlStateNormal];
+    }
+    else
+    {
+        NSString *strsecond = [strtemp substringFromIndex:4];
+        strsecond = [strsecond substringToIndex:[strsecond length]];
+        int second = [strsecond intValue];
+        [buttoncode setTitle:[NSString stringWithFormat:@"重新获取%d",second-1] forState:UIControlStateNormal];
+        if(second > 1)
+        {
+            
+            buttoncode.enabled = NO;
+        }
+        else
+        {
+            getyanzhengcodeflag = 0;
+            [buttoncode setTitle:@"获取验证码" forState:UIControlStateNormal];
+            buttoncode.enabled = YES;
+            [timerone invalidate];
+            timerone = nil;
+        }
+    }
+}
+
+-(void)getverifycode
+{
+    LoginService *loginservice = [LoginService new];
+    [loginservice sendloginverifycoderequest:textfieldtel.text App:app ReqUrl:RQDeleteMyAddr successBlock:^(NSDictionary *dicData) {
+        [MBProgressHUD showSuccess:@"" toView:app.window];
+    }];
+}
+
+
 -(void)keyboardHide:(id)sender
 {
     [textfieldtel resignFirstResponder];

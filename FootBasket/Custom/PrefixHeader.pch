@@ -92,6 +92,7 @@
 #import "JPhotoMagenage.h"
 #import "RestaurantDetailViewController.h"
 #import "MyCouponViewController.h"
+#import "MyEditAddrViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

@@ -180,6 +180,47 @@
     tableview.tableHeaderView = viewheader;
 }
 
+-(void)contactCustomer
+{
+    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *showAllInfoAction = [UIAlertAction actionWithTitle:@"客服A" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSMutableString *str2=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"15812002697"];
+        
+        NSLog(@"%@",str2);
+        
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str2]]];
+        
+        [self.view addSubview:callWebview];
+        
+    }];
+    UIAlertAction *pickAction = [UIAlertAction actionWithTitle:@"客服B" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSMutableString *str2=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"15398679337"];
+        
+        NSLog(@"%@",str2);
+        
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str2]]];
+        
+        [self.view addSubview:callWebview];
+        
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [actionSheetController addAction:cancelAction];
+    [actionSheetController addAction:showAllInfoAction];
+    [actionSheetController addAction:pickAction];
+    
+    [self presentViewController:actionSheetController animated:YES completion:nil];
+}
+
 #pragma mark - IBAction
 -(void)gotosetting:(id)sender
 {
@@ -276,7 +317,7 @@
 {
     if([app.userinfo.usertype isEqualToString:@"1"])
         return 2;
-    return 3;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -357,11 +398,11 @@
                         break;
                 }
                 break;
+//            case 1:
+//                imageview.image = LOADIMAGE(@"礼物", @"png");
+//                labelname.text = @"邀请有礼";
+//                break;
             case 1:
-                imageview.image = LOADIMAGE(@"礼物", @"png");
-                labelname.text = @"邀请有礼";
-                break;
-            case 2:
                 imageview.image = LOADIMAGE(@"电话", @"png");
                 labelname.text = @"联系客服";
                 break;
@@ -389,29 +430,42 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MyAddrListViewController *myaddrlist;
-    switch (indexPath.section)
+    if([app.userinfo.usertype isEqualToString:@"0"])
     {
-        case 0:
-            switch (indexPath.row)
+        MyAddrListViewController *myaddrlist;
+        switch (indexPath.section)
         {
             case 0:
+                switch (indexPath.row)
+            {
+                case 0:
 
+                    break;
+                case 1:
+                    myaddrlist = [[MyAddrListViewController alloc] init];
+                    myaddrlist.hidesBottomBarWhenPushed = YES;
+                    myaddrlist.fromflag = @"2";
+                    [self.navigationController pushViewController:myaddrlist animated:YES];
+                    break;
+            }
                 break;
             case 1:
-                myaddrlist = [[MyAddrListViewController alloc] init];
-                myaddrlist.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:myaddrlist animated:YES];
+                [self contactCustomer];
                 break;
+                
         }
-            break;
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-            
+    }
+    else if([app.userinfo.usertype isEqualToString:@"1"])
+    {
+        switch (indexPath.section)
+        {
+            case 0:
+                break;
+            case 1:
+                [self contactCustomer];
+                break;
+                
+        }
     }
 }
 
