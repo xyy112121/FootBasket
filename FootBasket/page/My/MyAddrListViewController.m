@@ -105,7 +105,7 @@
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     button.titleLabel.font = FONTN(15.0f);
     [button setTitleColor:COLORNOW(72, 72, 72) forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(clicksetdefault:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(setdefaultaddr:) forControlEvents:UIControlEventTouchUpInside];
     button.tag = indexpath.row+EnMyAddrListDefaultBtTag;
     [view addSubview:button];
     
@@ -209,6 +209,16 @@
 {
     MyNewAddrViewController *addnew = [[MyNewAddrViewController alloc] init];
     [self.navigationController pushViewController:addnew animated:YES];
+}
+
+-(void)setdefaultaddr:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    int tagnow = (int)[button tag]-EnMyAddrListDefaultBtTag;
+    
+    NSDictionary *dictemp = [arraydata objectAtIndex:tagnow];
+    [self comitsetdefault:[dictemp objectForKey:@"id"]];
+    
 }
 
 #pragma mark - tableview delegate
@@ -330,6 +340,15 @@
         [self getaddrlist];
     }];
 }
+
+-(void)comitsetdefault:(NSString *)objectid
+{
+    SettingService *settingservice = [SettingService new];
+    [settingservice sendSetDefaultAddressRequest:objectid App:app ReqUrl:RQSetDefaultAddr successBlock:^(NSDictionary *dicData) {
+        [self getaddrlist];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

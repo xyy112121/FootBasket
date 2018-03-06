@@ -50,3 +50,5 @@
 #define RQModifyUserInfo @"/Basket/control/UserForm_update_OL.action"//修改用户信息 objectID realName nickName
 
 #define RQSMSCode   @"/Basket/control/SMSCodeNavigate_getSMSCode_OL.action" //获取验证码 mobile
+
+#define RQSetDefaultAddr @"/Basket/resource/UserAddressNavigate_setDefault_OL.action" //默认地址objectID

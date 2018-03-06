@@ -26,6 +26,10 @@
 		740037F82047D7070065E7DF /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740037EC2047D7070065E7DF /* PhotoViewController.m */; };
 		740037F92047D7070065E7DF /* 未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037ED2047D7070065E7DF /* 未选中.png */; };
 		740037FA2047D7070065E7DF /* 选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 740037EE2047D7070065E7DF /* 选中.png */; };
+		740CC77A204EC8FE00543A18 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740CC779204EC8FE00543A18 /* AboutMeViewController.m */; };
+		740CC77E204EC9AD00543A18 /* aboutme@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 740CC77B204EC9AC00543A18 /* aboutme@3x.png */; };
+		740CC77F204EC9AD00543A18 /* aboutme.png in Resources */ = {isa = PBXBuildFile; fileRef = 740CC77C204EC9AC00543A18 /* aboutme.png */; };
+		740CC780204EC9AD00543A18 /* aboutme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 740CC77D204EC9AD00543A18 /* aboutme@2x.png */; };
 		740F3D3F20280CE40050A6BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F3D3E20280CE40050A6BF /* AppDelegate.m */; };
 		740F3D4220280CE40050A6BF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F3D4120280CE40050A6BF /* ViewController.m */; };
 		740F3D4520280CE40050A6BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740F3D4320280CE40050A6BF /* Main.storyboard */; };
@@ -380,6 +384,11 @@
 		740037EC2047D7070065E7DF /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		740037ED2047D7070065E7DF /* 未选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选中.png"; sourceTree = "<group>"; };
 		740037EE2047D7070065E7DF /* 选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选中.png"; sourceTree = "<group>"; };
+		740CC778204EC8FE00543A18 /* AboutMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
+		740CC779204EC8FE00543A18 /* AboutMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
+		740CC77B204EC9AC00543A18 /* aboutme@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutme@3x.png"; sourceTree = "<group>"; };
+		740CC77C204EC9AC00543A18 /* aboutme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutme.png; sourceTree = "<group>"; };
+		740CC77D204EC9AD00543A18 /* aboutme@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutme@2x.png"; sourceTree = "<group>"; };
 		740F3D3A20280CE40050A6BF /* FootBasket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootBasket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		740F3D3D20280CE40050A6BF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		740F3D3E20280CE40050A6BF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1007,6 +1016,9 @@
 		740F3D5320280E210050A6BF /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				740CC77C204EC9AC00543A18 /* aboutme.png */,
+				740CC77D204EC9AD00543A18 /* aboutme@2x.png */,
+				740CC77B204EC9AC00543A18 /* aboutme@3x.png */,
 				74D2213F204947F2001D76C5 /* 活动.png */,
 				74D2213E204947F2001D76C5 /* 活动@2x.png */,
 				74D22140204947F2001D76C5 /* 活动@3x.png */,
@@ -1186,6 +1198,8 @@
 				74150552204CF7540090DE05 /* MyEditAddrViewController.m */,
 				74DE88F520490077007F4923 /* MyCouponViewController.h */,
 				74DE88F620490077007F4923 /* MyCouponViewController.m */,
+				740CC778204EC8FE00543A18 /* AboutMeViewController.h */,
+				740CC779204EC8FE00543A18 /* AboutMeViewController.m */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -2071,6 +2085,7 @@
 				740F3DF020280E210050A6BF /* 地址icon.png in Resources */,
 				740F3DD820280E210050A6BF /* 代付款.png in Resources */,
 				743DC45A20299EEE004E4DB0 /* searchicon@3x.png in Resources */,
+				740CC780204EC9AD00543A18 /* aboutme@2x.png in Resources */,
 				740F3FE1202847F90050A6BF /* MKTreeView.xib in Resources */,
 				743DC45C20299EEE004E4DB0 /* searchicon@2x.png in Resources */,
 				740F402320284A710050A6BF /* 消息@3x.png in Resources */,
@@ -2108,6 +2123,7 @@
 				743DC45620299943004E4DB0 /* 加入购物车small@3x.png in Resources */,
 				740F3E1520280E210050A6BF /* 礼物@2x.png in Resources */,
 				740F3E1E20280E210050A6BF /* 购物车选择后@2x.png in Resources */,
+				740CC77F204EC9AD00543A18 /* aboutme.png in Resources */,
 				740F3E0D20280E210050A6BF /* 特惠@3x.png in Resources */,
 				740F3E2020280E210050A6BF /* 选区.png in Resources */,
 				740F3DC120280E210050A6BF /* addicon@2x.png in Resources */,
@@ -2185,6 +2201,7 @@
 				740F3E2220280E210050A6BF /* 选区@3x.png in Resources */,
 				740037D02047AFDA0065E7DF /* addpic@3x.png in Resources */,
 				740F402620284A710050A6BF /* 消息@2x.png in Resources */,
+				740CC77E204EC9AD00543A18 /* aboutme@3x.png in Resources */,
 				740F3DE820280E210050A6BF /* 删除@2x.png in Resources */,
 				740F3E1B20280E210050A6BF /* 购物车@2x.png in Resources */,
 				740F3DCD20280E210050A6BF /* Shape38x38@2x.png in Resources */,
@@ -2271,6 +2288,7 @@
 				740F401B202847F90050A6BF /* NullSafe.m in Sources */,
 				740037F12047D7070065E7DF /* PhotoCollectionViewCell.m in Sources */,
 				740F3FCA202847F90050A6BF /* MJRefreshConst.m in Sources */,
+				740CC77A204EC8FE00543A18 /* AboutMeViewController.m in Sources */,
 				74B5BA06204164DF00B43BC2 /* OrderDetailViewController.m in Sources */,
 				740F3FE8202847F90050A6BF /* POPAnimatableProperty.mm in Sources */,
 				740F3FBA202847F90050A6BF /* MJRefreshGifHeader.m in Sources */,

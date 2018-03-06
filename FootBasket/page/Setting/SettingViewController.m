@@ -58,8 +58,6 @@
     buttonlogout.frame = CGRectMake(0, SCREEN_HEIGHT-StatusBarAndNavigationHeight-50-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);
     buttonlogout.backgroundColor = COLORNOW(238, 89, 83);
     [buttonlogout setTitle:@"退出登录" forState:UIControlStateNormal];
-    buttonlogout.layer.cornerRadius = 3.0f;
-    buttonlogout.clipsToBounds = YES;
     [buttonlogout addTarget:self action:@selector(clicklogout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonlogout];
     

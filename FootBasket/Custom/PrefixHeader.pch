@@ -94,6 +94,7 @@
 #import "MyCouponViewController.h"
 #import "MyEditAddrViewController.h"
 #import "SettingModifyUserInfoViewController.h"
+#import "AboutMeViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

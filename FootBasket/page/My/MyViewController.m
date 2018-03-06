@@ -433,21 +433,24 @@
     if([app.userinfo.usertype isEqualToString:@"0"])
     {
         MyAddrListViewController *myaddrlist;
+        AboutMeViewController *aboutme;
         switch (indexPath.section)
         {
             case 0:
                 switch (indexPath.row)
-            {
-                case 0:
-
-                    break;
-                case 1:
-                    myaddrlist = [[MyAddrListViewController alloc] init];
-                    myaddrlist.hidesBottomBarWhenPushed = YES;
-                    myaddrlist.fromflag = @"2";
-                    [self.navigationController pushViewController:myaddrlist animated:YES];
-                    break;
-            }
+                {
+                    case 0:
+                        aboutme = [[AboutMeViewController alloc] init];
+                        aboutme.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:aboutme animated:YES];
+                        break;
+                    case 1:
+                        myaddrlist = [[MyAddrListViewController alloc] init];
+                        myaddrlist.hidesBottomBarWhenPushed = YES;
+                        myaddrlist.fromflag = @"2";
+                        [self.navigationController pushViewController:myaddrlist animated:YES];
+                        break;
+                }
                 break;
             case 1:
                 [self contactCustomer];

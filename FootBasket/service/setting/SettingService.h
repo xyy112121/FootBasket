@@ -23,4 +23,7 @@ typedef void (^SettingSuccessBlock)(NSDictionary *dicData);
 
 //修改用户信息
 -(void)sendModifySettingRequest:(NSString *)userid Name:(NSString *)name NickName:(NSString *)nickname App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
+
+//设置默认地址
+-(void)sendSetDefaultAddressRequest:(NSString *)objectid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
 @end
