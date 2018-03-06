@@ -21,7 +21,7 @@
         DLog(@"dic====%@",dic);
         if([[dic objectForKey:@"code"] isEqualToString:@"ok"])
         {
-            
+            successBlock(dic);
         }
         else
         {
@@ -57,6 +57,7 @@
         [MBProgressHUD showError:@"登录失败,请检查网络" toView:app.window];
     }];
 }
+
 
 
 @end

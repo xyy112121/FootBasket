@@ -93,6 +93,7 @@
 #import "RestaurantDetailViewController.h"
 #import "MyCouponViewController.h"
 #import "MyEditAddrViewController.h"
+#import "SettingModifyUserInfoViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

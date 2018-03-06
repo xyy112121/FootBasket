@@ -99,31 +99,41 @@
     labelpay.font = FONTN(15.0f);
     labelpay.text = [dicresponse objectForKey:@"displayIsPay"];
     [viewbottom addSubview:labelpay];
-    
-    
+
     tableview.tableFooterView = viewbottom;
 }
 
 //地址选择
--(UIView *)viewaddrcell:(CGRect)frame
+-(UIView *)viewaddrcell:(CGRect)frame DicAddr:(NSDictionary *)dicaddr
 {
     UIView *viewaddr = [[UIView alloc] initWithFrame:frame];
     viewaddr.backgroundColor = [UIColor whiteColor];
     
-    NSDictionary *dicarrd = [dicresponse objectForKey:@"address"];
-    UIImageView *imageaddricon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 14, 14, 18)];
+    //NSDictionary *dicarrd = [dicresponse objectForKey:@"address"];
+    UIImageView *imageaddricon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 24, 14, 18)];
     imageaddricon.image = LOADIMAGE(@"地址icon", @"png");
     [viewaddr addSubview:imageaddricon];
     
-    UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 8, SCREEN_WIDTH-100, 30)];
-    textfield.backgroundColor = [UIColor clearColor];
-    textfield.text = [NSString stringWithFormat:@"%@%@%@%@",[dicarrd objectForKey:@"province"],[dicarrd objectForKey:@"city"],[dicarrd objectForKey:@"county"],[dicarrd objectForKey:@"address"]];
-    textfield.font = FONTN(15.0f);
-    textfield.enabled = NO;
-    textfield.textColor = COLORNOW(52, 52, 52);
-    [viewaddr addSubview:textfield];
+    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 7, 100, 20)];
+    labelname.text = [dicaddr objectForKey:@"userName"];
+    labelname.font = FONTN(15.0f);
+    [viewaddr addSubview:labelname];
     
-    UIImageView *arrawleft = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-17, 14, 7, 15)];
+    UILabel *labeltel = [[UILabel alloc] initWithFrame:CGRectMake(XYViewWidth(viewaddr)-170, 7, 140, 20)];
+    labeltel.text = [dicaddr objectForKey:@"mobile"];
+    labeltel.textAlignment = NSTextAlignmentRight;
+    labeltel.font = FONTN(15.0f);
+    [viewaddr addSubview:labeltel];
+    
+    UILabel *labeladdr = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, XYViewBottom(labelname), SCREEN_WIDTH-60, 35)];
+    labeladdr.backgroundColor = [UIColor clearColor];
+    labeladdr.text = [NSString stringWithFormat:@"%@%@%@%@",[dicaddr objectForKey:@"province"],[dicaddr objectForKey:@"city"],[dicaddr objectForKey:@"county"],[dicaddr objectForKey:@"address"]];
+    labeladdr.font = FONTN(15.0f);
+    labeladdr.numberOfLines = 2;
+    labeladdr.textColor = COLORNOW(52, 52, 52);
+    [viewaddr addSubview:labeladdr];
+    
+    UIImageView *arrawleft = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-17, 24, 7, 15)];
     arrawleft.image = LOADIMAGE(@"arrow_left", @"png");
     [viewaddr addSubview:arrawleft];
     
@@ -292,7 +302,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0)
-        return 50;
+        return 70;
     else if(indexPath.section == 1)
         return 60;
     else if(indexPath.section == 2)
@@ -354,7 +364,7 @@
         [viewtime addSubview:labeltime];
         
         UIButton *receivebuttontime  = [UIButton buttonWithType:UIButtonTypeCustom];
-        receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-155, 21, 130, 30);
+        receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-195, 21, 170, 30);
         [receivebuttontime setTitle:[dicresponse objectForKey:@"deliveryTime"] forState:UIControlStateNormal];
         receivebuttontime.titleLabel.font = FONTN(15.0f);
         [receivebuttontime setTitleColor:COLORNOW(32, 188, 167) forState:UIControlStateNormal];
@@ -416,7 +426,7 @@
     cell.backgroundColor = [UIColor whiteColor];
     if(indexPath.section == 0)
     {
-        UIView *viewaddr = [self viewaddrcell:CGRectMake(0,0, SCREEN_WIDTH, 50)];
+        UIView *viewaddr = [self viewaddrcell:CGRectMake(0,0, SCREEN_WIDTH, 70) DicAddr:[dicresponse objectForKey:@"address"]];
         [cell.contentView addSubview:viewaddr];
     }
     else if(indexPath.section == 1)

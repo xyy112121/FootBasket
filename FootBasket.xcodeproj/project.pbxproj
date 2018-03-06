@@ -309,6 +309,7 @@
 		743DC45B20299EEE004E4DB0 /* searchicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 743DC45820299EED004E4DB0 /* searchicon.png */; };
 		743DC45C20299EEE004E4DB0 /* searchicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 743DC45920299EEE004E4DB0 /* searchicon@2x.png */; };
 		743DC45F2029A70F004E4DB0 /* CategoryLeftMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 743DC45E2029A70F004E4DB0 /* CategoryLeftMenu.m */; };
+		74669A2D204E3B2400E6815F /* SettingModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74669A2C204E3B2400E6815F /* SettingModifyUserInfoViewController.m */; };
 		7484DFC4202BFB9300900FB8 /* CategoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7484DFC3202BFB9300900FB8 /* CategoryService.m */; };
 		7484DFC8202BFC1A00900FB8 /* ShoppingCarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7484DFC7202BFC1A00900FB8 /* ShoppingCarService.m */; };
 		74AAAAE9203F0225006AD3EB /* 添加icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE6203F0225006AD3EB /* 添加icon@2x.png */; };
@@ -839,6 +840,8 @@
 		743DC45920299EEE004E4DB0 /* searchicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchicon@2x.png"; sourceTree = "<group>"; };
 		743DC45D2029A70F004E4DB0 /* CategoryLeftMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryLeftMenu.h; sourceTree = "<group>"; };
 		743DC45E2029A70F004E4DB0 /* CategoryLeftMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryLeftMenu.m; sourceTree = "<group>"; };
+		74669A2B204E3B2400E6815F /* SettingModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingModifyUserInfoViewController.h; sourceTree = "<group>"; };
+		74669A2C204E3B2400E6815F /* SettingModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingModifyUserInfoViewController.m; sourceTree = "<group>"; };
 		7484DFC2202BFB9300900FB8 /* CategoryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryService.h; sourceTree = "<group>"; };
 		7484DFC3202BFB9300900FB8 /* CategoryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryService.m; sourceTree = "<group>"; };
 		7484DFC6202BFC1A00900FB8 /* ShoppingCarService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarService.h; sourceTree = "<group>"; };
@@ -919,6 +922,8 @@
 				740037CB2047A91D0065E7DF /* RestaurantAuthViewController.m */,
 				74DE88F22048EFC5007F4923 /* RestaurantDetailViewController.h */,
 				74DE88F32048EFC5007F4923 /* RestaurantDetailViewController.m */,
+				74669A2B204E3B2400E6815F /* SettingModifyUserInfoViewController.h */,
+				74669A2C204E3B2400E6815F /* SettingModifyUserInfoViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2252,6 +2257,7 @@
 				740F3FF8202847F90050A6BF /* POPVector.mm in Sources */,
 				74BC2FFD2046931200C6B9DD /* SearchService.m in Sources */,
 				740F3FD8202847F90050A6BF /* RATreeView+UIScrollView.m in Sources */,
+				74669A2D204E3B2400E6815F /* SettingModifyUserInfoViewController.m in Sources */,
 				740F3FA6202847F90050A6BF /* JQCyclingCycleAnimation.m in Sources */,
 				740F4018202847F90050A6BF /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				740F400D202847F90050A6BF /* VBTextView.m in Sources */,

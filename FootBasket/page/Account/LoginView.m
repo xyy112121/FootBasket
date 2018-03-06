@@ -126,6 +126,7 @@
             app.userinfo.usertel = [dictemp objectForKey:@"mobile"];
             app.userinfo.username = [dictemp objectForKey:@"realName"];
             app.userinfo.userheader = [dictemp objectForKey:@"avatar"];
+            app.userinfo.usernickname = [dictemp objectForKey:@"userLogin"];
             app.userinfo.usertype = [NSString stringWithFormat:@"%@",[dictemp objectForKey:@"userType"]];
             [self removeFromSuperview];
             if(_delegate1&&[_delegate1 respondsToSelector:@selector(DGLoginSuccess:)])
@@ -185,7 +186,7 @@
         {
             [self keyboardHide:nil];
             getyanzhengcodeflag = 1;
-      //      [self getverifycode];
+            [self getverifycode];
             timerone= [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updasecond:) userInfo:nil repeats:YES];
         }
     }
@@ -196,7 +197,7 @@
 {
     
     NSString *strtemp = [buttoncode currentTitle];
-    if([strtemp length]== 5)
+    if([strtemp isEqualToString:@"获取验证码"])
     {
         [buttoncode setTitle:@"重新获取60" forState:UIControlStateNormal];
     }
@@ -225,8 +226,8 @@
 -(void)getverifycode
 {
     LoginService *loginservice = [LoginService new];
-    [loginservice sendloginverifycoderequest:textfieldtel.text App:app ReqUrl:RQDeleteMyAddr successBlock:^(NSDictionary *dicData) {
-        [MBProgressHUD showSuccess:@"" toView:app.window];
+    [loginservice sendloginverifycoderequest:textfieldtel.text App:app ReqUrl:RQSMSCode successBlock:^(NSDictionary *dicData) {
+        [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
     }];
 }
 

@@ -20,4 +20,7 @@ typedef void (^SettingSuccessBlock)(NSDictionary *dicData);
 -(void)sendGetRestaurangListRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
 
 -(void)sendGetRestaurangDetailRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
+
+//修改用户信息
+-(void)sendModifySettingRequest:(NSString *)userid Name:(NSString *)name NickName:(NSString *)nickname App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
 @end

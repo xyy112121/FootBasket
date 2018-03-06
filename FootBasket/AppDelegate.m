@@ -22,13 +22,19 @@
     if([filemanger fileExistsAtPath:Cache_UserInfo])
     {
         NSDictionary *dictemp = [NSDictionary dictionaryWithContentsOfFile:Cache_UserInfo];
+        self.userinfo.userid = [dictemp objectForKey:@"id"];
+        self.userinfo.userheader = [dictemp objectForKey:@"avatar"];
+        self.userinfo.usertel = [dictemp objectForKey:@"mobile"];
+        self.userinfo.username = [dictemp objectForKey:@"realName"];
+        self.userinfo.usernickname = [dictemp objectForKey:@"userLogin"];
+        self.userinfo.usertype = [NSString stringWithFormat:@"%@",[dictemp objectForKey:@"userType"]];
     }
     
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    self.userinfo = [UserInfo new];
+    [self getuserinfo];
     self.FCDisplayShoppingCar = @"0";
     // Override point for customization after application launch.
     return YES;

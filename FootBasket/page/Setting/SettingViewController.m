@@ -226,16 +226,21 @@
             [cell.contentView addSubview:imageview];
             break;
         case 1:
+            labeltitle.text = @"昵称";
+            labelvalue.text = [dicuser objectForKey:@"userLogin"];
+            [cell.contentView addSubview:labelvalue];
+            break;
+        case 2:
             labeltitle.text = @"真实姓名";
             labelvalue.text = [dicuser objectForKey:@"realName"];
             [cell.contentView addSubview:labelvalue];
             break;
-        case 2:
+        case 3:
             labeltitle.text = @"电话号码";
             labelvalue.text = [dicuser objectForKey:@"mobile"];
             [cell.contentView addSubview:labelvalue];
             break;
-        case 3:
+        case 4:
             labeltitle.text = @"门店信息";
             labelvalue.text = [NSString stringWithFormat:@"%d",(int)[arraymerchant count]];
             [cell.contentView addSubview:labelvalue];
@@ -249,10 +254,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row ==3)
+    if(indexPath.row ==4)
     {
         RestaurantInfoViewController *restaurant = [[RestaurantInfoViewController alloc] init];
         [self.navigationController pushViewController:restaurant animated:YES];
+    }
+    else if(indexPath.row == 1)
+    {
+        SettingModifyUserInfoViewController *modify = [[SettingModifyUserInfoViewController alloc] init];
+        modify.FCStrTitle = @"昵称";
+        modify.FCStrsrc = [dicuser objectForKey:@"userLogin"];
+        [self.navigationController pushViewController:modify animated:YES];
+    }
+    else if(indexPath.row == 2)
+    {
+        SettingModifyUserInfoViewController *modify = [[SettingModifyUserInfoViewController alloc] init];
+        modify.FCStrTitle = @"真实姓名";
+        modify.FCStrsrc = [dicuser objectForKey:@"userLogin"];
+        [self.navigationController pushViewController:modify animated:YES];
     }
     else if(indexPath.row == 0)
     {

@@ -2,7 +2,7 @@
 #define URLPicHeader @"http://120.78.254.71/Basket/"
 
 #define RQLogin   @"/Basket/control/UserNavigate_logIn_OL.action" // 登录 mobile=1 code=873940
-#define RQSMSCode   @"/Basket/control/SMSCodeNavigate_getSMSCode_OL.action" //获取验证码 mobile=1
+
 #define RQDiscount   @"/Basket/resource/ProductDiscountNavigate_searchPageOL_OL.action" //特惠商品  page=1&rows=10
 #define RQRecommend   @"/Basket/resource/ProductRecommendNavigate_searchPageOL_OL.action" //推荐商品  page=1&rows=10
 #define RQCategoryMain  @"/Basket/resource/CategoryNavigate_searchPageOL_OL.action" //获取大分类 page=1&rows=10"
@@ -47,3 +47,6 @@
 
 #define RQDeleteMyAddr  @"/Basket/resource/UserAddressForm_deleteEntity_OL.action" //删除地址 objectID
 
+#define RQModifyUserInfo @"/Basket/control/UserForm_update_OL.action"//修改用户信息 objectID realName nickName
+
+#define RQSMSCode   @"/Basket/control/SMSCodeNavigate_getSMSCode_OL.action" //获取验证码 mobile

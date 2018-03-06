@@ -16,4 +16,5 @@
 @synthesize userstate;
 @synthesize useradmin;
 @synthesize usertype;
+@synthesize usernickname;
 @end

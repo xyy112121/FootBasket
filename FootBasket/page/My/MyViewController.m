@@ -85,7 +85,7 @@
     [viewheader addSubview:buttonheader];
     
     UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-150)/2, XYViewBottom(buttonheader)+5,150, 20)];
-    labelname.text = app.userinfo.username;
+    labelname.text = app.userinfo.usernickname;
     labelname.backgroundColor = [UIColor clearColor];
     labelname.font = FONTN(15.0f);
     labelname.textAlignment = NSTextAlignmentCenter;

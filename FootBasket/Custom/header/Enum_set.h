@@ -67,6 +67,8 @@ typedef enum
 
 #define EnMyAddrDeleteBtTag 7200 //删除地址
 
+#define EnModifyTextfieldValue 7300 //编辑信息textfield
+
 #endif /* Enum_set_h */
 
 

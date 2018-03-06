@@ -246,32 +246,34 @@
     }
     else if(((![[dicselectaddr objectForKey:@"county"] isEqualToString:@"西山区"])||(![[dicselectaddr objectForKey:@"county"] isEqualToString:@"高新区"]))&&([[dicresponse objectForKey:@"realPayPrice"] floatValue]<500))
     {
-        [MBProgressHUD showMessage:@"对不起,我们当前区的配送设施正在紧张的建设之中,暂时不能下单,给你带来的不便,敬请谅解" toView:app.window];
+//        [MBProgressHUD showMessage: toView:app.window];
+        [self popAlertSheetView:@"对不起,我们当前区的配送设施正在紧张的建设之中,暂时不能下单,给你带来的不便,敬请谅解"];
         return ;
     }
-    
-    
-    NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = [NSString stringWithFormat:@"你实际需要支付%@元\n是否确定提交订单",[dicresponse objectForKey:@"realPayPrice"]];
-    NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
-    NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    // Create the actions.
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    else
+    {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = [NSString stringWithFormat:@"你实际需要支付%@元\n是否确定提交订单",[dicresponse objectForKey:@"realPayPrice"]];
+        NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
+        NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
         
-    }];
-    
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self commitselforder];
-    }];
-    
-    // Add the actions.
-    [alertController addAction:cancelAction];
-    [alertController addAction:otherAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        // Create the actions.
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+        }];
+        
+        UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self commitselforder];
+        }];
+        
+        // Add the actions.
+        [alertController addAction:cancelAction];
+        [alertController addAction:otherAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 -(void)clickreceiveTime:(id)sender
@@ -297,7 +299,39 @@
 - (void)didClickFinishDateTimePickerView:(NSString *)date
 {
     receivetime = date;
-    [receivebuttontime setTitle:date forState:UIControlStateNormal];
+    receivetime = [NSString stringWithFormat:@"%@:00",receivetime];
+    CommonHeader *com = [CommonHeader new];
+    NSString *cha = [com CMIntervalFromLastDate:receivetime toTheDate:[com CMReturnnowdate:@"yyyy-MM-dd HH:mm:ss"]];
+    DLog(@"cha=====%@",cha);
+    if([cha intValue]<7200)
+    {
+        [self popAlertSheetView:@"对不起,由于我们需要备货,为你送达货物的时候必须大于2小时,为您带来的不便,敬请谅解！"];
+        
+    }
+    else
+    {
+        [receivebuttontime setTitle:date forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark - popalertview
+-(void)popAlertSheetView:(NSString *)popstr
+{
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = popstr;
+    NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    // Add the actions.
+    [alertController addAction:otherAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

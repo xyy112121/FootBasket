@@ -155,4 +155,14 @@
  *  @return 黑白图像
  */
 - (UIImage*)CMCovertToGrayImageFromImage:(UIImage*)sourceImage;
+
+/**
+ *  返回两个时间点中的差
+ *
+ *
+ *
+ *
+ */
+- (NSString *)CMIntervalFromLastDate: (NSString *) dateString1  toTheDate:(NSString *) dateString2;
+
 @end

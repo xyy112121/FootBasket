@@ -67,15 +67,16 @@
 
 -(void)initviewheader
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-    UIView *viewbg = [[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 40)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)];
+    UIView *viewbg = [[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 60)];
     viewbg.backgroundColor = [UIColor whiteColor];
     [view addSubview:viewbg];
     
-    UILabel *labeltips = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, SCREEN_WIDTH-20, 30)];
-    labeltips.text = @"温馨提示: 本店购物当订单金额超过36元,我们为您送货到家,由于食材需要从仓库中提取并且为您精心准备,请您提前一个小时下单！谢谢！";
+    UILabel *labeltips = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, SCREEN_WIDTH-20, 50)];
+    labeltips.text = @"温馨提示: 本店购物订单金额超过36元的西山区和高新区用户,我们将为您送货到家,由于食材需要从仓库中提取并且为您精心准备,请您提前一个小时下单！谢谢！";
     labeltips.textColor = COLORNOW(180, 180, 180);
     labeltips.font = FONTN(13.0f);
+    labeltips.numberOfLines = 3;
     [view addSubview:labeltips];
     
     tableview.tableHeaderView = view;
