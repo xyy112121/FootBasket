@@ -15,7 +15,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,9 +28,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取推荐商品列表失败,请检查网络" toView:app.window];
     }];
 }
@@ -40,7 +40,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:page forKey:@"page"];
     [params setObject:pagesize forKey:@"rows"];
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -53,8 +53,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取特惠商品列表失败,请检查网络" toView:app.window];
     }];
 }

@@ -134,63 +134,81 @@
     [view addSubview:labelstate];
     
     NSArray *arrayproduct = [dic objectForKey:@"products"];
-    float heightnow = XYViewBottom(imageline1);
-    float widthnow = (SCREEN_WIDTH-90)/8;
-    for(int i=0;i<[arrayproduct count];i++)
+    if([arrayproduct count]>0)
     {
-        NSDictionary *dicproduct = [arrayproduct objectAtIndex:i];
-        UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10+(10+widthnow)*i,XYViewBottom(imageline1)+10, widthnow, widthnow)];
-        NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dicproduct objectForKey:@"productBasic_headPicture"]];
-        [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
-        imageview.contentMode = UIViewContentModeScaleAspectFill;
-        imageview.clipsToBounds = YES;
-        [view addSubview:imageview];
-    }
-    
-    heightnow = heightnow+widthnow+20;
-    
-    UIImageView *imageline2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, heightnow, SCREEN_WIDTH, 0.7)];
-    imageline2.backgroundColor = COLORNOW(220, 220, 220);
-    [view addSubview:imageline2];
-    
-    NSString *price = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"realPay"]];
-    CommonHeader *com = [CommonHeader new];
-    CGSize size = [com CMGetlablesize:price Fwidth:200 Fheight:20 Sfont:FONTN(15.0f) Spaceing:1.0f];
-    
-    UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-size.width-10, XYViewBottom(imageline2)+10, size.width, 20)];
-    labelprice.text = price;
-    labelprice.font = FONTN(15.0f);
-    labelprice.textColor = COLORNOW(52, 52, 52);
-    [view addSubview:labelprice];
-    
-    UILabel *labeldes = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelprice)-135,XYViewTop(labelprice), 135, 20)];
-    labeldes.text = [NSString stringWithFormat:@"共计%ld件商品 合计:",[(NSArray *)[dic objectForKey:@"products"] count]];
-    labeldes.font = FONTN(15.0f);
-    labeldes.textColor = COLORNOW(122, 122,122);
-    [view addSubview:labeldes];
-    
-    //未支付  已收货  显示欠款
-    if(([[dic objectForKey:@"isPay"] intValue]==0)&&([[dic objectForKey:@"deliveryState"] integerValue]==3))
-    {
-        UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, XYViewBottom(imageline2)+12, 15, 16)];
-        imageview.image = LOADIMAGE(@"代付款", @"png");
-        [view addSubview:imageview];
+        float heightnow = XYViewBottom(imageline1);
+        float widthnow = (SCREEN_WIDTH-90)/8;
+        int countnum = (int)[arrayproduct count];
+        int hang = countnum%8==0?countnum/8:countnum/8+1;
+        int lie = 0;
+        for(int i=0;i<hang;i++)
+        {
+            if(i<hang-1)
+            {
+                lie = 8;
+            }
+            else
+            {
+                lie = countnum%8==0?8:countnum%8;
+            }
+            for(int j=0;j<lie;j++)
+            {
+                NSDictionary *dicproduct = [arrayproduct objectAtIndex:i*8+j];
+                UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10+(10+widthnow)*j,XYViewBottom(imageline1)+10+(widthnow +10)*i, widthnow, widthnow)];
+                NSString *strpath = [NSString stringWithFormat:@"%@%@",URLPicHeader,[dicproduct objectForKey:@"productBasic_headPicture"]];
+                [imageview setImageWithURL:[NSURL URLWithString:strpath] placeholderImage:LOADIMAGE(@"图层20", @"png")];
+                imageview.contentMode = UIViewContentModeScaleAspectFill;
+                imageview.clipsToBounds = YES;
+                [view addSubview:imageview];
+            }
+            
+            heightnow = heightnow+10+widthnow;
+        }
         
-        UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+5, XYViewTop(imageview)-2, 150, 20)];
-        labelprice.text = [NSString stringWithFormat:@"欠款:￥%@元",[dic objectForKey:@"debtPrice"]];
-        labelprice.font = FONTN(16.0f);
-        labelprice.textColor = COLORNOW(255, 110, 64);
+        heightnow = heightnow+10;
+        
+        UIImageView *imageline2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, heightnow, SCREEN_WIDTH, 0.7)];
+        imageline2.backgroundColor = COLORNOW(220, 220, 220);
+        [view addSubview:imageline2];
+        
+        NSString *price = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"realPay"]];
+        CommonHeader *com = [CommonHeader new];
+        CGSize size = [com CMGetlablesize:price Fwidth:200 Fheight:20 Sfont:FONTN(15.0f) Spaceing:1.0f];
+        
+        UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-size.width-10, XYViewBottom(imageline2)+10, size.width, 20)];
+        labelprice.text = price;
+        labelprice.font = FONTN(15.0f);
+        labelprice.textColor = COLORNOW(52, 52, 52);
         [view addSubview:labelprice];
+        
+        UILabel *labeldes = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelprice)-135,XYViewTop(labelprice), 135, 20)];
+        labeldes.text = [NSString stringWithFormat:@"共计%ld件商品 合计:",[(NSArray *)[dic objectForKey:@"products"] count]];
+        labeldes.font = FONTN(15.0f);
+        labeldes.textColor = COLORNOW(122, 122,122);
+        [view addSubview:labeldes];
+        
+        //未支付  已收货  显示欠款
+        if(([[dic objectForKey:@"isPay"] intValue]==0)&&([[dic objectForKey:@"deliveryState"] integerValue]==3))
+        {
+            UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, XYViewBottom(imageline2)+12, 15, 16)];
+            imageview.image = LOADIMAGE(@"代付款", @"png");
+            [view addSubview:imageview];
+            
+            UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+5, XYViewTop(imageview)-2, 150, 20)];
+            labelprice.text = [NSString stringWithFormat:@"欠款:￥%@元",[dic objectForKey:@"debtPrice"]];
+            labelprice.font = FONTN(16.0f);
+            labelprice.textColor = COLORNOW(255, 110, 64);
+            [view addSubview:labelprice];
+        }
+        else
+        {
+            UILabel *labelstate = [[UILabel alloc] initWithFrame:CGRectMake(10,XYViewTop(imageline2)+10, 100, 20)];
+            labelstate.text = [dic objectForKey:@"displayIsPay"];
+            labelstate.font = FONTN(16.0f);
+            labelstate.textColor = COLORNOW(255, 110, 64);
+            [view addSubview:labelstate];
+        }
     }
-    else
-    {
-        UILabel *labelstate = [[UILabel alloc] initWithFrame:CGRectMake(10,XYViewTop(imageline2)+10, 100, 20)];
-        labelstate.text = [dic objectForKey:@"displayIsPay"];
-        labelstate.font = FONTN(16.0f);
-        labelstate.textColor = COLORNOW(255, 110, 64);
-        [view addSubview:labelstate];
-    }
-
     return view;
 }
 
@@ -212,7 +230,7 @@
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
-    [PTLoadingHubView dismiss];
+    [XLBallLoading hideInView:app.window];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -311,7 +329,11 @@
     
     cell.backgroundColor = [UIColor clearColor];
     NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
-    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 140) Dic:dictemp IndexPath:indexPath];
+    float widthnow = (SCREEN_WIDTH-90)/8;
+    NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
+    NSArray *arrayproduct = [dic objectForKey:@"products"];
+    int row = (int)[arrayproduct count]==0?0:(int)[arrayproduct count]/8+1;
+    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 85+((widthnow+10)*row+10)) Dic:dictemp IndexPath:indexPath];
     [cell.contentView addSubview:view];
     
     return cell;

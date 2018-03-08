@@ -81,7 +81,7 @@
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
-    [PTLoadingHubView dismiss];
+    [XLBallLoading hideInView:app.window];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

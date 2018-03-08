@@ -15,7 +15,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:searchtext forKey:@"productName"];
     [params setObject:rows forKey:@"rows"];
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,9 +28,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }

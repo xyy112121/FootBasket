@@ -119,25 +119,37 @@
     UIImageView *imageaddricon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 24, 14, 18)];
     imageaddricon.image = LOADIMAGE(@"地址icon", @"png");
     [viewaddr addSubview:imageaddricon];
-    
-    UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 7, 100, 20)];
-    labelname.text = [dicaddr objectForKey:@"userName"];
-    labelname.font = FONTN(15.0f);
-    [viewaddr addSubview:labelname];
-    
-    UILabel *labeltel = [[UILabel alloc] initWithFrame:CGRectMake(XYViewWidth(viewaddr)-170, 7, 140, 20)];
-    labeltel.text = [dicaddr objectForKey:@"mobile"];
-    labeltel.textAlignment = NSTextAlignmentRight;
-    labeltel.font = FONTN(15.0f);
-    [viewaddr addSubview:labeltel];
-    
-    UILabel *labeladdr = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, XYViewBottom(labelname), SCREEN_WIDTH-60, 35)];
-    labeladdr.backgroundColor = [UIColor clearColor];
-    labeladdr.text = [NSString stringWithFormat:@"%@%@%@%@",[dicaddr objectForKey:@"province"],[dicaddr objectForKey:@"city"],[dicaddr objectForKey:@"county"],[dicaddr objectForKey:@"address"]];
-    labeladdr.font = FONTN(15.0f);
-    labeladdr.numberOfLines = 2;
-    labeladdr.textColor = COLORNOW(52, 52, 52);
-    [viewaddr addSubview:labeladdr];
+    if([selectaddrid length]==0)
+    {
+        
+    }
+    else
+    {
+        
+        
+        UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, 7, 100, 20)];
+        labelname.text = [dicaddr objectForKey:@"userName"];
+        labelname.font = FONTN(15.0f);
+        [viewaddr addSubview:labelname];
+        
+        UILabel *labeltel = [[UILabel alloc] initWithFrame:CGRectMake(XYViewWidth(viewaddr)-170, 7, 140, 20)];
+        labeltel.text = [dicaddr objectForKey:@"mobile"];
+        labeltel.textAlignment = NSTextAlignmentRight;
+        labeltel.font = FONTN(15.0f);
+        [viewaddr addSubview:labeltel];
+        
+        UILabel *labeladdr = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageaddricon)+5, XYViewBottom(labelname), SCREEN_WIDTH-60, 35)];
+        labeladdr.backgroundColor = [UIColor clearColor];
+        labeladdr.text = [NSString stringWithFormat:@"%@%@%@%@",[dicaddr objectForKey:@"province"],[dicaddr objectForKey:@"city"],[dicaddr objectForKey:@"county"],[dicaddr objectForKey:@"address"]];
+        labeladdr.font = FONTN(15.0f);
+        labeladdr.numberOfLines = 2;
+        labeladdr.textColor = COLORNOW(52, 52, 52);
+        [viewaddr addSubview:labeladdr];
+        
+        
+        
+        
+    }
     
     UIImageView *arrawleft = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-17, 24, 7, 15)];
     arrawleft.image = LOADIMAGE(@"arrow_left", @"png");
@@ -240,7 +252,7 @@
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
-    [PTLoadingHubView dismiss];
+    [XLBallLoading hideInView:app.window];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -261,9 +273,8 @@
         [MBProgressHUD showError:@"请选择送达时间" toView:app.window];
         return;
     }
-    else if(((![[dicselectaddr objectForKey:@"county"] isEqualToString:@"西山区"])||(![[dicselectaddr objectForKey:@"county"] isEqualToString:@"高新区"]))&&([[dicresponse objectForKey:@"realPayPrice"] floatValue]<500))
+    else if(([[dicselectaddr objectForKey:@"county"] rangeOfString:@"西山区"].location == NSNotFound)&&([[dicselectaddr objectForKey:@"county"] rangeOfString:@"高新区"].location == NSNotFound)&&([[dicresponse objectForKey:@"realPayPrice"] floatValue]<500))
     {
-//        [MBProgressHUD showMessage: toView:app.window];
         [self popAlertSheetView:@"对不起,我们当前区的配送设施正在紧张的建设之中,暂时不能下单,给你带来的不便,敬请谅解"];
         return ;
     }

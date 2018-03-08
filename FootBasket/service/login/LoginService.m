@@ -38,7 +38,8 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:tel forKey:@"mobile"];
     [params setObject:code forKey:@"code"];
-    [PTLoadingHubView show];
+   // [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -51,13 +52,37 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"登录失败,请检查网络" toView:app.window];
     }];
 }
 
+-(void)sendGetVersionrequest:(NSString * )type App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(LoginSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:type forKey:@"phoneType"];
+    // [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+        [XLBallLoading hideInView:app.window];
+    } Failur:^(NSString *strmsg) {
+        [XLBallLoading hideInView:app.window];
+        [MBProgressHUD showError:@"登录失败,请检查网络" toView:app.window];
+    }];
+}
 
 
 @end

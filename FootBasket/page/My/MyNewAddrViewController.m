@@ -87,6 +87,7 @@
 {
     if(textField.tag == EnMyNewAddrTextfieldTag+2)
     {
+        [self keyboardHide:nil];
         [self clickselectcity];
         return NO;
     }
@@ -97,7 +98,7 @@
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
-    [PTLoadingHubView dismiss];
+    [XLBallLoading hideInView:app.window];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

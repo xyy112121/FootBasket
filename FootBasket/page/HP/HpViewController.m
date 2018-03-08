@@ -44,11 +44,25 @@
         [weakSelf gethpinterface];
     }];
     
+    [self getNewVersion];
+    
 //    tableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //        [weakSelf getmyfansperson:@"1" PageSize:[NSString stringWithFormat:@"%d",(int)[FCarraydata count]+10]];
 //    }];
 //    // 默认先隐藏footer
 //    tableview.mj_footer.hidden = YES;
+    
+    //    NSFileManager *filemanger = [NSFileManager defaultManager];
+    if(app.userinfo.userid)
+    {
+        [self gethpinterface];
+    }
+    else
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
     
 }
 
@@ -153,7 +167,7 @@
 #pragma mark - ActionDelegate
 -(void)DGLoginSuccess:(id)sender
 {
-    [self gethpinterface];
+//    [self gethpinterface];
 }
 
 -(void)DGCickSearchTextfield:(id)sender
@@ -190,17 +204,7 @@
     NSDictionary* dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
-    NSFileManager *filemanger = [NSFileManager defaultManager];
-    if(app.userinfo.userid)
-    {
-        [self gethpinterface];
-    }
-    else
-    {
-        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        login.delegate1 = self;
-        [app.window addSubview:login];
-    }
+
     
     [hpnav removeFromSuperview];
     hpnav = nil;
@@ -355,6 +359,63 @@
         [tableview reloadData];
     }];
     
+}
+
+-(void)getNewVersion
+{
+    LoginService *loginservice = [LoginService new];
+    [loginservice sendGetVersionrequest:@"ios" App:app ReqUrl:RQGetVersion successBlock:^(NSDictionary *dicData) {
+        
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *currentVersion = [infoDic objectForKey:@"CFBundleVersion"];
+        
+        NSDictionary *dictemp = [dicData objectForKey:@"row"];
+        if([dictemp count]>0)
+        {
+            
+//        NSString *serversion = [NSString stringWithFormat:@"%@",[[dic objectForKey:@"data"] objectForKey:@"number"]];
+//        NSString *verswitch = [NSString stringWithFormat:@"%@",[[dic objectForKey:@"data"] objectForKey:@"switch"]];
+//        if([verswitch isEqualToString:@"0"])
+//        {
+//            return ;
+//        }
+//        else if([serversion isEqualToString:@"0.0"])
+//        {
+//            return ;
+//        }
+//        else if(![serversion isEqualToString:currentVersion])
+//        {
+//            
+//            [self popAlertSheetView:@"有新版本,你需要更新吗?"]
+//            
+        }
+
+        
+    }];
+}
+
+#pragma mark - popalertview
+-(void)popAlertSheetView:(NSString *)popstr
+{
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = popstr;
+    NSString *canelButtonTitle = NSLocalizedString(@"取消", nil);
+    NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *canelAction = [UIAlertAction actionWithTitle:canelButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    // Add the actions.
+    [alertController addAction:otherAction];
+    [alertController addAction:canelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

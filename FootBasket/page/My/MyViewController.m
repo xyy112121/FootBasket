@@ -151,7 +151,7 @@
         [imagecoupon addTarget:self action:@selector(clickmycoupon:) forControlEvents:UIControlEventTouchUpInside];
         [viewheader addSubview:imagecoupon];
         
-        UILabel *labelcoupon = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagecoupon), XYViewBottom(imagecoupon)-5, XYViewWidth(imagecoupon), 20)];
+        UILabel *labelcoupon = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagecoupon)-10, XYViewBottom(imagecoupon)-5, XYViewWidth(imagecoupon)+20, 20)];
         labelcoupon.text = @"我的钱包";
         labelcoupon.backgroundColor = [UIColor clearColor];
         labelcoupon.font = FONTN(15.0f);
@@ -169,7 +169,7 @@
         [imagedelivery addTarget:self action:@selector(clickdelivery:) forControlEvents:UIControlEventTouchUpInside];
         [viewheader addSubview:imagedelivery];
         
-        UILabel *labeldelivery = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagedelivery), XYViewBottom(imagedelivery)-5, XYViewWidth(imagedelivery), 20)];
+        UILabel *labeldelivery = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(imagedelivery)-10, XYViewBottom(imagedelivery)-5, XYViewWidth(imagedelivery)+20, 20)];
         labeldelivery.text = @"送货单";
         labeldelivery.backgroundColor = [UIColor clearColor];
         labeldelivery.font = FONTN(15.0f);

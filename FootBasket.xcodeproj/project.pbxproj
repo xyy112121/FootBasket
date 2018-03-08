@@ -295,6 +295,7 @@
 		740F402D202856B20050A6BF /* RecommendGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F402C202856B20050A6BF /* RecommendGoodsCell.m */; };
 		7413048A202AA3B000D9AB80 /* HpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74130489202AA3B000D9AB80 /* HpService.m */; };
 		74150553204CF7540090DE05 /* MyEditAddrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74150552204CF7540090DE05 /* MyEditAddrViewController.m */; };
+		742E5533204FCA8900CABE29 /* XLBallLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 742E5532204FCA8800CABE29 /* XLBallLoading.m */; };
 		743B5238203FBD340004E673 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 743B5230203FBD330004E673 /* city.plist */; };
 		743B5239203FBD340004E673 /* CZHAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B5232203FBD330004E673 /* CZHAddressPickerView.m */; };
 		743B523A203FBD340004E673 /* description in Resources */ = {isa = PBXBuildFile; fileRef = 743B5233203FBD330004E673 /* description */; };
@@ -820,6 +821,8 @@
 		74130489202AA3B000D9AB80 /* HpService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HpService.m; sourceTree = "<group>"; };
 		74150551204CF7540090DE05 /* MyEditAddrViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyEditAddrViewController.h; sourceTree = "<group>"; };
 		74150552204CF7540090DE05 /* MyEditAddrViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyEditAddrViewController.m; sourceTree = "<group>"; };
+		742E5531204FCA8800CABE29 /* XLBallLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBallLoading.h; sourceTree = "<group>"; };
+		742E5532204FCA8800CABE29 /* XLBallLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBallLoading.m; sourceTree = "<group>"; };
 		743B522F203FBD330004E673 /* AddressPickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickerHeader.h; sourceTree = "<group>"; };
 		743B5230203FBD330004E673 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		743B5231203FBD330004E673 /* CZHAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHAddressPickerView.h; sourceTree = "<group>"; };
@@ -1248,6 +1251,7 @@
 		740F3E3F202847F90050A6BF /* CommLib */ = {
 			isa = PBXGroup;
 			children = (
+				742E5530204FCA8800CABE29 /* XLBallLoading */,
 				740037D72047D7070065E7DF /* 选择图片不裁剪 */,
 				74BC2FFE20469C1400C6B9DD /* NetworkLoading */,
 				74DF55BE20413FFC005276CC /* 时间选择器 */,
@@ -1806,6 +1810,15 @@
 			path = hp;
 			sourceTree = "<group>";
 		};
+		742E5530204FCA8800CABE29 /* XLBallLoading */ = {
+			isa = PBXGroup;
+			children = (
+				742E5531204FCA8800CABE29 /* XLBallLoading.h */,
+				742E5532204FCA8800CABE29 /* XLBallLoading.m */,
+			);
+			path = XLBallLoading;
+			sourceTree = "<group>";
+		};
 		743B522E203FBD330004E673 /* AddressPickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2355,6 +2368,7 @@
 				740F3FFC202847F90050A6BF /* NSData+ImageContentType.m in Sources */,
 				740F3FD4202847F90050A6BF /* RATreeView+Enums.m in Sources */,
 				7484DFC4202BFB9300900FB8 /* CategoryService.m in Sources */,
+				742E5533204FCA8900CABE29 /* XLBallLoading.m in Sources */,
 				740F4008202847F90050A6BF /* UIImage+MultiFormat.m in Sources */,
 				740F3FAC202847F90050A6BF /* MBProgressHUD+Add.m in Sources */,
 				740F3FC8202847F90050A6BF /* MJDIYHeader.m in Sources */,
@@ -2484,7 +2498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2533,7 +2547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2548,6 +2562,7 @@
 				DEVELOPMENT_TEAM = 64VCC3B3JQ;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FootBasket/Custom/PrefixHeader.pch";
 				INFOPLIST_FILE = FootBasket/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.reerapp.FootBasket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2565,6 +2580,7 @@
 				DEVELOPMENT_TEAM = 64VCC3B3JQ;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FootBasket/Custom/PrefixHeader.pch";
 				INFOPLIST_FILE = FootBasket/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.reerapp.FootBasket;
 				PRODUCT_NAME = "$(TARGET_NAME)";

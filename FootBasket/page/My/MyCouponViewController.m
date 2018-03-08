@@ -179,7 +179,7 @@
 #pragma mark - IBAction
 -(void)returnback:(id)sender
 {
-    [PTLoadingHubView dismiss];
+    [XLBallLoading hideInView:app.window];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -231,6 +231,7 @@
     NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
     NSArray *arrayproduct = [dic objectForKey:@"products"];
     int row = (int)[arrayproduct count]==0?0:(int)[arrayproduct count]/8+1;
+    DLog(@"widow====%f",85+((widthnow+10)*row+10));
     return 85+((widthnow+10)*row+10);
 }
 
@@ -269,7 +270,11 @@
     
     cell.backgroundColor = [UIColor clearColor];
     NSDictionary *dictemp = [arraydata objectAtIndex:indexPath.row];
-    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 140) Dic:dictemp IndexPath:indexPath];
+    float widthnow = (SCREEN_WIDTH-90)/8;
+    NSDictionary *dic = [arraydata objectAtIndex:indexPath.row];
+    NSArray *arrayproduct = [dic objectForKey:@"products"];
+    int row = (int)[arrayproduct count]==0?0:(int)[arrayproduct count]/8+1;
+    UIView *view = [self ViewCell:CGRectMake(0, 0, SCREEN_WIDTH, 85+((widthnow+10)*row+10)) Dic:dictemp IndexPath:indexPath];
     [cell.contentView addSubview:view];
     
     

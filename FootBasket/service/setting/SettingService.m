@@ -15,7 +15,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"objectID"];
 
-    [PTLoadingHubView show];
+   [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -28,9 +28,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
@@ -40,7 +40,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"objectID"];
     
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithArraypic:avatar Parameter:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -53,10 +53,10 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"上传图片失败,请检查网络" toView:app.window];
     }];
 }
@@ -68,7 +68,7 @@
     [params setObject:name forKey:@"name"];
     [params setObject:address forKey:@"address"];
 
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithArraypic:restaurantpic Parameter:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -81,10 +81,10 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+       [XLBallLoading hideInView:app.window];
         
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"餐馆上传图片失败,请检查网络" toView:app.window];
     }];
 }
@@ -94,7 +94,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"userId"];
     
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -107,9 +107,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
@@ -119,7 +119,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"objectID"];
     
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -132,9 +132,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
@@ -146,7 +146,7 @@
     [params setObject:name forKey:@"realName"];
     [params setObject:nickname forKey:@"nickName"];
     
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -159,9 +159,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }
@@ -171,7 +171,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:objectid forKey:@"objectID"];
     
-    [PTLoadingHubView show];
+    [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         
     } Success:^(NSDictionary *dic) {
@@ -184,9 +184,9 @@
         {
             [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
         }
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
     } Failur:^(NSString *strmsg) {
-        [PTLoadingHubView dismiss];
+        [XLBallLoading hideInView:app.window];
         [MBProgressHUD showError:@"获取商品详情失败,请检查网络" toView:app.window];
     }];
 }

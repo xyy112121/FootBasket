@@ -52,3 +52,5 @@
 #define RQSMSCode   @"/Basket/control/SMSCodeNavigate_getSMSCode_OL.action" //获取验证码 mobile
 
 #define RQSetDefaultAddr @"/Basket/resource/UserAddressNavigate_setDefault_OL.action" //默认地址objectID
+
+#define RQGetVersion @"/Basket/control/VersionNavigate_searchPageOL_OL.action"//获取版本 phoneType=ios android
