@@ -46,10 +46,11 @@
     textfieldinput.backgroundColor = [UIColor clearColor];
     [self addSubview:textfieldinput];
     
-    UIButton *buttonright = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonright.frame = CGRectMake(SCREEN_WIDTH-50, 2, 40, 40);
-    [buttonright setImage:LOADIMAGE(@"活动", @"png") forState:UIControlStateNormal];
-    [self addSubview:buttonright];
+    _buttondiscovery = [UIButton buttonWithType:UIButtonTypeCustom];
+    _buttondiscovery.frame = CGRectMake(SCREEN_WIDTH-50, 2, 40, 40);
+    [_buttondiscovery setImage:LOADIMAGE(@"活动", @"png") forState:UIControlStateNormal];
+    [_buttondiscovery addTarget:self action:@selector(gotodiscovery:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_buttondiscovery];
 }
 
 -(void)initViewCategory
@@ -90,6 +91,14 @@
     }
     return YES;
     
+}
+
+-(void)gotodiscovery:(id)sender
+{
+    if(_delegate1 && [_delegate1 respondsToSelector:@selector(DGClickHpDiscovery:)])
+    {
+        [_delegate1 DGClickHpDiscovery:sender];
+    }
 }
 
 @end

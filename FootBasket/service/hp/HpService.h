@@ -15,4 +15,8 @@ typedef void (^DiscountSuccessBlock)(NSDictionary *dicData);;
 -(void)sendRecommendRequest:(NSString * )page PageSize:(NSString *)pagesize App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DiscountSuccessBlock)successBlock;
 
 -(void)sendDiscountRequest:(NSString * )page PageSize:(NSString *)pagesize App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DiscountSuccessBlock)successBlock;
+
+
+//获取首页的发现页面是否显示
+-(void)sendGetDiscoryRequest:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DiscountSuccessBlock)successBlock;
 @end

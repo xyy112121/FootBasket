@@ -50,9 +50,20 @@
     [self.view addSubview:tableview];
     [self setExtraCellLineHidden:tableview];
     
-    [self getmydeliverylist];
+    [self getmydeliverylist:@"10"];
     
     [self initheaderview];
+    
+    __weak __typeof(self) weakSelf = self;
+    tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf getmydeliverylist:@"10"];
+    }];
+    
+    tableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf getmydeliverylist:[NSString stringWithFormat:@"%ld",[arraydata count]+10]];
+    }];
+    // 默认先隐藏footer
+    tableview.mj_footer.hidden = YES;
 }
 
 -(void)initheaderview
@@ -171,7 +182,7 @@
     labelsendtime.textColor = COLORNOW(52, 52, 52);
     [view addSubview:labelsendtime];
     
-    UILabel *labelsendtimevalue = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelsendtime), XYViewTop(labelsendtime),150, 20)];
+    UILabel *labelsendtimevalue = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labelsendtime), XYViewTop(labelsendtime),180, 20)];
     labelsendtimevalue.text = [dic objectForKey:@"deliveryTime"];
     labelsendtimevalue.font = FONTB(16.0f);
     labelsendtimevalue.textColor = COLORNOW(52, 52, 52);
@@ -214,7 +225,7 @@
         deliverystate = @"2";
     else
         deliverystate = @"3";
-    [self getmydeliverylist];
+    [self getmydeliverylist:@"10"];
 }
 
 #pragma mark - tableview delegate
@@ -308,14 +319,18 @@
 }
 
 #pragma mark - 接口
--(void)getmydeliverylist
+-(void)getmydeliverylist:(NSString *)rows
 {
     DeliveryService *delivery = [DeliveryService new];
-    [delivery sendDeliveryListRequest:app.userinfo.userid DeliveryState:deliverystate App:app ReqUrl:RQDeliveryList successBlock:^(NSDictionary *dicData) {
+    [delivery sendDeliveryListRequest:app.userinfo.userid Rows:rows DeliveryState:deliverystate App:app ReqUrl:RQDeliveryList successBlock:^(NSDictionary *dicData) {
         arraydata = [dicData objectForKey:@"rows"];
         tableview.delegate = self;
         tableview.dataSource = self;
         [tableview reloadData];
+        if([arraydata count]>10)
+            tableview.mj_footer.hidden = NO;
+        [tableview.mj_header endRefreshing];
+        [tableview.mj_footer endRefreshing];
     }];
     
 }

@@ -102,6 +102,7 @@
 {
     if(textField.tag == EnMyNewAddrTextfieldTag+2)
     {
+        [self keyboardHide:nil];
         [self clickselectcity];
         return NO;
     }

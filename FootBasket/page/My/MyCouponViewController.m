@@ -43,7 +43,7 @@
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.title = @"我的钱包";
     
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight-50) style:UITableViewStylePlain];
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin-StatusBarAndNavigationHeight) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tableview];

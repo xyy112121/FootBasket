@@ -10,11 +10,12 @@
 
 @implementation DeliveryService
 
--(void)sendDeliveryListRequest:(NSString *)userid DeliveryState:(NSString *)deliverystate App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DeliverSuccessBlock)successBlock
+-(void)sendDeliveryListRequest:(NSString *)userid Rows:(NSString *)rows DeliveryState:(NSString *)deliverystate App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DeliverSuccessBlock)successBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:userid forKey:@"userId"];
     [params setObject:deliverystate forKey:@"deliveryState"];
+    [params setObject:rows forKey:@"rows"];
     [XLBallLoading showInView:app.window];
     [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
         

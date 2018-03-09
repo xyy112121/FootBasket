@@ -60,4 +60,24 @@
     }];
 }
 
+-(void)sendGetDiscoryRequest:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(DiscountSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+    } Failur:^(NSString *strmsg) {
+        [MBProgressHUD showError:@"获取特惠商品列表失败,请检查网络" toView:app.window];
+    }];
+}
+
 @end

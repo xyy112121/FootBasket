@@ -45,7 +45,7 @@
     }];
     
     [self getNewVersion];
-    
+    [self getHpDiscory];
 //    tableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //        [weakSelf getmyfansperson:@"1" PageSize:[NSString stringWithFormat:@"%d",(int)[FCarraydata count]+10]];
 //    }];
@@ -53,16 +53,7 @@
 //    tableview.mj_footer.hidden = YES;
     
     //    NSFileManager *filemanger = [NSFileManager defaultManager];
-    if(app.userinfo.userid)
-    {
-        [self gethpinterface];
-    }
-    else
-    {
-        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        login.delegate1 = self;
-        [app.window addSubview:login];
-    }
+    
     
 }
 
@@ -167,7 +158,7 @@
 #pragma mark - ActionDelegate
 -(void)DGLoginSuccess:(id)sender
 {
-//    [self gethpinterface];
+    [self gethpinterface];
 }
 
 -(void)DGCickSearchTextfield:(id)sender
@@ -187,9 +178,20 @@
 
 -(void)DGAddShoppingCar:(NSDictionary *)sender
 {
-    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) DicRecommend:sender];
+    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin) DicRecommend:sender];
     [app.window addSubview:addshoppingcar];
 
+}
+
+-(void)DGClickHpDiscovery:(id)sender
+{
+    if ([FCDiscoryUrl rangeOfString:@"http"].location != NSNotFound)
+    {
+        WkWebviewViewController *wkwebview = [[WkWebviewViewController alloc] init];
+        wkwebview.hidesBottomBarWhenPushed = YES;
+        wkwebview.FCDiscoveryUrl = FCDiscoryUrl;
+        [self.navigationController pushViewController:wkwebview animated:YES];
+    }
 }
 
 #pragma mark - viewcontroller delegate
@@ -204,7 +206,16 @@
     NSDictionary* dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     self.navigationController.navigationBar.titleTextAttributes= dict;
     
-
+    if(app.userinfo.userid)
+    {
+        [self gethpinterface];
+    }
+    else
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
     
     [hpnav removeFromSuperview];
     hpnav = nil;
@@ -365,32 +376,40 @@
 {
     LoginService *loginservice = [LoginService new];
     [loginservice sendGetVersionrequest:@"ios" App:app ReqUrl:RQGetVersion successBlock:^(NSDictionary *dicData) {
-        
+        DLog(@"dicdata=====%@",dicData);
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
         NSString *currentVersion = [infoDic objectForKey:@"CFBundleVersion"];
         
-        NSDictionary *dictemp = [dicData objectForKey:@"row"];
+        NSDictionary *dictemp = [dicData objectForKey:@"version"];
         if([dictemp count]>0)
         {
             
-//        NSString *serversion = [NSString stringWithFormat:@"%@",[[dic objectForKey:@"data"] objectForKey:@"number"]];
-//        NSString *verswitch = [NSString stringWithFormat:@"%@",[[dic objectForKey:@"data"] objectForKey:@"switch"]];
-//        if([verswitch isEqualToString:@"0"])
-//        {
-//            return ;
-//        }
-//        else if([serversion isEqualToString:@"0.0"])
-//        {
-//            return ;
-//        }
-//        else if(![serversion isEqualToString:currentVersion])
-//        {
-//            
-//            [self popAlertSheetView:@"有新版本,你需要更新吗?"]
-//            
+            NSString *serversion = [dictemp objectForKey:@"version"];
+            if(![serversion isEqualToString:currentVersion])
+            {
+                
+                [self popAlertSheetView:@"有新版本,你需要更新吗?"];
+            }
         }
 
         
+    }];
+}
+
+-(void)getHpDiscory
+{
+    HpService *discory = [HpService new];
+    [discory sendGetDiscoryRequest:app ReqUrl:RQGetHpDiscory successBlock:^(NSDictionary *dicData) {
+        NSDictionary *dic = [dicData objectForKey:@"discovery"];
+        if([[dic objectForKey:@"isDiscovery"] isEqualToString:@"true"])
+        {
+            hpnav.buttondiscovery.hidden = NO;
+            FCDiscoryUrl = [dic objectForKey:@"url"];
+        }
+        else
+        {
+            hpnav.buttondiscovery.hidden = YES;
+        }
     }];
 }
 

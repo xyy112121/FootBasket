@@ -371,7 +371,7 @@
         [viewtime addSubview:labeltime];
         
         UIButton *receivebuttontime  = [UIButton buttonWithType:UIButtonTypeCustom];
-        receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-155, 21, 130, 30);
+        receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-175, 21, 150, 30);
         [receivebuttontime setTitle:[dicresponse objectForKey:@"deliveryTime"] forState:UIControlStateNormal];
         receivebuttontime.titleLabel.font = FONTN(15.0f);
         [receivebuttontime setTitleColor:COLORNOW(32, 188, 167) forState:UIControlStateNormal];

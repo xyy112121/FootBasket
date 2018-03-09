@@ -48,7 +48,7 @@
     
     [self setExtraCellLineHidden:tableview];
 
-    [self initheaderview];
+    
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, StatusBarHeight, 50, 40)];
     [button setTitle:@"设置"forState:UIControlStateNormal];
@@ -263,6 +263,7 @@
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -275,6 +276,8 @@
     if([app.userinfo.userheader length]>0)
         [buttonheader setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPicHeader,app.userinfo.userheader]] placeholderImage:LOADIMAGE(@"个人头像", @"png")];
     
+    [self initheaderview];
+    [tableview reloadData];
     NSFileManager *filemanger = [NSFileManager defaultManager];
     if(![filemanger fileExistsAtPath:Cache_UserInfo])
     {

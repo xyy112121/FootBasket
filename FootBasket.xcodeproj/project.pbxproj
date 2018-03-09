@@ -315,6 +315,7 @@
 		743DC45C20299EEE004E4DB0 /* searchicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 743DC45920299EEE004E4DB0 /* searchicon@2x.png */; };
 		743DC45F2029A70F004E4DB0 /* CategoryLeftMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 743DC45E2029A70F004E4DB0 /* CategoryLeftMenu.m */; };
 		74669A2D204E3B2400E6815F /* SettingModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74669A2C204E3B2400E6815F /* SettingModifyUserInfoViewController.m */; };
+		747D1EBD2052606F00C272A0 /* WkWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747D1EBC2052606F00C272A0 /* WkWebviewViewController.m */; };
 		7484DFC4202BFB9300900FB8 /* CategoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7484DFC3202BFB9300900FB8 /* CategoryService.m */; };
 		7484DFC8202BFC1A00900FB8 /* ShoppingCarService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7484DFC7202BFC1A00900FB8 /* ShoppingCarService.m */; };
 		74AAAAE9203F0225006AD3EB /* 添加icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AAAAE6203F0225006AD3EB /* 添加icon@2x.png */; };
@@ -854,6 +855,8 @@
 		743DC45E2029A70F004E4DB0 /* CategoryLeftMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryLeftMenu.m; sourceTree = "<group>"; };
 		74669A2B204E3B2400E6815F /* SettingModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingModifyUserInfoViewController.h; sourceTree = "<group>"; };
 		74669A2C204E3B2400E6815F /* SettingModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingModifyUserInfoViewController.m; sourceTree = "<group>"; };
+		747D1EBB2052606F00C272A0 /* WkWebviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WkWebviewViewController.h; sourceTree = "<group>"; };
+		747D1EBC2052606F00C272A0 /* WkWebviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WkWebviewViewController.m; sourceTree = "<group>"; };
 		7484DFC2202BFB9300900FB8 /* CategoryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryService.h; sourceTree = "<group>"; };
 		7484DFC3202BFB9300900FB8 /* CategoryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryService.m; sourceTree = "<group>"; };
 		7484DFC6202BFC1A00900FB8 /* ShoppingCarService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarService.h; sourceTree = "<group>"; };
@@ -1184,6 +1187,8 @@
 				740F402920284C560050A6BF /* HpNavigationView.m */,
 				740F402B202856B20050A6BF /* RecommendGoodsCell.h */,
 				740F402C202856B20050A6BF /* RecommendGoodsCell.m */,
+				747D1EBB2052606F00C272A0 /* WkWebviewViewController.h */,
+				747D1EBC2052606F00C272A0 /* WkWebviewViewController.m */,
 			);
 			path = HP;
 			sourceTree = "<group>";
@@ -2410,6 +2415,7 @@
 				74CD213E2043AC720047F8F6 /* DeliveryDetailViewController.m in Sources */,
 				740F3F94202847F90050A6BF /* AFURLSessionManager.m in Sources */,
 				740F4019202847F90050A6BF /* View+MASAdditions.m in Sources */,
+				747D1EBD2052606F00C272A0 /* WkWebviewViewController.m in Sources */,
 				74BC300120469C1400C6B9DD /* PTLoadingHubView.m in Sources */,
 				740F3FEF202847F90050A6BF /* POPBasicAnimation.mm in Sources */,
 				74DF55BD20411BB4005276CC /* MangeAddressService.m in Sources */,

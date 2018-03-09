@@ -14,5 +14,6 @@
     AppDelegate *app;
     UITableView *tableview;
     NSArray *arraydata;
+    NSString *FCDiscoryUrl;
 }
 @end

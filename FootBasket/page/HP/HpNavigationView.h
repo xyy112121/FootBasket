@@ -12,9 +12,11 @@
 {
     AppDelegate *app;
     UITextField *textfieldinput;
+    
 }
 
 -(void)initViewHP;
 -(void)initViewCategory;
+@property(nonatomic,strong)UIButton *buttondiscovery;
 @property(nonatomic,weak)id<ActionDelegate>delegate1;
 @end

@@ -170,7 +170,7 @@
 
 -(void)DGAddShoppingCar:(NSDictionary *)sender
 {
-    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) DicRecommend:sender];
+    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin) DicRecommend:sender];
     [app.window addSubview:addshoppingcar];
     
 }

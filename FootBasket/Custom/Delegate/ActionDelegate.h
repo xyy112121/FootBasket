@@ -19,4 +19,5 @@
 -(void)DGClickRecommendDetail:(NSDictionary *)sender;//点击精品推荐
 -(void)DGAddShoppingCar:(NSDictionary *)sender;//点击添加到购物车
 -(void)DGClickOrderAddress:(NSDictionary *)sender;//点击选择地址
+-(void)DGClickHpDiscovery:(id)sender; //点击首页的发现功能
 @end
