@@ -16,6 +16,6 @@
 }
 
 @property(nonatomic,strong)id<ActionDelegate>delegate1;
-@property(nonatomic,strong)NSString *FCDiscoveryUrl;
+@property(nonatomic,copy)NSString *FCDiscoveryUrl;
 
 @end

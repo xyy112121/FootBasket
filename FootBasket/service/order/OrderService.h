@@ -20,4 +20,8 @@ typedef void (^OrderSuccessBlock)(NSDictionary *dicData);
 -(void)sendOrderDoneReceiveRequest:(NSString *)orderid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(OrderSuccessBlock)successBlock;
 
 -(void)sendMyCouponOrderListRequest:(NSString *)userid Rows:(NSString *)rows App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(OrderSuccessBlock)successBlock;
+
+
+//获取未收货订单数目
+-(void)sendMyOrderNumberRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(OrderSuccessBlock)successBlock;
 @end

@@ -218,6 +218,7 @@
     {
         [setservice sendModifySettingRequest:app.userinfo.userid Name:_FCStrsrc NickName:@"" App:app ReqUrl:RQModifyUserInfo successBlock:^(NSDictionary *dicData) {
             [MBProgressHUD showError:[dicData objectForKey:@"resultInfo"] toView:app.window];
+            [self.navigationController popViewControllerAnimated:YES];
         }];
     }
     

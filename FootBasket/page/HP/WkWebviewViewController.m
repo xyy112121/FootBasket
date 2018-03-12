@@ -44,6 +44,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    if([_FCDiscoveryUrl rangeOfString:@"?"].location !=NSNotFound)
+    {
+        _FCDiscoveryUrl = [NSString stringWithFormat:@"%@&userid=%@",_FCDiscoveryUrl,[app.userinfo.userid length]>0?app.userinfo.userid:@""];
+    }
+    else
+    {
+        _FCDiscoveryUrl = [NSString stringWithFormat:@"%@?userid=%@",_FCDiscoveryUrl,[app.userinfo.userid length]>0?app.userinfo.userid:@""];
+    }
+    
     [self initWKWebView];
 }
 

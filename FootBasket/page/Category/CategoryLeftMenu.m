@@ -29,6 +29,8 @@
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XYViewWidth(self), XYViewHeight(self)) style:UITableViewStylePlain];
     tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableview.backgroundColor = COLORNOW(235, 235, 235);
+    tableview.showsVerticalScrollIndicator = NO;
+    tableview.showsHorizontalScrollIndicator = NO;
     [self addSubview:tableview];
 
     [self setExtraCellLineHidden:tableview];
@@ -145,7 +147,7 @@
 {
     CategoryService *categoryservice = [CategoryService new];
     
-    [categoryservice sendCategorySmallRequest:@"1" PageSize:@"10" CategoryId:[dic objectForKey:@"id"] App:app ReqUrl:RQCategoryOther successBlock:^(NSDictionary *dicData) {
+    [categoryservice sendCategorySmallRequest:@"1" PageSize:@"50" CategoryId:[dic objectForKey:@"id"] App:app ReqUrl:RQCategoryOther successBlock:^(NSDictionary *dicData) {
         
         selectone = 0;
         arraydata = [dicData objectForKey:@"rows"];

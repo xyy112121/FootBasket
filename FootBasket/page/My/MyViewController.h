@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface MyViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,ActionDelegate>
 {
     AppDelegate *app;
     UITableView *tableview;
     UIButton *buttonheader;
+    UILabel *labelnumber;
 }
 @end

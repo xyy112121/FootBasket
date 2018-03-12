@@ -51,8 +51,7 @@
     [self.view addSubview:tableview];
     [self setExtraCellLineHidden:tableview];
     
-    if(![app.userinfo.usertype isEqualToString:@"1"])
-        [self getuserinfo];
+    
     
     UIButton *buttonlogout = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonlogout.frame = CGRectMake(0, SCREEN_HEIGHT-StatusBarAndNavigationHeight-50-IPhone_SafeBottomMargin, SCREEN_WIDTH, 50);
@@ -67,6 +66,8 @@
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
+    if([app.userinfo.usertype isEqualToString:@"0"])
+        [self getuserinfo];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -268,7 +269,7 @@
     {
         SettingModifyUserInfoViewController *modify = [[SettingModifyUserInfoViewController alloc] init];
         modify.FCStrTitle = @"真实姓名";
-        modify.FCStrsrc = [dicuser objectForKey:@"userLogin"];
+        modify.FCStrsrc = [dicuser objectForKey:@"realName"];
         [self.navigationController pushViewController:modify animated:YES];
     }
     else if(indexPath.row == 0)

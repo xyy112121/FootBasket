@@ -41,7 +41,7 @@
     
     textfieldtel = [[UITextField alloc] initWithFrame:CGRectMake(XYViewL(imageline1)+5, XYViewTop(imageline1)-35, XYViewWidth(imageline1)-20, 30)];
     textfieldtel.placeholder = @"输入电话号码";
-    textfieldtel.text = @"18669069389";//
+    textfieldtel.text = @"";//
     textfieldtel.font = FONTN(16.0f);
     textfieldtel.delegate = self;
     [self addSubview:textfieldtel];
@@ -50,7 +50,7 @@
     textfieldcode.placeholder = @"输入验证码";
     textfieldcode.font = FONTN(16.0f);
     textfieldcode.delegate = self;
-    textfieldcode.text = @"4321";
+    textfieldcode.text = @"";
     [self addSubview:textfieldcode];
     
     buttoncode = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -72,6 +72,15 @@
     [buttonlogin addTarget:self action:@selector(clicklogin:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:buttonlogin];
     
+    
+    buttontourists = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttontourists.frame = CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-IPhone_SafeBottomMargin-60-60, 100, 35);
+    [buttontourists setTitle:@"游客登录" forState:UIControlStateNormal];
+    [buttontourists setTitleColor:COLORNOW(152, 152, 152) forState:UIControlStateNormal];
+    buttontourists.titleLabel.font = FONTN(14.0f);
+    [buttontourists addTarget:self action:@selector(clicktouristslogin:) forControlEvents:UIControlEventTouchUpInside];
+    buttontourists.backgroundColor = [UIColor whiteColor];
+    [self addSubview:buttontourists];
     
     buttonchange = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonchange.frame = CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-IPhone_SafeBottomMargin-60, 100, 35);
@@ -118,7 +127,13 @@
     else
     {
         LoginService *loginservice = [LoginService new];
-        [loginservice sendloginrequest:textfieldtel.text Code:textfieldcode.text App:app ReqUrl:RQLogin successBlock:^(NSDictionary *dicData) {
+        NSString *pwdmd5 = textfieldcode.text;
+        if(usertypelogin == EnDeliverySelected)
+        {
+            CommonHeader *com = [CommonHeader new];
+            pwdmd5 = [com CMMD5:pwdmd5];
+        }
+        [loginservice sendloginrequest:textfieldtel.text Code:pwdmd5 App:app ReqUrl:RQLogin successBlock:^(NSDictionary *dicData) {
             DLog(@"dicData====%@",dicData);
             NSDictionary *dictemp = [dicData objectForKey:@"user"];
             [dictemp writeToFile:Cache_UserInfo atomically:NO];
@@ -229,6 +244,17 @@
     [loginservice sendloginverifycoderequest:textfieldtel.text App:app ReqUrl:RQSMSCode successBlock:^(NSDictionary *dicData) {
         [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
     }];
+}
+
+-(void)clicktouristslogin:(id)sender
+{
+    [self keyboardHide:nil];
+    [self removeFromSuperview];
+    app.userinfo.usertype = @"tourists";
+    if(_delegate1&&[_delegate1 respondsToSelector:@selector(DGTouristsLoginSuccess:)])
+    {
+        [_delegate1 DGTouristsLoginSuccess:nil];
+    }
 }
 
 

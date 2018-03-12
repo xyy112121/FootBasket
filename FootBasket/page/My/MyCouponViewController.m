@@ -80,12 +80,12 @@
     labeltitle.textColor = COLORNOW(52, 52, 52);
     [view addSubview:labeltitle];
     
-    UILabel *labelvalue = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labeltitle)+5, 20, 150, 20)];
-    labelvalue.backgroundColor = [UIColor clearColor];
-    labelvalue.text = @"￥100";
-    labelvalue.font = FONTN(15.0f);
-    labelvalue.textColor = COLORNOW(255, 110, 64);
-    [view addSubview:labelvalue];
+    labelwalletvalue = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(labeltitle)+5, 20, 150, 20)];
+    labelwalletvalue.backgroundColor = [UIColor clearColor];
+    labelwalletvalue.text = @"";//[NSString stringWithFormat:@"￥%@",FCwallet];
+    labelwalletvalue.font = FONTN(15.0f);
+    labelwalletvalue.textColor = COLORNOW(255, 110, 64);
+    [view addSubview:labelwalletvalue];
     
     tableview.tableHeaderView = view;
 }
@@ -292,6 +292,8 @@
     OrderService *order = [OrderService new];
     [order sendMyCouponOrderListRequest:app.userinfo.userid Rows:rows App:app ReqUrl:RQMyCouponList successBlock:^(NSDictionary *dicData) {
         arraydata = [dicData objectForKey:@"rows"];
+        FCwallet = [NSString stringWithFormat:@"%@",[dicData objectForKey:@"wallet"]];
+        labelwalletvalue.text = [NSString stringWithFormat:@"￥%@",FCwallet];
         tableview.delegate = self;
         tableview.dataSource = self;
         [tableview reloadData];

@@ -367,8 +367,8 @@
 -(void)DGClickPayWay:(id)sender TitleName:(UILabel *)titlename
 {
     PayButtonView *payway1 = [tableview viewWithTag:EnDoneOrderPayWayImageTag];
-    PayButtonView *payway2 = [tableview viewWithTag:EnDoneOrderPayWayImageTag];
-    PayButtonView *payway3 = [tableview viewWithTag:EnDoneOrderPayWayImageTag];
+    PayButtonView *payway2 = [tableview viewWithTag:EnDoneOrderPayWayImageTag+1];
+    PayButtonView *payway3 = [tableview viewWithTag:EnDoneOrderPayWayImageTag+2];
     [payway1 updateimageselect];
     [payway2 updateimageselect];
     [payway3 updateimageselect];
@@ -636,8 +636,30 @@
     NSString *jsonnum = [com CMDataToJson:_arrayproductnum];
     DLog(@"jsonnum===%@",jsonnum);
     [shoppingcar sendCommitOrderRequest:jsonnum Userid:app.userinfo.userid AddrId:selectaddrid PayWay:payway DeliveryTime:receivetime App:app ReqUrl:RQCommitOrder successBlock:^(NSDictionary *dicData) {
-        [MBProgressHUD showSuccess:[dicData objectForKey:@"resultInfo"] toView:app.window];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+ //       [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = [dicData objectForKey:@"resultInfo"];
+//        NSString *cancelButtonTitle = NSLocalizedString(@"取消", nil);
+        NSString *otherButtonTitle = NSLocalizedString(@"确定", nil);
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        // Create the actions.
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//
+//        }];
+        
+        UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+        
+        // Add the actions.
+//        [alertController addAction:cancelAction];
+        [alertController addAction:otherAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
     
 }

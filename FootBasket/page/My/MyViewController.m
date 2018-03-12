@@ -48,8 +48,6 @@
     
     [self setExtraCellLineHidden:tableview];
 
-    
-    
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, StatusBarHeight, 50, 40)];
     [button setTitle:@"设置"forState:UIControlStateNormal];
     [button setBackgroundColor:[UIColor clearColor]];
@@ -125,6 +123,17 @@
         labelleft.textAlignment = NSTextAlignmentCenter;
         labelleft.textColor = COLORNOW(51, 51, 51);
         [viewheader addSubview:labelleft];
+        
+        labelnumber = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imagewaitreceive)-26, XYViewTop(imagewaitreceive)+5, 20, 20)];
+        labelnumber.text = @"10";
+        labelnumber.layer.cornerRadius = 10.0f;
+        labelnumber.clipsToBounds = YES;
+        labelnumber.backgroundColor = COLORNOW(238, 89, 83);
+        labelnumber.font = FONTN(15.0f);
+        labelnumber.alpha = 0;
+        labelnumber.textAlignment = NSTextAlignmentCenter;
+        labelnumber.textColor = [UIColor whiteColor];
+        [viewheader addSubview:labelnumber];
         
         //已收货
         UIButton *imagereceived = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -260,6 +269,12 @@
 }
 
 
+#pragma mark - Actiondelegate
+-(void)DGTouristsLoginSuccess:(id)sender
+{
+    [self.tabBarController setSelectedIndex:0];
+}
+
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -278,11 +293,25 @@
     
     [self initheaderview];
     [tableview reloadData];
-    NSFileManager *filemanger = [NSFileManager defaultManager];
-    if(![filemanger fileExistsAtPath:Cache_UserInfo])
+    
+    if([app.userinfo.usertype isEqualToString:@"tourists"])
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
+    else if(app.userinfo.userid)
+    {
+        if([app.userinfo.usertype isEqualToString:@"0"])
+       {
+           [self getordernumber];
+       }
+    }
+    else
     {
         [self.tabBarController setSelectedIndex:0];
     }
+
 }
 
 #pragma mark - tableview delegate
@@ -475,6 +504,20 @@
     }
 }
 
+
+#pragma mark - 接口
+-(void)getordernumber
+{
+    OrderService *orderservice = [OrderService new];
+    [orderservice sendMyOrderNumberRequest:app.userinfo.userid App:app ReqUrl:RQGetMyOrderNumber successBlock:^(NSDictionary *dicData) {
+        if([[dicData objectForKey:@"waitingReceive"] intValue]>0)
+        {
+            labelnumber.text = [NSString stringWithFormat:@"%@",[dicData objectForKey:@"waitingReceive"]];
+            labelnumber.alpha = 1;
+        }
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

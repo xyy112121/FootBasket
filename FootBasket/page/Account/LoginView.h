@@ -16,6 +16,7 @@
     UITextField *textfieldtel;
     UITextField *textfieldcode;
     UIButton *buttonchange;
+    UIButton *buttontourists;
     EnUserTypeLogin usertypelogin;
     int getyanzhengcodeflag;
     NSTimer *timerone;

@@ -112,4 +112,28 @@
     }];
 }
 
+-(void)sendMyOrderNumberRequest:(NSString *)userid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(OrderSuccessBlock)successBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:userid forKey:@"userId"];
+    [XLBallLoading showInView:app.window];
+    [RequestInterface doGetJsonWithParametersNoAn:params App:app ReqUrl:requrl ShowView:app.window alwaysdo:^{
+        
+    } Success:^(NSDictionary *dic) {
+        DLog(@"dic====%@",dic);
+        if([[dic objectForKey:@"success"] isEqualToString:@"true"])
+        {
+            successBlock(dic);
+        }
+        else
+        {
+            [MBProgressHUD showError:[dic objectForKey:@"resultInfo"] toView:app.window];
+        }
+        [XLBallLoading hideInView:app.window];
+    } Failur:^(NSString *strmsg) {
+        [XLBallLoading hideInView:app.window];
+        [MBProgressHUD showError:@"获取优惠列表失败,请检查网络" toView:app.window];
+    }];
+}
+
 @end

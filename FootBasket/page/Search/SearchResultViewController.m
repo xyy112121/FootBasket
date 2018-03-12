@@ -129,10 +129,19 @@
 
 -(void)clickCategoryGoods:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
-    int tagnow = (int)[button tag]-EnSearchProductListTag;
-    NSDictionary *dic = [arraydata objectAtIndex:tagnow];
-    [self DGAddShoppingCar:dic];
+    if([app.userinfo.userid length]==0)
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
+    else
+    {
+        UIButton *button = (UIButton *)sender;
+        int tagnow = (int)[button tag]-EnSearchProductListTag;
+        NSDictionary *dic = [arraydata objectAtIndex:tagnow];
+        [self DGAddShoppingCar:dic];
+    }
 }
 
 #pragma mark - tableview delegate

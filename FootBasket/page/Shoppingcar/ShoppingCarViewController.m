@@ -393,10 +393,16 @@
     }
 }
 
+#pragma mark - Actiondelegate
+-(void)DGTouristsLoginSuccess:(id)sender
+{
+    [self.tabBarController setSelectedIndex:0];
+}
+
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self getshoppingcarinterface];
+    
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -404,6 +410,17 @@
     UIColor* color = [UIColor blackColor];
     NSDictionary* dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
     self.navigationController.navigationBar.titleTextAttributes= dict;
+    
+    if(app.userinfo.userid)
+    {
+        [self getshoppingcarinterface];
+    }
+    else
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
 }
 
 #pragma mark - tableview delegate

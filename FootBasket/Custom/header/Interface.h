@@ -57,3 +57,7 @@
 
 #define RQGetHpDiscory @"/Basket/business/DiscoveryNavigate_getIsDiscovery_OL.action" //判断首页右上角发现接口
 
+#define RQGetMyOrderNumber @"/Basket/business/OrderNavigate_getDebitAndWaitingR_OL.action" //获取用户未收货订单数目userId
+
+#define RQGetDebitOrderList @"/Basket/business/OrderNavigate_searchDebtOrders_OL.action" //获取欠款订单userId=1519397887797upgqsa&page=1&rows=10
+

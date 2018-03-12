@@ -100,7 +100,8 @@
     
     UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(XYViewR(imageview)+10, XYViewTop(imageview), XYViewWidth(viewcell)-110, 20)];
     labelname.text = [dic objectForKey:@"name"];
-    labelname.font = FONTB(17.0f);
+    labelname.font = FONTB(16.0f);
+    labelname.adjustsFontSizeToFitWidth = YES;
     [viewcell addSubview:labelname];
     
     UILabel *labelsummary = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(viewcell)-100, 20)];
@@ -152,7 +153,7 @@
 {
     CategoryService *categoryservice = [CategoryService new];
     
-    [categoryservice sendCategoryGoodsRequest:@"1" PageSize:@"10" SmallId:[sender objectForKey:@"id"] App:app ReqUrl:RQCategoryGood successBlock:^(NSDictionary *dicData) {
+    [categoryservice sendCategoryGoodsRequest:@"1" PageSize:@"50" SmallId:[sender objectForKey:@"id"] App:app ReqUrl:RQCategoryGood successBlock:^(NSDictionary *dicData) {
         
         arraydata = [dicData objectForKey:@"rows"];
         tableview.delegate = self;
@@ -177,10 +178,19 @@
 
 -(void)clickCategoryGoods:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
-    int tagnow = (int)[button tag]-EnMyCategoryProductShopCarTag;
-    NSDictionary *dic = [arraydata objectAtIndex:tagnow];
-    [self DGAddShoppingCar:dic];
+    if([app.userinfo.userid length]==0)
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
+    else
+    {
+        UIButton *button = (UIButton *)sender;
+        int tagnow = (int)[button tag]-EnMyCategoryProductShopCarTag;
+        NSDictionary *dic = [arraydata objectAtIndex:tagnow];
+        [self DGAddShoppingCar:dic];
+    }
 }
 
 #pragma mark - IBAction
@@ -309,8 +319,7 @@
             [self leftmenucategory:CGRectMake(0, 45, widthnow+20, SCREEN_HEIGHT-StatusBarAndNavigationHeight-IPhone_SafeBottomMargin-49-45) Dic:dictemp];
         }
     }];
-    
-    
+
 }
 
 - (void)didReceiveMemoryWarning {

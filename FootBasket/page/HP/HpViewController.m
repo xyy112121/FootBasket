@@ -115,6 +115,7 @@
     UILabel *labelname = [[UILabel alloc] initWithFrame:CGRectMake(10,XYViewBottom(imageview)+5, XYViewWidth(view)-10, 20)];
     labelname.text = [dic objectForKey:@"name"];
     labelname.font = FONTN(16.0f);
+    labelname.adjustsFontSizeToFitWidth = YES;
     [view addSubview:labelname];
     
     UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(view)-50, 20)];
@@ -148,15 +149,29 @@
 
 -(void)clickDiscountgoods:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
-    int tagnow = (int)[button tag]-EnHpDiscountShopCarBtTag;
-    NSDictionary *dic = [arraydata objectAtIndex:tagnow];
-    [self DGAddShoppingCar:dic];
+    if([app.userinfo.userid length]==0)
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
+    else
+    {
+        UIButton *button = (UIButton *)sender;
+        int tagnow = (int)[button tag]-EnHpDiscountShopCarBtTag;
+        NSDictionary *dic = [arraydata objectAtIndex:tagnow];
+        [self DGAddShoppingCar:dic];
+    }
 }
 
 
 #pragma mark - ActionDelegate
 -(void)DGLoginSuccess:(id)sender
+{
+    [self gethpinterface];
+}
+
+-(void)DGTouristsLoginSuccess:(id)sender
 {
     [self gethpinterface];
 }
@@ -178,9 +193,17 @@
 
 -(void)DGAddShoppingCar:(NSDictionary *)sender
 {
-    AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin) DicRecommend:sender];
-    [app.window addSubview:addshoppingcar];
-
+    if([app.userinfo.userid length]==0)
+    {
+        LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        login.delegate1 = self;
+        [app.window addSubview:login];
+    }
+    else
+    {
+        AddShoppingCarView *addshoppingcar = [[AddShoppingCarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-IPhone_SafeBottomMargin) DicRecommend:sender];
+        [app.window addSubview:addshoppingcar];
+    }
 }
 
 -(void)DGClickHpDiscovery:(id)sender
@@ -189,6 +212,7 @@
     {
         WkWebviewViewController *wkwebview = [[WkWebviewViewController alloc] init];
         wkwebview.hidesBottomBarWhenPushed = YES;
+       
         wkwebview.FCDiscoveryUrl = FCDiscoryUrl;
         [self.navigationController pushViewController:wkwebview animated:YES];
     }
@@ -210,7 +234,7 @@
     {
         [self gethpinterface];
     }
-    else
+    else if(([app.userinfo.userid length]==0)&&((![app.userinfo.usertype isEqualToString:@"tourists"])))
     {
         LoginView *login = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         login.delegate1 = self;

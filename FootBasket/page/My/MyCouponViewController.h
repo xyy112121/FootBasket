@@ -13,6 +13,8 @@
     AppDelegate *app;
     UITableView *tableview;
     NSArray *arraydata;
+    NSString *FCwallet;
+    UILabel *labelwalletvalue;
 }
 
 @end
