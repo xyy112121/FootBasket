@@ -453,6 +453,10 @@
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
+        NSString *postUrl = @"https://itunes.apple.com/cn/app/chun-cheng-wan-bao-ke-hu-duan/id780126079?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:postUrl]];
+        DLog(@"posturl===%@",postUrl);
+        
     }];
     
     // Add the actions.
