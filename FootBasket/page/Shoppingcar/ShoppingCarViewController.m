@@ -156,7 +156,10 @@
     [view addSubview:labelname];
     
     UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelname)+5, XYViewWidth(view)-50, 20)];
-    labelprice.text = [NSString stringWithFormat:@"￥%@元",[dic objectForKey:@"salePrice"]];
+    if([app.userinfo.usertype isEqualToString:@"2"])
+        labelprice.text = [NSString stringWithFormat:@"￥%@元",[dic objectForKey:@"merchantPrice"]];
+    else
+        labelprice.text = [NSString stringWithFormat:@"￥%@元",[dic objectForKey:@"salePrice"]];
     labelprice.font = FONTN(15.0f);
     labelprice.textColor = COLORNOW(122, 122, 122);
     [view addSubview:labelprice];
@@ -290,6 +293,8 @@
                 
                 NSDictionary *dicdata = [arraydata objectAtIndex:i];
                 float productprice = [[dicdata objectForKey:@"salePrice"] floatValue];
+                if([app.userinfo.usertype isEqualToString:@"2"])
+                    productprice = [[dicdata objectForKey:@"merchantPrice"] floatValue];
                 float totalprice = [[labeltotalmoney.text substringFromIndex:1] floatValue];
                 totalprice = totalprice+productprice;
                 [labeltotalmoney setText:[NSString stringWithFormat:@"￥%.2f",totalprice]];
@@ -325,6 +330,8 @@
                 
                 NSDictionary *dicdata = [arraydata objectAtIndex:i];
                 float productprice = [[dicdata objectForKey:@"salePrice"] floatValue];
+                if([app.userinfo.usertype isEqualToString:@"2"])
+                    productprice = [[dicdata objectForKey:@"merchantPrice"] floatValue];
                 float totalprice = [[labeltotalmoney.text substringFromIndex:1] floatValue];
                 totalprice = totalprice-productprice;
                 [labeltotalmoney setText:[NSString stringWithFormat:@"￥%.2f",totalprice]];
@@ -553,6 +560,8 @@
             
             int productnum = [[dictemp objectForKey:@"productNumber"] intValue];
             float productprice = [[dictemp objectForKey:@"salePrice"] floatValue];
+            if([app.userinfo.usertype isEqualToString:@"2"])
+                productprice = [[dictemp objectForKey:@"merchantPrice"] floatValue];
             nowprice = nowprice+productprice*productnum;
         }
         

@@ -305,6 +305,7 @@
         
         if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
         {
+            [self getuserinfo];
             [self getordernumber];
         }
     }
@@ -530,7 +531,21 @@
     }];
 }
 
-
+-(void)getuserinfo
+{
+    SettingService *setservice = [SettingService new];
+    
+    [setservice sendGetUserInfoRequest:app.userinfo.userid App:app ReqUrl:RQMyUserCenter successBlock:^(NSDictionary *dicData) {
+        NSDictionary *dictemp = [dicData objectForKey:@"user"];
+        [dictemp writeToFile:Cache_UserInfo atomically:NO];
+        app.userinfo.userid = [dictemp objectForKey:@"id"];
+        app.userinfo.usertel = [dictemp objectForKey:@"mobile"];
+        app.userinfo.username = [dictemp objectForKey:@"realName"];
+        app.userinfo.userheader = [dictemp objectForKey:@"avatar"];
+        app.userinfo.usernickname = [dictemp objectForKey:@"userLogin"];
+        app.userinfo.usertype = [NSString stringWithFormat:@"%@",[dictemp objectForKey:@"userType"]];
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

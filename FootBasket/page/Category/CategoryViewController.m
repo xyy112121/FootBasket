@@ -111,7 +111,10 @@
     [viewcell addSubview:labelsummary];
     
     UILabel *labelprice = [[UILabel alloc] initWithFrame:CGRectMake(XYViewL(labelname), XYViewBottom(labelsummary)+5, 100, 20)];
-    labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"salePrice"],[dic objectForKey:@"displayUnit"]];
+    if([app.userinfo.usertype isEqualToString:@"2"])
+        labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"merchantPrice"],[dic objectForKey:@"displayUnit"]];
+    else
+        labelprice.text = [NSString stringWithFormat:@"￥%@元/%@",[dic objectForKey:@"salePrice"],[dic objectForKey:@"displayUnit"]];
     labelprice.font = FONTN(14.0f);
     labelprice.textColor = COLORNOW(248, 88, 37);
     [viewcell addSubview:labelprice];
