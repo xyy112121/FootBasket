@@ -26,4 +26,7 @@ typedef void (^SettingSuccessBlock)(NSDictionary *dicData);
 
 //设置默认地址
 -(void)sendSetDefaultAddressRequest:(NSString *)objectid App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
+
+//申请成为餐饮用户
+-(void)sendStorebussiseRequest:(NSString *)userid Name:(NSString *)name StoreName:(NSString *)storename App:(AppDelegate *)app  ReqUrl:(NSString *)requrl successBlock:(SettingSuccessBlock)successBlock;
 @end

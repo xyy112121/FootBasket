@@ -97,6 +97,7 @@
 #import "AboutMeViewController.h"
 #import "XLBallLoading.h"
 #import "WkWebviewViewController.h"
+#import "MyApplyStoreViewController.h"
 #endif /* PrefixHeader_pch */
 
 /**

@@ -330,6 +330,7 @@
 		74D22141204947F2001D76C5 /* 活动@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74D2213E204947F2001D76C5 /* 活动@2x.png */; };
 		74D22142204947F2001D76C5 /* 活动.png in Resources */ = {isa = PBXBuildFile; fileRef = 74D2213F204947F2001D76C5 /* 活动.png */; };
 		74D22143204947F2001D76C5 /* 活动@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74D22140204947F2001D76C5 /* 活动@3x.png */; };
+		74D6A6C12061F74F0093303F /* MyApplyStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D6A6C02061F74F0093303F /* MyApplyStoreViewController.m */; };
 		74DA127B2041A65E00C1C5DA /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */; };
 		74DA127F2041B67F00C1C5DA /* DeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA127E2041B67F00C1C5DA /* DeliveryService.m */; };
 		74DE88F42048EFC5007F4923 /* RestaurantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DE88F32048EFC5007F4923 /* RestaurantDetailViewController.m */; };
@@ -879,6 +880,8 @@
 		74D2213E204947F2001D76C5 /* 活动@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动@2x.png"; sourceTree = "<group>"; };
 		74D2213F204947F2001D76C5 /* 活动.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动.png"; sourceTree = "<group>"; };
 		74D22140204947F2001D76C5 /* 活动@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动@3x.png"; sourceTree = "<group>"; };
+		74D6A6BF2061F74F0093303F /* MyApplyStoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyApplyStoreViewController.h; sourceTree = "<group>"; };
+		74D6A6C02061F74F0093303F /* MyApplyStoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyApplyStoreViewController.m; sourceTree = "<group>"; };
 		74DA12792041A65E00C1C5DA /* DeliveryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
 		74DA127A2041A65E00C1C5DA /* DeliveryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryViewController.m; sourceTree = "<group>"; };
 		74DA127D2041B67F00C1C5DA /* DeliveryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryService.h; sourceTree = "<group>"; };
@@ -1208,6 +1211,8 @@
 				74DE88F620490077007F4923 /* MyCouponViewController.m */,
 				740CC778204EC8FE00543A18 /* AboutMeViewController.h */,
 				740CC779204EC8FE00543A18 /* AboutMeViewController.m */,
+				74D6A6BF2061F74F0093303F /* MyApplyStoreViewController.h */,
+				74D6A6C02061F74F0093303F /* MyApplyStoreViewController.m */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -2431,6 +2436,7 @@
 				740F3F8F202847F90050A6BF /* AFHTTPSessionManager.m in Sources */,
 				740F3FEA202847F90050A6BF /* POPAnimationEvent.mm in Sources */,
 				740F3FBC202847F90050A6BF /* MJRefreshStateHeader.m in Sources */,
+				74D6A6C12061F74F0093303F /* MyApplyStoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2564,7 +2570,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = A5HXN542J2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FootBasket/Custom/PrefixHeader.pch";
@@ -2573,8 +2579,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.foodbasket.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7b85395f-ecd1-4577-8eb6-223188015fe2";
-				PROVISIONING_PROFILE_SPECIFIER = profoodbasketpush;
+				PROVISIONING_PROFILE = "f7bf9436-ebda-4da1-bbba-683c3b83080e";
+				PROVISIONING_PROFILE_SPECIFIER = devfoodbasket;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2583,7 +2589,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = A5HXN542J2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FootBasket/Custom/PrefixHeader.pch";
@@ -2592,8 +2598,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.foodbasket.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7b85395f-ecd1-4577-8eb6-223188015fe2";
-				PROVISIONING_PROFILE_SPECIFIER = profoodbasketpush;
+				PROVISIONING_PROFILE = "f7bf9436-ebda-4da1-bbba-683c3b83080e";
+				PROVISIONING_PROFILE_SPECIFIER = devfoodbasket;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

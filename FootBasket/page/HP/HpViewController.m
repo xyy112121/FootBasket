@@ -221,7 +221,7 @@
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+//    [self getuserinfo];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -453,8 +453,11 @@
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        NSString *postUrl = @"https://itunes.apple.com/cn/app/chun-cheng-wan-bao-ke-hu-duan/id780126079?mt=8";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:postUrl]];
+        NSString *postUrl = @"https://itunes.apple.com/us/app/菜篮子食材/id1357517793?l=zh&ls=1&mt=8";
+        postUrl = [postUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  //      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:postUrl]];
+        UIApplication *application = [UIApplication sharedApplication];
+        [application openURL:[NSURL URLWithString:postUrl] options:@{} completionHandler:nil];
         DLog(@"posturl===%@",postUrl);
         
     }];
@@ -463,6 +466,16 @@
     [alertController addAction:otherAction];
     [alertController addAction:canelAction];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(void)getuserinfo
+{
+    SettingService *setservice = [SettingService new];
+    
+    [setservice sendGetUserInfoRequest:app.userinfo.userid App:app ReqUrl:RQMyUserCenter successBlock:^(NSDictionary *dicData) {
+        NSDictionary *dicuser = [dicData objectForKey:@"user"];
+        app.userinfo.usertype = [dicuser objectForKey:@"userType"];
+    }];
 }
 
 

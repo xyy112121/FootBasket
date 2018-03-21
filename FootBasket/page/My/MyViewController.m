@@ -107,7 +107,7 @@
     
     //待收货
     float nowwidth = (SCREEN_WIDTH-120)/4;
-    if([app.userinfo.usertype isEqualToString:@"0"])
+    if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
     {
         UIButton *imagewaitreceive = [UIButton buttonWithType:UIButtonTypeCustom];
         imagewaitreceive.frame = CGRectMake(30, XYViewBottom(imageviewline)+5, nowwidth, 50);
@@ -302,10 +302,11 @@
     }
     else if(app.userinfo.userid)
     {
-        if([app.userinfo.usertype isEqualToString:@"0"])
-       {
-           [self getordernumber];
-       }
+        
+        if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
+        {
+            [self getordernumber];
+        }
     }
     else
     {
@@ -367,7 +368,7 @@
     else
     {
         if(section == 0)
-            return 2;
+            return 3;
     }
     return 1;
 }
@@ -413,7 +414,7 @@
     labelname.textColor = COLORNOW(51, 51, 51);
     [cell.contentView addSubview:labelname];
     
-    if([app.userinfo.usertype isEqualToString:@"0"])
+    if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
     {
         switch (indexPath.section)
         {
@@ -427,6 +428,10 @@
                     case 1:
                         imageview.image = LOADIMAGE(@"收货地址icon", @"png");
                         labelname.text = @"我的收货地址";
+                        break;
+                    case 2:
+                        imageview.image = LOADIMAGE(@"收货地址icon", @"png");
+                        labelname.text = @"我的商户";
                         break;
                 }
                 break;
@@ -462,10 +467,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([app.userinfo.usertype isEqualToString:@"0"])
+    if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
     {
         MyAddrListViewController *myaddrlist;
         AboutMeViewController *aboutme;
+        MyApplyStoreViewController *storeview;
         switch (indexPath.section)
         {
             case 0:
@@ -481,6 +487,11 @@
                         myaddrlist.hidesBottomBarWhenPushed = YES;
                         myaddrlist.fromflag = @"2";
                         [self.navigationController pushViewController:myaddrlist animated:YES];
+                        break;
+                    case 2:
+                        storeview = [[MyApplyStoreViewController alloc] init];
+                        storeview.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:storeview animated:YES];
                         break;
                 }
                 break;
@@ -518,6 +529,8 @@
         
     }];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

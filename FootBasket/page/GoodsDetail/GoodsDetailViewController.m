@@ -52,7 +52,7 @@
     
     [self getGoodsDetail:_FCGoodsId];
     
-    if([app.userinfo.usertype isEqualToString:@"0"])
+    if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
         [self initbottomview];
     
 }

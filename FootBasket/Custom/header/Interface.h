@@ -61,3 +61,6 @@
 
 #define RQGetDebitOrderList @"/Basket/business/OrderNavigate_searchDebtOrders_OL.action" //获取欠款订单userId=1519397887797upgqsa&page=1&rows=10
 
+#define RQRequestStoreBuss @"/Basket/control/UserForm_applyMerchant_OL.action"  //申请成为商户 objectID realName merchantName 
+
+

@@ -66,7 +66,7 @@
 #pragma mark - viewcontroller delegate
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([app.userinfo.usertype isEqualToString:@"0"])
+    if([app.userinfo.usertype isEqualToString:@"0"]||[app.userinfo.usertype isEqualToString:@"2"])
         [self getuserinfo];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar  setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];

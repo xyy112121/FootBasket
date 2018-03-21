@@ -331,14 +331,14 @@
     CommonHeader *com = [CommonHeader new];
     NSString *cha = [com CMIntervalFromLastDate:receivetime toTheDate:[com CMReturnnowdate:@"yyyy-MM-dd HH:mm:ss"]];
     DLog(@"cha=====%@",cha);
-    if([cha intValue]<7200)
+    if([cha intValue]<3500)
     {
-        [self popAlertSheetView:@"对不起,由于我们需要备货,为你送达货物的时候必须大于2小时,为您带来的不便,敬请谅解！"];
+        [self popAlertSheetView:@"对不起,由于我们需要精心的为你挑选优质食材,所以备货需要一些时间,送达时间在55分钟以内,为您带来的不便,敬请谅解！"];
         
     }
     else
     {
-        [receivebuttontime setTitle:date forState:UIControlStateNormal];
+        [receivebuttontime setTitle:[NSString stringWithFormat:@"%@前",date] forState:UIControlStateNormal];
     }
 }
 
@@ -490,7 +490,7 @@
         [viewtime addSubview:labeltime];
         
         receivebuttontime  = [UIButton buttonWithType:UIButtonTypeCustom];
-        receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-155, 21, 130, 30);
+        receivebuttontime.frame = CGRectMake(SCREEN_WIDTH-175, 21, 150, 30);
         [receivebuttontime setTitle:@"请选择送达时间" forState:UIControlStateNormal];
         receivebuttontime.titleLabel.font = FONTN(15.0f);
         [receivebuttontime setTitleColor:COLORNOW(32, 188, 167) forState:UIControlStateNormal];
